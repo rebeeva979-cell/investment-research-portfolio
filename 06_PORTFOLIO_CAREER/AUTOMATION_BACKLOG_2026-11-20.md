@@ -69,7 +69,7 @@ A02 закрыт 20.11.2026: пайплайн, raw-снимки и провер�
 | A03 | Единый manifest и source register | Сейчас нельзя доказать, когда и откуда взято каждое число | Каждый fetch пишет `manifest.json`; `ETHFI_SOURCE_REGISTER.csv` генерируется; у каждой метрики есть URL, `as_of`, метод | 3–4 ч | A02 |
 | A04 | Consistency gate | Числа в HTML, CSV и отчёте могут разойтись после ручной правки | `make check`: пересчёт ключевых коэффициентов, проверка ссылок/ассетов, stale-дат, арифметики supply; 0 ошибок | 4 ч | A02 |
 | A05 | CI/CD на GitHub Actions | Ручная сборка и деплой не масштабируются | На push: pytest, link check, сборка PDF, deploy Pages; зелёный workflow | 3–4 ч | A01, A04 |
-| A06 | Weekly refresh + digest | Работодателю нужен cadence, а не один замороженный кейс | Понедельник 08:00: ETHFI + macro + LTC, сравнение с порогами, `weekly/YYYY-MM-DD.md`, Telegram-дайджест | 6–8 ч | A03 |
+| A06 | Weekly refresh + digest (digest/timer ready; Telegram needs env) | Работодателю нужен cadence, а не один замороженный кейс | Понедельник 08:00: ETHFI + macro + LTC, сравнение с порогами, `weekly/YYYY-MM-DD.md`, Telegram-дайджест | 6–8 ч | A03 |
 
 ### P1 — следующий уровень
 

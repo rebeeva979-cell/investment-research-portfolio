@@ -1,0 +1,10 @@
+[Unit]
+Description=ETHFI weekly refresh and digest
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Documents/codex/03-INVESTICI/portfeli-i-onchain/Crypto_Investment_Research_Portfolio
+ExecStart=/usr/bin/python3 04_ETHFI/onchain/weekly.py --refresh
+Nice=10

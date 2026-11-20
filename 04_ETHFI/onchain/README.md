@@ -36,9 +36,11 @@ python3 check_site.py
 From the repository root:
 
 ```bash
-make build      # rebuild metrics + charts
-make check      # manifest + unit tests + site consistency
-make test       # unit tests only
+make build        # rebuild metrics + charts
+make check        # manifest + unit tests + site consistency
+make test         # unit tests only
+make weekly-digest # compare with the previous weekly state, no network
+make weekly       # fetch a new snapshot, rebuild, write reports/weekly_*.md
 ```
 
 ## What each file is
@@ -50,8 +52,9 @@ make test       # unit tests only
 | `build_outputs.py` | metrics, CSVs, five hand-written SVG charts |
 | `manifest.py` | write/verify `MANIFEST.csv` |
 | `check_site.py` | fail if links, tables, quoted numbers or site CSVs drift |
+| `weekly.py` | weekly trigger digest, delta vs `reports/latest.json`, optional Telegram |
 | `SOURCES.md` | source register, confidence levels, refresh caveats |
-| `raw/` | committed public-API snapshots (13 files, ~9 MB) |
+| `raw/` | committed public-API snapshots (14 files, ~9 MB) |
 | `data/` | generated CSVs served by the site |
 | `assets/` | generated SVGs used by the site |
 
@@ -64,3 +67,25 @@ make test       # unit tests only
 - `dex_quotes.json` — QuoterV2 fixture; not auto-refreshed.
 
 See `SOURCES.md` for the verified / inferred / lead split.
+
+## Weekly cadence
+
+`weekly.py` compares the current snapshot with `reports/latest.json`, checks the
+decision triggers, and writes `reports/weekly_YYYY-MM-DD.md`. It is a control
+sheet, not a new thesis. `--telegram` sends the digest only when
+`TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` are set; without them it still writes
+the file and prints why it skipped Telegram.
+
+Install the user timer (no root, no secrets in the repo):
+
+```bash
+mkdir -p ~/.config/systemd/user
+cp 04_ETHFI/onchain/ops/ethfi-weekly.* ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now ethfi-weekly.timer
+systemctl --user list-timers ethfi-weekly.timer
+```
+
+The timer runs Monday 08:00 local time, leaves the refreshed CSVs/charts in the
+working tree, and writes the digest. Review `reports/` and commit the snapshot;
+automation does not commit or push.

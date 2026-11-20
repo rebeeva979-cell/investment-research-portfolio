@@ -1,7 +1,7 @@
 PYTHON ?= python3
 ONCHAIN := 04_ETHFI/onchain
 
-.PHONY: all build refresh manifest manifest-check test site-check check clean
+.PHONY: all build refresh manifest manifest-check test site-check check weekly weekly-digest clean
 
 all: build check
 
@@ -13,6 +13,14 @@ build:
 refresh:
 	cd $(ONCHAIN) && $(PYTHON) fetch_onchain.py --refresh
 	$(MAKE) build manifest
+
+weekly:
+	cd $(ONCHAIN) && $(PYTHON) weekly.py --refresh
+	$(MAKE) build
+	@echo "Review 04_ETHFI/onchain/reports/ and commit the refreshed snapshot."
+
+weekly-digest:
+	cd $(ONCHAIN) && $(PYTHON) weekly.py
 
 manifest:
 	cd $(ONCHAIN) && $(PYTHON) manifest.py
