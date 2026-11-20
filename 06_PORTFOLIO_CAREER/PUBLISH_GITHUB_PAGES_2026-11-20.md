@@ -2,7 +2,7 @@
 
 **Цель:** получить публичный URL вида `https://<username>.github.io/<repo>/` и подставить его в CV и LinkedIn.
 
-Публикуется только папка `docs/` (1,1 МБ, 28 файлов). Исходные данные, raw JSON и рабочие файлы проекта остаются локально.
+GitHub Pages отдаёт только папку `docs/` (1,1 МБ, 28 файлов). Сам репозиторий содержит также `04_ETHFI/onchain/` с кодом и raw-снимками и кейсы LTC/SNX/other — это доказательство процесса, а не только витрина. Папка `07_PUBLICATION/` и старые сборки исключены через `.gitignore`.
 
 ## Вариант A — через браузер (без терминала)
 
@@ -19,22 +19,24 @@
 7. Подождать 1–10 минут. На странице Pages появится ссылка **Visit site**.
 8. Проверить: главная, `/ethfi.html`, `/method.html`, `/cv.html`, PDF и CSV. Переключить RU/EN, открыть с телефона.
 
-Если GitHub не показывает папку `docs` при загрузке, создать её вручную: **Add file → Create new file**, в имени написать `docs/.nojekyll`, оставить пустым, Commit. Затем загрузить остальные файлы внутрь `docs`.
+Браузерная загрузка всей папки проекта (67 МБ, 205 файлов) неудобна: GitHub ограничивает число файлов за один upload. Для полного репозитория используйте GitHub Desktop или вариант B. Если нужен только сайт, загрузите `docs/` и создайте `docs/.nojekyll` вручную.
 
-## Вариант B — через терминал
+## Вариант B — через терминал (репозиторий уже инициализирован)
+
+Локальный git уже создан, первые коммиты есть. Нужно только создать пустой репозиторий на GitHub и добавить remote:
 
 ```bash
 cd /home/nikolay/Documents/codex/03-INVESTICI/portfeli-i-onchain/Crypto_Investment_Research_Portfolio
 
-git init -b main
-git add .gitignore README.md docs
-git commit -m "Portfolio v3: ETHFI on-chain case, RU/EN site"
+git branch -M main
+git remote add origin https://github.com/<username>/crypto-research-portfolio.git
 
 # HTTPS: GitHub попросит логин и Personal Access Token вместо пароля.
 # Токен создаётся: GitHub → Settings → Developer settings → Personal access tokens.
-git remote add origin https://github.com/<username>/crypto-research-portfolio.git
 git push -u origin main
 ```
+
+Если remote уже добавлен: `git push -u origin main`. Не делать `git init` и не добавлять только `docs` — иначе код пайплайна не попадёт в репозиторий.
 
 Если настроен SSH-ключ, вместо HTTPS:
 
