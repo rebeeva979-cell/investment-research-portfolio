@@ -22,7 +22,7 @@
 
 Мой фокус — DeFi-протоколы и цифровые активы. В кейсе ether.fi (ETHFI) я проследила 2.54M ETHFI через CoW, funding Safe и LayerZero, разметила treasury, вестинг и CEX-кошельки, сверила три базы supply и показала, что buyback реален, а holder yield — нет. Результат — Decision Card WAIT 0–2% с условиями апгрейда и отмены.
 
-Инструменты: Python (stdlib + API), SQL, Dune, Looker Studio, Power BI, Excel. Пишу на русском и английском (B1, письменная коммуникация). Ищу remote part-time роль в исследовательской или инвестиционной команде, 15–20 часов в неделю.
+Инструменты: Python (stdlib + API; воспроизводимый пайплайн: raw → manifest → tests), SQL, Dune, Looker Studio, Power BI, Excel. Пишу на русском и английском (B1, письменная коммуникация). Ищу remote part-time роль в исследовательской или инвестиционной команде, 15–20 часов в неделю.
 
 Портфолио: [PUBLIC_PORTFOLIO_URL]  
 Кейсы: ETHFI, LTC, SNX, LYFT, GPRO, ZNTL, ANT.  
@@ -34,7 +34,7 @@ I build reproducible investment-research cases at the intersection of on-chain a
 
 My focus is DeFi protocols and digital assets. In the ether.fi (ETHFI) case I traced 2.54M ETHFI through CoW, the funding Safe and LayerZero, labelled treasury, vesting and CEX wallets, reconciled three supply bases, and showed that the buyback is real while holder yield is not. The output is a WAIT 0–2% decision card with upgrade and invalidation triggers.
 
-Tools: Python (stdlib + APIs), SQL, Dune, Looker Studio, Power BI, Excel. I work in Russian and English (B1, written communication preferred). I am looking for a remote part-time role in a research or investment team, 15–20 hours per week.
+Tools: Python (stdlib + APIs; reproducible pipeline: raw → manifest → tests), SQL, Dune, Looker Studio, Power BI, Excel. I work in Russian and English (B1, written communication preferred). I am looking for a remote part-time role in a research or investment team, 15–20 hours per week.
 
 Portfolio: [PUBLIC_PORTFOLIO_URL]  
 Cases: ETHFI, LTC, SNX, LYFT, GPRO, ZNTL, ANT.  
