@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method — how I do on-chain research | Marina Rebeeva</title>
+<meta name="description" content="Research method: primary data first, reconcile instead of averaging, separate policy from flow, label verified vs inferred, write the invalidation first.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="monogram">MR</span><span>Marina Rebeeva<small>on-chain research</small></span></a>
+    <div class="navlinks">
+      <a href="index.html#work"><span class="ru">Кейсы</span><span class="en">Work</span></a>
+      <a href="method.html"><span class="ru">Методика</span><span class="en">Method</span></a>
+      <a class="keep" href="cv.html">CV</a>
+      <a href="index.html#contact"><span class="ru">Контакты</span><span class="en">Contact</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-setlang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-setlang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="report-hero">
+  <div class="wrap">
+    <div class="meta"><span class="mono" style="color:var(--mint)">METHOD</span><span class="mono dim">v1.2 · 20.11.2026</span><span class="mono dim">RU / EN</span></div>
+    <h1 class="ru">Метод важнее вывода.</h1>
+    <h1 class="en">The method outranks the call.</h1>
+    <p class="dek ru">Вывод можно скопировать. Процесс — нет. Здесь описано, как я собираю данные, где ставлю границы и почему публикую расхождения, а не сглаживаю их.</p>
+    <p class="dek en">A conclusion can be copied. A process cannot. This page describes how I collect data, where I draw boundaries, and why I publish discrepancies instead of smoothing them.</p>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:44px;max-width:900px">
+  <section>
+    <div class="kicker"><span class="ru">Правила</span><span class="en">Rules</span></div>
+    <h2 class="ru">Шесть правил, которые определяют качество.</h2>
+    <h2 class="en">Six rules that determine quality.</h2>
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card"><div class="num">01</div><h3 class="ru">Первичные данные раньше агрегаторов</h3><h3 class="en">Primary data before aggregators</h3><p class="ru">RPC, контракты, логи, официальные документы. Агрегатор — удобная гипотеза, а не источник истины.</p><p class="en">RPC, contracts, logs, official documents. An aggregator is a convenient hypothesis, not a source of truth.</p></div>
+      <div class="card"><div class="num">02</div><h3 class="ru">Сверять, а не усреднять</h3><h3 class="en">Reconcile, do not average</h3><p class="ru">Если два источника расходятся, среднее скрывает ошибку. Публикую разрыв и выбираю консервативную базу.</p><p class="en">If two sources disagree, an average hides the error. I publish the gap and choose the conservative base.</p></div>
+      <div class="card"><div class="num">03</div><h3 class="ru">Политика — не поток</h3><h3 class="en">Policy is not flow</h3><p class="ru">Пост в блоге описывает намерение. Перевод в блокчейне — свидетельство. Это разные статусы доказательства.</p><p class="en">A blog post describes intent. A transfer is evidence. They are different evidence statuses.</p></div>
+      <div class="card"><div class="num">04</div><h3 class="ru">Размечать уверенность</h3><h3 class="en">Label confidence</h3><p class="ru">Каждое утверждение — verified, inferred или lead. Читатель должен видеть, где заканчиваются данные и начинается интерпретация.</p><p class="en">Every claim is verified, inferred or a lead. The reader must see where data ends and interpretation begins.</p></div>
+      <div class="card"><div class="num">05</div><h3 class="ru">Point-in-time, не навсегда</h3><h3 class="en">Point-in-time, not forever</h3><p class="ru">У каждого числа есть дата, таймзона и источник. «Сейчас» — не свойство актива, а срез.</p><p class="en">Every number has a date, timezone and source. “Now” is a snapshot, not a property of the asset.</p></div>
+      <div class="card"><div class="num">06</div><h3 class="ru">Сначала условия отмены</h3><h3 class="en">Invalidation first</h3><p class="ru">Если не могу назвать, что докажет мою ошибку, у меня нет тезиса — есть мнение.</p><p class="en">If I cannot name what would prove me wrong, I have an opinion, not a thesis.</p></div>
+    </div>
+  </section>
+
+  <section id="pipeline" style="margin-top:56px">
+    <div class="kicker"><span class="ru">Пайплайн</span><span class="en">Pipeline</span></div>
+    <h2 class="ru">От публичного endpoint до decision card.</h2>
+    <h2 class="en">From a public endpoint to a decision card.</h2>
+    <div class="grid-3" style="margin-top:22px">
+      <div class="card"><div class="num">01 / COLLECT</div><p class="ru"><b>fetch_lib.py</b> — кэшированные запросы к публичным API и RPC. Сырые ответы сохраняются в <code>raw/</code>, чтобы расчёт можно было повторить.</p><p class="en"><b>fetch_lib.py</b> — cached requests to public APIs and RPC. Raw responses are kept in <code>raw/</code> so the calculation can be rerun.</p></div>
+      <div class="card"><div class="num">02 / TRANSFORM</div><p class="ru"><b>build_outputs.py</b> — агрегаты, сверки, сценарии. Без pandas и matplotlib: stdlib + numpy, CSV и SVG.</p><p class="en"><b>build_outputs.py</b> — aggregates, reconciliations, scenarios. No pandas or matplotlib: stdlib + numpy, CSV and SVG.</p></div>
+      <div class="card"><div class="num">03 / DECIDE</div><p class="ru"><b>Memo + decision card</b> — что делать, каким размером, при каком условии пересмотреть. Каждый артефакт ссылается на данные.</p><p class="en"><b>Memo + decision card</b> — what to do, at what size, under what condition to revisit. Every artifact links back to the data.</p></div>
+    </div>
+    <div class="callout" style="margin-top:18px"><p class="ru" style="margin:0"><b>Воспроизводимость.</b> Любой график в кейсе ETHFI можно пересобрать из сохранённых JSON одной командой. Это требование к портфолио: читатель проверяет, а не верит.</p><p class="en" style="margin:0"><b>Reproducibility.</b> Any chart in the ETHFI case can be rebuilt from the saved JSON with one command. That is the portfolio requirement: the reader verifies rather than trusts.</p></div>
+  </section>
+
+  <section style="margin-top:56px">
+    <div class="kicker"><span class="ru">Статусы доказательств</span><span class="en">Evidence status</span></div>
+    <h2 class="ru">Три уровня уверенности.</h2>
+    <h2 class="en">Three levels of confidence.</h2>
+    <div class="table-wrap" style="margin-top:18px">
+      <table>
+        <thead><tr><th><span class="ru">Статус</span><span class="en">Status</span></th><th><span class="ru">Значение</span><span class="en">Meaning</span></th><th><span class="ru">Пример</span><span class="en">Example</span></th></tr></thead>
+        <tbody>
+          <tr><td><b style="color:var(--mint)">VERIFIED</b></td><td><span class="ru">Подтверждено транзакцией, вызовом контракта или первоисточником.</span><span class="en">Confirmed by a transaction, contract call or primary document.</span></td><td><span class="ru">2.54M ETHFI прошли через CoW; burn 1.46M ETHFI.</span><span class="en">2.54M ETHFI went through CoW; 1.46M ETHFI burned.</span></td></tr>
+          <tr><td><b style="color:var(--amber)">INFERRED</b></td><td><span class="ru">Логичный вывод из проверенных данных, но без последнего звена.</span><span class="en">A logical conclusion from verified data, missing the last link.</span></td><td><span class="ru">Кэшбэк на Optimism: путь до LZMultiCall есть, выплаты нет.</span><span class="en">Optimism cashback: path to LZMultiCall exists, payout does not.</span></td></tr>
+          <tr><td><b style="color:var(--dim)">LEAD</b></td><td><span class="ru">Наблюдение или вторичный источник, требующий проверки.</span><span class="en">An observation or secondary source that needs verification.</span></td><td><span class="ru">Адрес buyback Safe, найденный у BlockPinned.</span><span class="en">The buyback Safe address found via BlockPinned.</span></td></tr>
+          </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section style="margin-top:56px">
+    <div class="kicker"><span class="ru">Чек-лист</span><span class="en">Checklist</span></div>
+    <h2 class="ru">Что проверяю перед публикацией.</h2>
+    <h2 class="en">What I check before publishing.</h2>
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card"><h3 class="ru">Данные</h3><h3 class="en">Data</h3><ul class="small muted" style="padding-left:16px;margin:8px 0 0"><li class="ru">Дата, таймзона и блок для каждого среза.</li><li class="en">Date, timezone and block for every snapshot.</li><li class="ru">Суммы в токенах и USD раздельно.</li><li class="en">Amounts in tokens and USD kept separate.</li><li class="ru">Fees ≠ revenue ≠ profit ≠ holder yield.</li><li class="en">Fees ≠ revenue ≠ profit ≠ holder yield.</li><li class="ru">Gross transfer value не назван платёжным оборотом.</li><li class="en">Gross transfer value is not called payment volume.</li></ul></div>
+      <div class="card"><h3 class="ru">Адреса</h3><h3 class="en">Addresses</h3><ul class="small muted" style="padding-left:16px;margin:8px 0 0"><li class="ru">Контракты, CEX, мосты и treasury исключены из «float».</li><li class="en">Contracts, CEX, bridges and treasury excluded from “float”.</li><li class="ru">Метка — эвристика, а не юридическая идентификация.</li><li class="en">A label is a heuristic, not legal identification.</li><li class="ru">Изменение поведения фиксируется как событие, не как вывод.</li><li class="en">Behaviour change is logged as an event, not a conclusion.</li><li class="ru">Нет исходящих = наблюдение на дату, не гарантия.</li><li class="en">No outflows = observation on a date, not a guarantee.</li></ul></div>
+      <div class="card"><h3 class="ru">Рынок</h3><h3 class="en">Market</h3><ul class="small muted" style="padding-left:16px;margin:8px 0 0"><li class="ru">Ликвидность и проскальзывание до размера позиции.</li><li class="en">Liquidity and slippage before position size.</li><li class="ru">Разлоки и overhang отдельно от circulating.</li><li class="en">Unlocks and overhang separate from circulating.</li><li class="ru">Сценарии — чувствительность, не прогноз.</li><li class="en">Scenarios are sensitivity, not forecasts.</li><li class="ru">Цена ошибки сформулирована до вывода.</li><li class="en">Cost of being wrong defined before the conclusion.</li></ul></div>
+      <div class="card"><h3 class="ru">Коммуникация</h3><h3 class="en">Communication</h3><ul class="small muted" style="padding-left:16px;margin:8px 0 0"><li class="ru">Сначала ответ, потом метод.</li><li class="en">Answer first, method second.</li><li class="ru">Каждый график имеет источник и дату.</li><li class="en">Every chart has a source and date.</li><li class="ru">Ограничения написаны, а не спрятаны.</li><li class="en">Limitations are written, not hidden.</li><li class="ru">Текст понятен нетехническому аллокатору.</li><li class="en">The text is readable for a non-technical allocator.</li></ul></div>
+    </div>
+  </section>
+
+  <section style="margin-top:56px">
+    <div class="kicker"><span class="ru">Ограничения</span><span class="en">Limitations</span></div>
+    <h2 class="ru">Что этот метод не делает.</h2>
+    <h2 class="en">What this method does not do.</h2>
+    <ul class="ru" style="color:var(--muted);font-size:14px;max-width:70ch">
+      <li>Не заменяет юридическую проверку контрактов, custody и лицензий.</li>
+      <li>Не управляет клиентскими активами и не даёт инвестиционных рекомендаций.</li>
+      <li>Не строит HFT- или MEV-модели; фокус — фундаментальная проверка flow и экономики.</li>
+      <li>Не скрывает конфликт источников: если база не определена, это написано.</li>
+    </ul>
+    <ul class="en" style="color:var(--muted);font-size:14px;max-width:70ch">
+      <li>It does not replace legal review of contracts, custody or licenses.</li>
+      <li>It does not manage client assets or provide investment advice.</li>
+      <li>It does not build HFT or MEV models; the focus is fundamental verification of flow and economics.</li>
+      <li>It does not hide source conflicts: if the base is unresolved, the text says so.</li>
+    </ul>
+  </section>
+
+  <section style="margin-top:50px;border-top:1px solid var(--line);padding-top:26px">
+    <div class="cta">
+      <a class="btn primary" href="ethfi.html"><span class="ru">Посмотреть метод в действии</span><span class="en">See the method in action</span> <span class="arrow">→</span></a>
+      <a class="btn" href="cv.html">CV</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><span class="ru">© 2026 Marina Rebeeva. Независимое исследование, не инвестиционная рекомендация.</span><span class="en">© 2026 Marina Rebeeva. Independent research, not investment advice.</span></p>
+    <div class="links"><a href="index.html"><span class="ru">На главную</span><span class="en">Home</span></a><a href="mailto:rebeeva979@gmail.com">Email</a></div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

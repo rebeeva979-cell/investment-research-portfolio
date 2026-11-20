@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LTC Research — Start Here</title>
+<style>
+:root{--bg:#f3f5f9;--panel:#fff;--text:#152033;--muted:#667085;--border:#e3e8f0;--accent:#2563eb;--accent2:#0f766e;--amber:#d97706;--red:#dc2626;--shadow:0 10px 30px rgba(15,23,42,.08)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#dbeafe 0%,transparent 55%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:36px 22px 60px}
+.hero{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;flex-wrap:wrap;margin-bottom:22px}
+.hero h1{margin:0;font-size:30px;letter-spacing:-.6px}
+.hero p{margin:8px 0 0;color:var(--muted);max-width:680px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{padding:5px 10px;border-radius:999px;background:var(--panel);border:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted)}
+.badge.blue{background:rgba(37,99,235,.08);border-color:rgba(37,99,235,.3);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
+.card h2{margin:0;font-size:16px;letter-spacing:-.2px}
+.card p{margin:0;color:var(--muted);font-size:12.5px}
+.card .meta{font-size:11px;color:var(--muted);margin-top:auto}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+a.btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-size:12px;font-weight:700}
+a.btn.secondary{background:transparent;color:var(--accent);border:1px solid rgba(37,99,235,.35)}
+a.btn.green{background:var(--accent2)}
+a.btn:hover{filter:brightness(.95);text-decoration:none}
+.section{margin-top:26px}
+.section h2{font-size:17px;margin:0 0 10px;letter-spacing:-.2px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.step{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px}
+.step b{display:block;margin-bottom:4px;font-size:12px;color:var(--accent)}
+.step span{font-size:12px;color:var(--muted)}
+.note{margin-top:22px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px 16px;font-size:12px;color:var(--muted)}
+.note strong{color:var(--text)}
+.footer{margin-top:26px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);padding-top:14px}
+@media(max-width:760px){.grid,.steps{grid-template-columns:1fr}.hero h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Litecoin Research — Start Here</h1>
+      <p>Единая точка входа: интерактивный дашборд, компактный источник для Looker Studio, полный research workbook, гайд и memo.</p>
+      <div class="badges">
+        <span class="badge blue">Research POC</span>
+        <span class="badge">As of 2026-11-14</span>
+        <span class="badge">Coverage 2018-08-22 — 2026-11-14</span>
+        <span class="badge">Not investment advice</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>1. Интерактивный дашборд</h2>
+      <p>7 разделов: Overview, On-chain, Mining &amp; Supply, Valuation &amp; Peers, Risk &amp; Returns, Decision Gates, Data &amp; Sources. Работает без интернета и Google-аккаунта.</p>
+      <div class="actions">
+        <a class="btn" href="LTC_Dashboard.html">Открыть LTC_Dashboard.html</a>
+      </div>
+      <div class="meta">Один HTML-файл · ECharts · светлая/тёмная тема · CSV-экспорт</div>
+    </div>
+
+    <div class="card">
+      <h2>2. Компактный Looker starter</h2>
+      <p>11 листов и только нужные поля. Это самый быстрый путь к первому отчёту в Looker Studio. Полный workbook — рядом, если понадобятся blocks, transfers, mining и valuation.</p>
+      <div class="actions">
+        <a class="btn green" href="LTC_LOOKER_STARTER.xlsx">LTC_LOOKER_STARTER.xlsx</a>
+        <a class="btn secondary" href="LOOKER_STUDIO_STARTER_CHECKLIST.pdf">Чеклист PDF</a>
+      </div>
+      <div class="meta">XLSX · 2.3 MB · 11 листов · загрузить в Google Drive → открыть как Google Sheets</div>
+    </div>
+
+    <div class="card">
+      <h2>3. Полный research workbook</h2>
+      <p>20 листов: market, on-chain, blocks, transfers, mining, supply, valuation, peers, decision rules, economics framework, data quality и sources.</p>
+      <div class="actions">
+        <a class="btn secondary" href="LTC_LOOKER_DATASET.xlsx">LTC_LOOKER_DATASET.xlsx</a>
+        <a class="btn secondary" href="LTC_KPI_LATEST.csv">KPI CSV</a>
+      </div>
+      <div class="meta">XLSX · 8.9 MB · полная research-база</div>
+    </div>
+
+    <div class="card">
+      <h2>4. Инструкции и memo</h2>
+      <p>Пошаговая карта сборки Looker Studio, короткий чеклист на первые 3 страницы и investment memo с выводами, рисками и ограничениями.</p>
+      <div class="actions">
+        <a class="btn secondary" href="LOOKER_STUDIO_BUILD_GUIDE.pdf">Гайд PDF</a>
+        <a class="btn secondary" href="LOOKER_STUDIO_STARTER_CHECKLIST.pdf">Чеклист PDF</a>
+        <a class="btn secondary" href="LTC_RESEARCH_MEMO.pdf">Memo PDF</a>
+      </div>
+      <div class="meta">PDF открывается на телефоне и в любом просмотрщике</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Как действовать</h2>
+    <div class="steps">
+      <div class="step"><b>Шаг 1</b><span>Открой <strong>LTC_Dashboard.html</strong> и посмотри, какие выводы и графики тебе нужны.</span></div>
+      <div class="step"><b>Шаг 2</b><span>Если нужен Looker Studio: загрузи <strong>LTC_LOOKER_STARTER.xlsx</strong> в Drive, открой как Google Sheets и иди по чеклисту.</span></div>
+      <div class="step"><b>Шаг 3</b><span>Для полного кейса используй <strong>LTC_RESEARCH_MEMO.pdf</strong> и полный workbook. Перед публикацией проверь Data Quality и Sources.</span></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Важно:</strong> объём в исходном файле оставлен как raw field, потому что единица измерения не подтверждена.
+    ATH — максимум дневного close в датасете, а не внутридневной all-time high. Active addresses — не уникальные пользователи.
+    Miner revenue — валовая выручка, не прибыль. Дашборд не выдаёт инвестиционную рекомендацию.
+  </div>
+
+  <div class="footer">
+    Файлы лежат в <strong>/home/nikolay/Documents/codex/03-INVESTICI/portfeli-i-onchain/Crypto_Investment_Research_Portfolio/01_LTC/</strong>.
+    Если открываешь PDF на телефоне, начни с <strong>LOOKER_STUDIO_STARTER_CHECKLIST.pdf</strong>.
+  </div>
+</div>
+</body>
+</html>

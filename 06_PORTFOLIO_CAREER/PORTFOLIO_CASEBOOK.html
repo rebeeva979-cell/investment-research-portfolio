@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investment Research Portfolio — Casebook · 20.11.2026</title>
+<style>
+:root{--ink:#14202e;--muted:#5d6b7c;--line:#d9e2ec;--accent:#0d6e66;--bg:#f6f8fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Georgia,serif}
+.wrap{max-width:900px;margin:0 auto;padding:48px 28px 80px;background:#fff}
+h1{font-size:38px;line-height:1.1;margin:0 0 8px;letter-spacing:-.02em}h2{font-size:26px;margin:44px 0 12px;border-top:1px solid var(--line);padding-top:22px}h3{font-size:18px;margin:26px 0 8px}
+p,li{color:#263546}strong{color:#111}a{color:var(--accent)}hr{border:0;border-top:1px solid var(--line);margin:30px 0}
+blockquote{margin:18px 0;padding:12px 18px;border-left:4px solid var(--accent);background:#eef7f5;color:#27423f}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}th{background:#edf3f9}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:#eef2f6;padding:1px 4px;border-radius:4px}
+pre{background:#0d1a2a;color:#e9f2fa;padding:14px;border-radius:8px;overflow:auto}pre code{background:none;color:inherit;padding:0}
+.meta{color:var(--muted);font-size:13px;margin-bottom:26px}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}h2{break-after:avoid}table,pre{break-inside:avoid}a{color:#111;text-decoration:underline}}
+</style></head><body><div class="wrap">
+<div class="meta">Marina Rebeeva · investment research portfolio · 20 November 2026</div>
+<h1 id="investment-research-portfolio-casebook">Investment Research Portfolio — Casebook</h1>
+<p><strong>Версия:</strong> 20 ноября 2026<br />
+<strong>Позиционирование:</strong> Junior Investment Research / Crypto &amp; Digital Assets Analyst<br />
+<strong>Важно:</strong> это учебно-практическое портфолио и decision-support research, а не управление чужими деньгами и не персональная рекомендация.</p>
+<h2 id="_1">Как читать портфолио</h2>
+<p>Каждый кейс отвечает не на вопрос «какую монету купить», а на вопрос:</p>
+<blockquote>
+<p>какое действие допустимо при текущих данных и заданном risk budget?</p>
+</blockquote>
+<p>В каждом кейсе есть пять слоёв:</p>
+<ol>
+<li>Investment question — какой вопрос проверяем.</li>
+<li>Evidence — какие данные и источники нужны.</li>
+<li>Model — как считаем экономику, valuation и риск.</li>
+<li>Decision Card — действие, уверенность, лимит и отмена тезиса.</li>
+<li>Reproducibility — dashboard, SQL/Python, source register и дата обновления.</li>
+</ol>
+<h2 id="_2">Сводная карта кейсов</h2>
+<table>
+<thead>
+<tr>
+<th>Кейс</th>
+<th>Что демонстрирует</th>
+<th>Главный артефакт</th>
+<th>Текущий статус</th>
+<th style="text-align: right;">Временный max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../01_LTC/LTC_RESEARCH_MEMO.md">LTC — Network &amp; Market Research</a></td>
+<td>on-chain activity, PoW security, supply, mining economics, drawdown и peer analysis</td>
+<td><a href="../01_LTC/LTC_Dashboard.html">LTC Dashboard</a> + workbook</td>
+<td><code>wait</code></td>
+<td style="text-align: right;">3%</td>
+</tr>
+<tr>
+<td><a href="../04_ETHFI/ETHFI_ONCHAIN_VERIFICATION_2026-11-20.md">ETHFI — Protocol Economics &amp; On-chain Verification</a></td>
+<td>buyback ≠ burn ≠ dividend; treasury/vesting/CEX labeling; supply reconciliation; DEX depth</td>
+<td>verification report + 4-page bilingual case + CSVs/SVG</td>
+<td><code>wait</code></td>
+<td style="text-align: right;">2%</td>
+</tr>
+<tr>
+<td><a href="../05_OTHER_ASSETS/LYFT_RESEARCH_BRIEF.md">LYFT — Marketplace Unit Economics</a></td>
+<td>rides, active riders, take rate, adjusted EBITDA и нормализация FCF</td>
+<td>SEC/IR brief + valuation seed</td>
+<td><code>wait</code></td>
+<td style="text-align: right;">3%</td>
+</tr>
+<tr>
+<td><a href="../05_OTHER_ASSETS/ZNTL_RESEARCH_BRIEF.md">ZNTL — Clinical Risk &amp; Runway</a></td>
+<td>binary clinical risk, cash runway, burn, dilution и scenario valuation</td>
+<td>clinical investment brief</td>
+<td><code>wait</code></td>
+<td style="text-align: right;">0.5%</td>
+</tr>
+<tr>
+<td><a href="../05_OTHER_ASSETS/GPRO_RESEARCH_BRIEF.md">GPRO — Special Situation</a></td>
+<td>deal probability, debt/covenants, residual ownership и downside</td>
+<td>merger/deal-risk brief</td>
+<td><code>wait</code></td>
+<td style="text-align: right;">1%</td>
+</tr>
+<tr>
+<td><a href="../05_OTHER_ASSETS/ANTHROPIC_RESEARCH_BRIEF.md">ANT — AI IPO Valuation</a></td>
+<td>revenue run-rate vs TTM, dilution, compute commitments и IPO microstructure</td>
+<td><a href="../05_OTHER_ASSETS/ANT_Anthropic_Calculator.html">ANT calculator</a> + IPO brief</td>
+<td><code>wait</code></td>
+<td style="text-align: right;">0.5%</td>
+</tr>
+<tr>
+<td><a href="../02_SNX/SNX_SIP423_RESEARCH_REPORT_2026-11-19.md">SNX — SIP-423 Supply Overhang</a></td>
+<td>real mint, Safe custody, lock enforceability, unlock scenarios и market-cap methodology</td>
+<td><a href="../02_SNX/SNX_SIP423_RESEARCH_REPORT_2026-11-19.md">SNX report</a> + data pack</td>
+<td><code>defensive / research</code></td>
+<td style="text-align: right;">0% now</td>
+</tr>
+</tbody>
+</table>
+<p>Общий слой: <a href="../05_OTHER_ASSETS/COMBINED_DASHBOARD_BUILD_GUIDE.md">Macro &amp; ETF Flows</a> — SPY, DXY, USDT, BTC/ETH ETF flows и weekly change.</p>
+<hr />
+<h2 id="case-1-ltc-network-market-research">Case 1 — LTC: Network &amp; Market Research</h2>
+<h3 id="investment-question">Investment question</h3>
+<p>Сохраняется ли тезис Litecoin как платёжной Proof-of-Work сети, если рыночная оценка, адресная активность, комиссии, эмиссия и доходность майнеров рассматриваются вместе?</p>
+<h3 id="_3">Что исследовано</h3>
+<ul>
+<li>daily market data, MA, returns, volatility и drawdowns;</li>
+<li>active addresses и transactions как proxy adoption;</li>
+<li>blocks, difficulty, block interval и hashrate;</li>
+<li>supply, issuance, halving context и remaining supply;</li>
+<li>gross transfer value и output metrics с оговоркой о change/self-transfers;</li>
+<li>fees, subsidy revenue, gross miner revenue и fee share;</li>
+<li>MVRV/realized-cap proxy и peers BTC/BCH/DOGE/DASH.</li>
+</ul>
+<h3 id="_4">Что демонстрирует работодателю</h3>
+<p>Умение не подменять пользователей адресами, выручку gross transfer value, а валовую выручку майнеров — прибылью. Также показывает полный цикл: data extraction → data quality → dashboard → investment memo → decision gates.</p>
+<h3 id="decision-card">Decision Card</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Текущее решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статус</td>
+<td><code>wait</code></td>
+</tr>
+<tr>
+<td>Уверенность</td>
+<td><code>medium</code></td>
+</tr>
+<tr>
+<td>Временный max</td>
+<td>3% ликвидного портфеля</td>
+</tr>
+<tr>
+<td>Главный риск</td>
+<td>сеть может оставаться безопасной, но реальный платёжный спрос и fee economics — слабыми</td>
+</tr>
+<tr>
+<td>Отмена тезиса</td>
+<td>ухудшение security/activity при отсутствии подтверждённого спроса</td>
+</tr>
+<tr>
+<td>Следующий катализатор</td>
+<td>новый on-chain snapshot и peer comparison</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">Артефакты</h3>
+<ul>
+<li><a href="../01_LTC/LTC_RESEARCH_MEMO.md">LTC research memo</a></li>
+<li><a href="../01_LTC/LOOKER_STUDIO_BUILD_GUIDE.md">LTC Looker build guide</a></li>
+<li><a href="../01_LTC/LTC_Dashboard.html">LTC standalone dashboard</a></li>
+<li><a href="../01_LTC/LTC_LOOKER_DATASET.xlsx">LTC dataset</a></li>
+</ul>
+<hr />
+<h2 id="case-2-ethfi-protocol-economics-on-chain-value-accrual">Case 2 — ETHFI: Protocol Economics &amp; On-chain Value Accrual</h2>
+<h3 id="investment-question_1">Investment question</h3>
+<p>Растёт ли ether.fi как бизнес достаточно качественно, чтобы рост протокола отражался в стоимости ETHFI, и доходит ли документированный buyback до держателя — или остаётся внутри структур протокола?</p>
+<h3 id="on-chain">Что проверено on-chain</h3>
+<ul>
+<li><strong>Buyback исполняется:</strong> 566 сделок CoW, 2,542,499 ETHFI за $1,645,541, средняя $0.6472, период 17.09–20.11.2026; 30 дней — 1,155,696 ETHFI / $663,000.</li>
+<li><strong>Маршрут:</strong> Funding Safe <code>0xf40bcc…f7021</code> → Buyback Safe <code>0x43f4ca…6408c</code> → CoW <code>0x9008D1…0ab41</code>; 2,054,374 ETHFI ушло на EOA <code>0x9eaC71…843f</code>, 893,950 — в LZMultiCall <code>0xAcdDAC…c05f1</code> (LayerZero/Optimism).</li>
+<li><strong>До держателя не дошло:</strong> ни один ETHFI с buyback Safe не ушёл в sETHFI; holder revenue = $0 с 1 апреля 2026; распределение cashback на Optimism не подтверждено до адресов получателей.</li>
+<li><strong>Политика vs поток:</strong> buyback/revenue = 17.3% за 30 дней против 30% на buyback (60% с cashback, который не подтверждён); annualised $7.96M = 1.71% market cap; 1.16M ETHFI/мес покрывает ~26% разлоков.</li>
+<li><strong>Supply:</strong> on-chain 998,535,999; burn 1,464,001 через <code>burn()</code>; CoinGecko считает total как circulating; DefiLlama — 983,600,557 + 16,399,443 locked = 1B. Расхождение ~1.5% float.</li>
+<li><strong>Концентрация:</strong> top-10 62.19%, top-5 45.84%; treasury Safe 15.34%, sETHFI 10.92%, CEX 13.94%; EOA float 47.5%, top-1 EOA 21.4% float; Gini 0.805, HHI 761, Nakamoto 5.</li>
+<li><strong>Ликвидность:</strong> $1.23M видимой DEX-глубины (0.26% mcap); $250k продажа — −38.8% по QuoterV2.</li>
+<li><strong>Экономика:</strong> TVL $3.73B, −70.9% от пика; mcap/revenue 10.73×, mcap/TVL 0.125×; сценарии Bear/Base/Bull $0.228 / $0.435 / $0.730.</li>
+</ul>
+<h3 id="_6">Что демонстрирует работодателю</h3>
+<p>Полный цикл on-chain forensic research: от адреса и транзакции до policy-vs-flow вывода, supply reconciliation, концентрации, микроструктуры и Decision Card. Ключевой навык — не принимать «buyback» за «holder yield» и показывать, где заканчиваются данные и начинается интерпретация.</p>
+<h3 id="decision-card_1">Decision Card</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Текущее решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статус</td>
+<td><code>wait</code></td>
+</tr>
+<tr>
+<td>Уверенность</td>
+<td><code>high</code> в исполнении buyback; <code>low</code> в распределении держателям</td>
+</tr>
+<tr>
+<td>Временный max</td>
+<td>0–2% ликвидного портфеля</td>
+</tr>
+<tr>
+<td>Горизонт</td>
+<td>3–6 месяцев</td>
+</tr>
+<tr>
+<td>Главный риск</td>
+<td>buyback — customer-acquisition расход, а не yield; TVL и revenue продолжают сжиматься; 156M ETHFI у allocation/vesting EOA</td>
+</tr>
+<tr>
+<td>Апгрейд</td>
+<td>buyback уходит в sETHFI/holders или burn с проверяемыми tx; TVL &gt;$4.5B 30 дней с ростом revenue; подтверждённый cashback &gt;$1M с адресами</td>
+</tr>
+<tr>
+<td>Отмена</td>
+<td>treasury/allocation EOA отправляют &gt;5% float на CEX; buyback останавливается &gt;30 дней; TVL &lt;$3B или revenue &lt;$2.5M/30 дней</td>
+</tr>
+<tr>
+<td>Почему не short</td>
+<td>реальный механический bid, тонкий float, стоимость заимствования и squeeze-риск не измерены</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">Артефакты</h3>
+<ul>
+<li><a href="../04_ETHFI/ETHFI_ONCHAIN_VERIFICATION_2026-11-20.md">On-chain verification report</a></li>
+<li><a href="../docs/ethfi.html">Interactive bilingual case</a></li>
+<li><a href="../docs/method.html">Methodology</a></li>
+<li><a href="../04_ETHFI/ETHFI_INVESTMENT_THESIS.md">Investment thesis</a></li>
+<li><a href="../04_ETHFI/ETHFI_FINANCIAL_TOKENOMICS_MODEL.md">Financial &amp; Tokenomics Model</a></li>
+<li><a href="../04_ETHFI/ETHFI_RISK_ASSESSMENT.md">Risk Assessment</a></li>
+<li><a href="../docs/data/ethfi_metrics.csv">Metrics CSV</a> · <a href="../docs/data/ethfi_holders_top.csv">Holders CSV</a> · <a href="../docs/data/ethfi_buybacks_daily.csv">Buybacks CSV</a> · <a href="../docs/data/ethfi_valuation_scenarios.csv">Scenarios CSV</a></li>
+</ul>
+<hr />
+<h2 id="case-3-lyft-marketplace-unit-economics">Case 3 — LYFT: Marketplace Unit Economics</h2>
+<h3 id="investment-question_2">Investment question</h3>
+<p>Превращается ли рост rides и active riders в устойчивый FCF на акцию после insurance, incentives, stock-based compensation и разовых изменений оборотного капитала?</p>
+<h3 id="_8">Что исследовано</h3>
+<ul>
+<li>active riders, rides, gross bookings и revenue;</li>
+<li>take rate, contribution economics и adjusted EBITDA;</li>
+<li>operating cash flow и FCF bridge;</li>
+<li>SBC, insurance reserves, incentives и legal/tax one-offs;</li>
+<li>cash, debt, ownership и valuation multiples;</li>
+<li>bull/base/bear сценарии и operating invalidation triggers.</li>
+</ul>
+<h3 id="_9">Что демонстрирует работодателю</h3>
+<p>Способность не принимать adjusted EBITDA или headline FCF за чистую экономику бизнеса. Кейс связывает операционные KPI с денежным потоком и valuation.</p>
+<h3 id="decision-card_2">Decision Card</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Текущее решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статус</td>
+<td><code>wait</code>; starter до 1% только после normalised FCF gate</td>
+</tr>
+<tr>
+<td>Уверенность</td>
+<td><code>medium</code></td>
+</tr>
+<tr>
+<td>Временный max</td>
+<td>3% после operating и valuation gates</td>
+</tr>
+<tr>
+<td>Главный риск</td>
+<td>рост rides не превращается в FCF из-за insurance, incentives, SBC и конкуренции</td>
+</tr>
+<tr>
+<td>Отмена тезиса</td>
+<td>замедление riders вместе со сжатием take rate/contribution margin и FCF</td>
+</tr>
+<tr>
+<td>Следующий катализатор</td>
+<td>следующий квартальный отчёт и обновление unit economics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">Артефакты</h3>
+<ul>
+<li><a href="../05_OTHER_ASSETS/LYFT_RESEARCH_BRIEF.md">LYFT research brief</a></li>
+<li><a href="../05_OTHER_ASSETS/COMBINED_DASHBOARD_BUILD_GUIDE.md">combined dashboard specification</a></li>
+<li><a href="../05_OTHER_ASSETS/OWNERSHIP_AND_VALUATION_SEED.csv">ownership and valuation seed</a></li>
+</ul>
+<hr />
+<h2 id="case-4-zntl-clinical-risk-runway-dilution">Case 4 — ZNTL: Clinical Risk, Runway &amp; Dilution</h2>
+<h3 id="investment-question_3">Investment question</h3>
+<p>Создаёт ли cash runway и клинический pipeline достаточно привлекательную асимметрию, чтобы оправдать binary clinical/regulatory risk и вероятность будущего dilution?</p>
+<h3 id="_11">Что исследовано</h3>
+<ul>
+<li>cash, marketable securities, liabilities и operating burn;</li>
+<li>runway до ключевого readout;</li>
+<li>clinical program, endpoints, biomarker и regulatory path;</li>
+<li>share count и влияние follow-on offering;</li>
+<li>bear/base/bull сценарии вместо P/E или обычного DCF;</li>
+<li>catalyst calendar и условия отмены тезиса.</li>
+</ul>
+<h3 id="_12">Что демонстрирует работодателю</h3>
+<p>Умение анализировать pre-revenue biotech через cash-per-share, runway, clinical probability и dilution, а не через неподходящие мультипликаторы.</p>
+<h3 id="decision-card_3">Decision Card</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Текущее решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статус</td>
+<td><code>wait</code></td>
+</tr>
+<tr>
+<td>Уверенность</td>
+<td><code>medium</code> в оценке риска; <code>low</code> в upside</td>
+</tr>
+<tr>
+<td>Временный max</td>
+<td>0.5%; до 1% только отдельная clinical sleeve</td>
+</tr>
+<tr>
+<td>Главный риск</td>
+<td>неубедительный clinical readout и последующее dilution</td>
+</tr>
+<tr>
+<td>Отмена тезиса</td>
+<td>отсутствие clinically meaningful benefit, остановка программы или дорогая эмиссия</td>
+</tr>
+<tr>
+<td>Следующий катализатор</td>
+<td>DENALI readout и новые financing disclosures</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_13">Артефакты</h3>
+<ul>
+<li><a href="../05_OTHER_ASSETS/ZNTL_RESEARCH_BRIEF.md">ZNTL research brief</a></li>
+<li><a href="../05_OTHER_ASSETS/ZNTL_LYFT_GPRO_INVESTMENT_CASES.md">ZNTL / LYFT / GPRO cases</a></li>
+<li><a href="../05_OTHER_ASSETS/RISK_CATALYST_LOG.csv">risk and catalyst log</a></li>
+</ul>
+<hr />
+<h2 id="case-5-gpro-merger-special-situation">Case 5 — GPRO: Merger Special Situation</h2>
+<h3 id="investment-question_4">Investment question</h3>
+<p>Какова вероятность закрытия сделки и сколько реально стоит заявленная cash consideration плюс residual ownership после учёта debt, covenants, financing conditions и dilution?</p>
+<h3 id="_14">Что исследовано</h3>
+<ul>
+<li>merger consideration и spread к рыночной цене;</li>
+<li>conditions precedent, closing deadline и commitment letter;</li>
+<li>cash, debt, covenant waivers и going-concern disclosures;</li>
+<li>hardware revenue, camera units и subscription revenue;</li>
+<li>residual ownership и post-merger cap table;</li>
+<li>probability-weighted downside вместо headline spread.</li>
+</ul>
+<h3 id="_15">Что демонстрирует работодателю</h3>
+<p>Умение разбирать special situation как событие и структуру капитала, а не как обычную growth-акцию. Центральный объект анализа — вероятность сделки и остаточная стоимость, а не P/E.</p>
+<h3 id="decision-card_4">Decision Card</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Текущее решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статус</td>
+<td><code>wait / watchlist only</code></td>
+</tr>
+<tr>
+<td>Уверенность</td>
+<td><code>medium</code></td>
+</tr>
+<tr>
+<td>Временный max</td>
+<td>1% special-situation budget</td>
+</tr>
+<tr>
+<td>Главный риск</td>
+<td>срыв/перенос сделки, covenant/default pressure и размывание residual stake</td>
+</tr>
+<tr>
+<td>Отмена тезиса</td>
+<td>отсутствие closing на согласованных условиях или резкое ухудшение cash/debt</td>
+</tr>
+<tr>
+<td>Следующий катализатор</td>
+<td>новый 8-K, waiver/commitment-letter update и pro forma cap table</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">Артефакты</h3>
+<ul>
+<li><a href="../05_OTHER_ASSETS/GPRO_RESEARCH_BRIEF.md">GPRO research brief</a></li>
+<li><a href="../05_OTHER_ASSETS/COMBINED_DASHBOARD_BUILD_GUIDE.md">combined dashboard specification</a></li>
+<li><a href="../05_OTHER_ASSETS/RISK_CATALYST_LOG.csv">risk and catalyst log</a></li>
+</ul>
+<hr />
+<h2 id="case-6-ant-ai-ipo-valuation-revenue-multiple-calculator">Case 6 — ANT: AI IPO Valuation &amp; Revenue-Multiple Calculator</h2>
+<h3 id="investment-question_5">Investment question</h3>
+<p>Какую цену можно обосновать при разных определениях выручки и share count, и когда рост Anthropic превращается из run-rate story в доказанную публичную экономику?</p>
+<h3 id="_17">Что исследовано</h3>
+<ul>
+<li><code>$81bn</code> run-rate против <code>$35.3bn</code> TTM;</li>
+<li>basic, option-adjusted и fully diluted share bases;</li>
+<li>IPO price <code>$83</code> против Bybit ANTUSDT derivative mark;</li>
+<li>sensitivity 10–30× revenue run-rate;</li>
+<li>dilution, Class F control, compute commitments и IPO volatility.</li>
+</ul>
+<h3 id="_18">Что демонстрирует работодателю</h3>
+<p>Способность превратить сложный IPO narrative в прозрачный калькулятор, явно разделить фактическую выручку и run-rate, а также показать, почему headline valuation нельзя принимать без dilution и unit-economics gates.</p>
+<h3 id="decision-card_5">Decision Card</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Текущее решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статус</td>
+<td><code>wait</code>; в день IPO не использовать большое плечо</td>
+</tr>
+<tr>
+<td>Уверенность</td>
+<td><code>medium</code> в рисках; <code>low–medium</code> в оценке</td>
+</tr>
+<tr>
+<td>Временный max</td>
+<td>0.5% satellite до первых двух публичных отчётов</td>
+</tr>
+<tr>
+<td>Главный риск</td>
+<td>рынок капитализирует run-rate, а маржа, FCF и compute economics не доказаны</td>
+</tr>
+<tr>
+<td>Отмена тезиса</td>
+<td>замедление revenue вместе с ухудшением margin/FCF и ускорением dilution</td>
+</tr>
+<tr>
+<td>Следующий катализатор</td>
+<td>first trade, price discovery и первый квартальный отчёт</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_19">Артефакты</h3>
+<ul>
+<li><a href="../05_OTHER_ASSETS/ANTHROPIC_RESEARCH_BRIEF.md">ANTHROPIC research brief</a></li>
+<li><a href="../05_OTHER_ASSETS/ANT_Anthropic_Calculator.html">ANT calculator</a></li>
+<li><a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm">SEC final prospectus</a></li>
+</ul>
+<hr />
+<h2 id="case-7-snx-sip-423-supply-overhang-on-chain-verification">Case 7 — SNX: SIP-423 Supply Overhang &amp; On-chain Verification</h2>
+<h3 id="investment-question_6">Investment question</h3>
+<p>Является ли рост supply после SIP-423 реальной эмиссией и насколько надёжен lock, если новые токены лежат в Safe multisig, а protocol fees и TVL остаются низкими?</p>
+<h3 id="_20">Что исследовано</h3>
+<ul>
+<li><code>totalSupply()</code> до и после mint;</li>
+<li>236.46 млн SNX, переведённые в один Safe;</li>
+<li>отсутствие исходящих SNX-переводов на дату среза;</li>
+<li>SIP terms: 1-year lock, 1-year vest, claim window и неопределённость unclaimed treatment;</li>
+<li>разницу между reported circulating market cap и pre-mint comparison basis;</li>
+<li>fees, TVL, revenue hurdle и дисконт claim value;</li>
+<li>сценарии unlock pressure и условия отмены тезиса.</li>
+</ul>
+<h3 id="_21">Что демонстрирует работодателю</h3>
+<p>Умение проверить токеномику не по агрегатору, а через RPC calls, Transfer logs, Safe custody и governance-документ. Кейс показывает разницу между «токены находятся в multisig» и trustless vesting-контрактом.</p>
+<h3 id="decision-card_6">Decision Card</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Текущее решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статус</td>
+<td><code>defensive / research</code>; не покупать сейчас</td>
+</tr>
+<tr>
+<td>Уверенность</td>
+<td><code>high</code> в факте mint; <code>medium</code> в будущей реализации lock/claim</td>
+</tr>
+<tr>
+<td>Временный max</td>
+<td>0%; до 0.5% только после отдельного gate</td>
+</tr>
+<tr>
+<td>Главный риск</td>
+<td>40.67% post-mint supply сосредоточено в Safe, а revenue/TVL не дают достаточной поддержки</td>
+</tr>
+<tr>
+<td>Отмена тезиса</td>
+<td>receipt contract, lock mechanics и revenue hurdle не подтверждены или unlock выходит на рынок раньше спроса</td>
+</tr>
+<tr>
+<td>Следующий катализатор</td>
+<td>deployment receipt contract, governance updates и приближение claim window в 2027</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_22">Артефакты</h3>
+<ul>
+<li><a href="../02_SNX/SNX_SIP423_RESEARCH_REPORT_2026-11-19.md">SNX research report</a></li>
+<li><a href="../02_SNX/SNX_SIP423_RESEARCH_REPORT_2026-11-19.html">SNX HTML report</a></li>
+<li><a href="../02_SNX/SNX_SIP423_DATA_PACK.xlsx">SNX data pack</a></li>
+<li><a href="../02_SNX/SNX_SIP423_RESEARCH_BRIEF.md">SNX research brief</a></li>
+</ul>
+<hr />
+<h2 id="macro-etf-flows">Общий Macro &amp; ETF Flows слой</h2>
+<p>Этот слой не является отдельным активом, а добавляет контекст к каждому кейсу:</p>
+<ul>
+<li>SPY — risk appetite и equity regime;</li>
+<li>DXY — долларовая ликвидность и давление на risk assets;</li>
+<li>USDT — peg deviation и market-cap trend, без вывода о резервах только по цене;</li>
+<li>BTC/ETH ETF flows — потоковый контекст, а не самостоятельный сигнал сделки.</li>
+</ul>
+<p>Артефакты: <a href="../05_OTHER_ASSETS/MARKET_MACRO_DAILY.csv">macro data</a>, <a href="../05_OTHER_ASSETS/ETF_FLOWS_DAILY.csv">ETF flows</a>, <a href="../05_OTHER_ASSETS/MACRO_SOURCE_REGISTER.csv">source register</a>.</p>
+<h2 id="_23">Как презентовать кейсы работодателю</h2>
+<p>Для каждого кейса показать в таком порядке:</p>
+<ol>
+<li>один investment question;</li>
+<li>три ключевых графика;</li>
+<li>один расчёт экономики/valuation;</li>
+<li>главный риск и falsifier;</li>
+<li>Decision Card с ограничением позиции;</li>
+<li>ссылку на dataset, SQL и source register.</li>
+</ol>
+<p>Не начинать презентацию с «актив может дать 4–6x». Начинать с качества данных, механизма создания стоимости и того, что должно быть правдой, чтобы тезис сработал.</p>
+<h2 id="_24">Что ещё добавить до публичной версии</h2>
+<ul>
+<li>скриншот или публичную ссылку на каждый dashboard;</li>
+<li>короткий weekly update по каждому кейсу;</li>
+<li>один общий <code>README</code> с методикой и source policy;</li>
+<li>дату обновления и статус data quality на первой странице;</li>
+<li>disclosure: personal research, not client asset management or investment advice.</li>
+</ul>
+</div></body></html>

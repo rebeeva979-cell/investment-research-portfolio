@@ -1,0 +1,2 @@
+idea_id,captured_at,asset,ticker,asset_class,source_url,source_type,claim,source_tier,status,next_check,falsifier
+VIDEO-2026-11-20-001,2026-11-20,,unknown,unknown,https://youtu.be/rmVTEdI6Xrc,video,unknown until transcript,3,lead,Get transcript and extract <=3 testable claims,Any extracted claim fails primary-source or data-quality checks

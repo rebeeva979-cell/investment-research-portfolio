@@ -1,0 +1,604 @@
+{
+ "schemaVersion": "1.0.0",
+ "pairs": [
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0x06f00544c0bc62e6db10f46d370dfccdc23d8189",
+   "pairAddress": "0x06f00544C0bc62E6db10F46D370dFCcDC23d8189",
+   "labels": [
+    "v3"
+   ],
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "name": "Wrapped Ether",
+    "symbol": "WETH"
+   },
+   "priceNative": "0.0002673",
+   "priceUsd": "0.4674",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 1,
+     "sells": 22
+    },
+    "h6": {
+     "buys": 33,
+     "sells": 85
+    },
+    "h24": {
+     "buys": 96,
+     "sells": 242
+    }
+   },
+   "volume": {
+    "h24": 176334.47,
+    "h6": 41098.83,
+    "h1": 6844.02
+   },
+   "priceChange": {
+    "h1": -1.53,
+    "h6": -0.83,
+    "h24": -10.79
+   },
+   "liquidity": {
+    "base": 467737,
+    "quote": 90.8704,
+    "usd": 377545.91
+   },
+   "fdv": 466809766,
+   "marketCap": 466809766,
+   "pairCreatedAt": 1710769031000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0x553f5e94603f1fcdaa08eb22499d59e4a39e2f8d071c3c6946c27e5e38754ffc",
+   "pairAddress": "0x553f5e94603f1fcdaa08eb22499d59e4a39e2f8d071c3c6946c27e5e38754ffc",
+   "labels": [
+    "v4"
+   ],
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "name": "Ether",
+    "symbol": "ETH"
+   },
+   "priceNative": "0.0002666",
+   "priceUsd": "0.4661",
+   "txns": {
+    "m5": {
+     "buys": 1,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 1,
+     "sells": 5
+    },
+    "h6": {
+     "buys": 23,
+     "sells": 22
+    },
+    "h24": {
+     "buys": 99,
+     "sells": 101
+    }
+   },
+   "volume": {
+    "h24": 310347.58,
+    "h6": 43048.72,
+    "h1": 7636.2,
+    "m5": 1250.83
+   },
+   "priceChange": {
+    "m5": -1.14,
+    "h1": -1.8,
+    "h6": -1.28,
+    "h24": -10.83
+   },
+   "liquidity": {
+    "base": 753610,
+    "quote": 222.1763,
+    "usd": 739608.24
+   },
+   "fdv": 465434517,
+   "marketCap": 465434517,
+   "pairCreatedAt": 1787936639000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0x80fa4c1fd0fbb9a4f071999af69531dee1016644",
+   "pairAddress": "0x80fa4C1fd0fbB9A4f071999aF69531dee1016644",
+   "labels": [
+    "v3"
+   ],
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    "name": "Tether USD",
+    "symbol": "USDT"
+   },
+   "priceNative": "0.4688",
+   "priceUsd": "0.4688",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 0,
+     "sells": 6
+    },
+    "h6": {
+     "buys": 13,
+     "sells": 12
+    },
+    "h24": {
+     "buys": 46,
+     "sells": 79
+    }
+   },
+   "volume": {
+    "h24": 8650.09,
+    "h6": 1207.87,
+    "h1": 222.51
+   },
+   "priceChange": {
+    "h1": -0.95,
+    "h6": -0.1,
+    "h24": -10.54
+   },
+   "liquidity": {
+    "base": 76595,
+    "quote": 25155,
+    "usd": 61069.29
+   },
+   "fdv": 468191950,
+   "marketCap": 468191950,
+   "pairCreatedAt": 1710767255000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "metric",
+   "url": "https://dexscreener.com/ethereum/0x4f061b8e26eb762ed593d76c7567d54f320b9781",
+   "pairAddress": "0x4f061B8E26eb762ed593d76c7567d54F320B9781",
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "Ether.fi",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "name": "USDC",
+    "symbol": "USDC"
+   },
+   "priceNative": "0.4695",
+   "priceUsd": "0.4695",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 1,
+     "sells": 0
+    },
+    "h6": {
+     "buys": 6,
+     "sells": 12
+    },
+    "h24": {
+     "buys": 37,
+     "sells": 45
+    }
+   },
+   "volume": {
+    "h24": 114473.26,
+    "h6": 24042.14,
+    "h1": 1374.17
+   },
+   "priceChange": {
+    "h1": -1.06,
+    "h6": -0.15,
+    "h24": -10.58
+   },
+   "liquidity": {
+    "base": 9537.4052,
+    "quote": 14744,
+    "usd": 19222.16
+   },
+   "fdv": 468834054,
+   "marketCap": 468834054,
+   "pairCreatedAt": 1794249323000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0x526cc4c56982e84ce640c387c0a5454fc2030d30f7fc77a8bb64d71718edbdaa",
+   "pairAddress": "0x526cc4c56982e84ce640c387c0a5454fc2030d30f7fc77a8bb64d71718edbdaa",
+   "labels": [
+    "v4"
+   ],
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "name": "Ether",
+    "symbol": "ETH"
+   },
+   "priceNative": "0.0002696",
+   "priceUsd": "0.4726",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 0,
+     "sells": 1
+    },
+    "h6": {
+     "buys": 1,
+     "sells": 5
+    },
+    "h24": {
+     "buys": 1,
+     "sells": 24
+    }
+   },
+   "volume": {
+    "h24": 2122.24,
+    "h6": 423.31,
+    "h1": 2.33
+   },
+   "priceChange": {
+    "h1": 0.27,
+    "h6": -0.24,
+    "h24": -9.33
+   },
+   "liquidity": {
+    "base": 15289,
+    "quote": 8.3166,
+    "usd": 21804.25
+   },
+   "fdv": 471985102,
+   "marketCap": 471985102,
+   "pairCreatedAt": 1754327855000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0xdefdac77a9a767a2c4eed826e1aead2dace53e1c",
+   "pairAddress": "0xDeFDAC77A9A767a2c4eEd826E1AEaD2dAcE53e1C",
+   "labels": [
+    "v3"
+   ],
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "name": "Wrapped Ether",
+    "symbol": "WETH"
+   },
+   "priceNative": "0.0002699",
+   "priceUsd": "0.4705",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h6": {
+     "buys": 0,
+     "sells": 2
+    },
+    "h24": {
+     "buys": 0,
+     "sells": 12
+    }
+   },
+   "volume": {
+    "h24": 289.04,
+    "h6": 62.56
+   },
+   "priceChange": {
+    "h6": -1.08,
+    "h24": -9.63
+   },
+   "liquidity": {
+    "base": 10475,
+    "quote": 2.5839,
+    "usd": 9433.3
+   },
+   "fdv": 469843343,
+   "marketCap": 469843343,
+   "pairCreatedAt": 1710635351000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0x4d396ccc5b7bf3112f59c35ee4cf22ee44451e66",
+   "pairAddress": "0x4d396cCc5b7Bf3112F59c35EE4cF22ee44451E66",
+   "labels": [
+    "v3"
+   ],
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "name": "USD Coin",
+    "symbol": "USDC"
+   },
+   "priceNative": "0.4907",
+   "priceUsd": "0.4907",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h6": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h24": {
+     "buys": 1,
+     "sells": 24
+    }
+   },
+   "volume": {
+    "h24": 10990.03
+   },
+   "priceChange": {
+    "h24": -4.19
+   },
+   "liquidity": {
+    "base": 800.4537,
+    "quote": 25.7463,
+    "usd": 418.54
+   },
+   "fdv": 490001043,
+   "marketCap": 490001043,
+   "pairCreatedAt": 1710751907000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "curve",
+   "url": "https://dexscreener.com/ethereum/0xcccd572b22dee28479b11dd99589a1e4c0682a7e",
+   "pairAddress": "0xcCCD572B22dee28479B11DD99589a1e4c0682a7E",
+   "labels": [
+    "two"
+   ],
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee",
+    "name": "Wrapped eETH",
+    "symbol": "weETH"
+   },
+   "priceNative": "0.0002508",
+   "priceUsd": "0.4874",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h6": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h24": {
+     "buys": 0,
+     "sells": 1
+    }
+   },
+   "volume": {
+    "h24": 1.72
+   },
+   "priceChange": {},
+   "liquidity": {
+    "base": 100.9592,
+    "quote": 0.02477,
+    "usd": 97.36
+   },
+   "fdv": 486706192,
+   "marketCap": 486706192,
+   "pairCreatedAt": 1717197803000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0x2e9eef85c2822c6ec9ee3d3e7da32873797c478de9815ca3021c4b21665b619d",
+   "pairAddress": "0x2e9eef85c2822c6ec9ee3d3e7da32873797c478de9815ca3021c4b21665b619d",
+   "labels": [
+    "v4"
+   ],
+   "baseToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "quoteToken": {
+    "address": "0x0000000000000000000000000000000000000000",
+    "name": "Ether",
+    "symbol": "ETH"
+   },
+   "priceNative": "0.0002866",
+   "priceUsd": "0.5038",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h6": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h24": {
+     "buys": 0,
+     "sells": 1
+    }
+   },
+   "volume": {},
+   "priceChange": {},
+   "liquidity": {
+    "base": 0.4009,
+    "quote": 0.0001931,
+    "usd": 0.54
+   },
+   "fdv": 503080082,
+   "marketCap": 503080082,
+   "pairCreatedAt": 1786366283000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0x0bb7d325e4d7aa6b2e4f068bd5b71660b87e2180ff267b70a29631882b291006",
+   "pairAddress": "0x0bb7d325e4d7aa6b2e4f068bd5b71660b87e2180ff267b70a29631882b291006",
+   "labels": [
+    "v4"
+   ],
+   "baseToken": {
+    "address": "0x86B5780b606940Eb59A062aA85a07959518c0161",
+    "name": "Staked ETHFI",
+    "symbol": "sETHFI"
+   },
+   "quoteToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "priceNative": "1.2038",
+   "priceUsd": "0.5636",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h6": {
+     "buys": 0,
+     "sells": 1
+    },
+    "h24": {
+     "buys": 0,
+     "sells": 4
+    }
+   },
+   "volume": {
+    "h24": 95.19,
+    "h6": 14.04
+   },
+   "priceChange": {
+    "h6": -0.14,
+    "h24": -4.36
+   },
+   "liquidity": {
+    "base": 292.6754,
+    "quote": 748.229,
+    "usd": 515.27
+   },
+   "fdv": 48480748,
+   "marketCap": 48480748,
+   "pairCreatedAt": 1794831695000
+  },
+  {
+   "chainId": "ethereum",
+   "dexId": "uniswap",
+   "url": "https://dexscreener.com/ethereum/0xd0412ea5ae20b0eec447c6ceda209a324da39970",
+   "pairAddress": "0xd0412EA5aE20B0EeC447C6CEda209A324da39970",
+   "labels": [
+    "v2"
+   ],
+   "baseToken": {
+    "address": "0x88888805E7e3d5c7FB002AD98f08250E79c298dC",
+    "name": "OPOSSUM",
+    "symbol": "OPOS"
+   },
+   "quoteToken": {
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "name": "ether.fi governance token",
+    "symbol": "ETHFI"
+   },
+   "priceNative": "0.00000000005474",
+   "priceUsd": "0.00000000002591",
+   "txns": {
+    "m5": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h1": {
+     "buys": 0,
+     "sells": 0
+    },
+    "h6": {
+     "buys": 1,
+     "sells": 0
+    },
+    "h24": {
+     "buys": 1,
+     "sells": 0
+    }
+   },
+   "volume": {
+    "h24": 1.84,
+    "h6": 1.84
+   },
+   "priceChange": {},
+   "liquidity": {
+    "base": 2760402003885,
+    "quote": 151.1251,
+    "usd": 143.06
+   },
+   "fdv": 3912,
+   "marketCap": 3912,
+   "pairCreatedAt": 1790077967000
+  }
+ ]
+}

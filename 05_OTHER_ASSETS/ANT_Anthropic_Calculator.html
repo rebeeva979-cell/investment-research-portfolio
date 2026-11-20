@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANT: цена и годовые выручки</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a trader's conversion card. Calculator first, then the ladders it is built from. */
+:root {
+  color-scheme: light;
+  --paper: #eef0f2;
+  --card: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-3: #66655f;
+  --muted: #898781;
+  --accent: #1c5cab;
+  --hl: #e6eef8;
+  --grid: #e1e0d9;
+  --baseline: #c3c2b7;
+  --rule: rgba(11, 11, 11, 0.10);
+  --font-display: "Unbounded", "IBM Plex Sans", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0d0d0d; --card: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #a8a79f; --muted: #9b9a94;
+    --accent: #6da7ec; --hl: #1d2a3a; --grid: #2c2c2a; --baseline: #383835; --rule: rgba(255, 255, 255, 0.10);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0d0d0d; --card: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --ink-3: #a8a79f; --muted: #9b9a94;
+  --accent: #6da7ec; --hl: #1d2a3a; --grid: #2c2c2a; --baseline: #383835; --rule: rgba(255, 255, 255, 0.10);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.page { max-width: 980px; margin: 0 auto; padding: 32px 20px 48px; display: grid; gap: 20px; }
+header.top { display: grid; gap: 12px; padding: 8px 0 4px; border-top: 3px solid var(--ink); }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); padding-top: 12px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(28px, 5.4vw, 46px); line-height: 1.08; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.lede { font-size: 18px; color: var(--ink-2); max-width: 64ch; margin: 0; }
+.byline { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--ink-2); }
+.byline strong { color: var(--ink); font-weight: 600; }
+.author a { font-weight: 700; color: var(--ink); text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.card { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 24px; display: grid; gap: 16px; min-width: 0; }
+h2 { font-family: var(--font-display); font-weight: 500; font-size: 22px; line-height: 1.2; margin: 0; text-wrap: balance; }
+h3 { font-size: 15px; font-weight: 600; margin: 4px 0 0; }
+p { margin: 0; max-width: 70ch; }
+.note { font-size: 14px; color: var(--ink-3); }
+.small { font-size: 13px; color: var(--ink-3); }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stat { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 16px; display: grid; gap: 4px; align-content: start; }
+.stat .label { font-size: 13px; color: var(--ink-2); }
+.stat .value { font-size: 28px; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.stat .sub { font-size: 13px; color: var(--ink-3); }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .stats { grid-template-columns: 1fr; } }
+
+.form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .form { grid-template-columns: 1fr; } }
+.field { display: grid; gap: 6px; font-size: 13px; color: var(--ink-2); align-content: start; }
+input, select { font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--baseline); background: var(--card); color: var(--ink); width: 100%; min-width: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--baseline); background: var(--paper); color: var(--ink); cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.out { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .out { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .out { grid-template-columns: 1fr; } }
+.out .stat .value { font-size: 24px; }
+.out .stat.key { border-color: var(--accent); }
+.hidden { display: none; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+caption { text-align: left; font-size: 13px; color: var(--ink-3); padding: 0 0 8px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 13px; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.mark td { background: var(--hl); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+.tag { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.two > div { display: grid; gap: 10px; align-content: start; min-width: 0; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; }
+.timeline li { display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.timeline li:last-child { border-bottom: 0; }
+.timeline .when { font-family: var(--font-mono); font-size: 13px; }
+.timeline .v { font-weight: 600; font-variant-numeric: tabular-nums; }
+.callout { margin: 0; max-width: none; border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 12px; padding: 14px 16px; font-size: 15px; background: var(--card); }
+.callout b { font-weight: 600; }
+.sources { margin: 0; padding-left: 18px; columns: 2; column-gap: 28px; font-size: 13px; }
+.sources li { break-inside: avoid; margin-bottom: 6px; }
+@media (max-width: 640px) { .sources { columns: 1; } }
+footer.bottom { display: grid; gap: 8px; font-size: 13px; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: 16px; }
+footer.bottom .author { font-size: 15px; color: var(--ink); }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="top">
+    <div class="eyebrow">Калькулятор мультипликаторов · ANT · 19 ноября 2026</div>
+    <h1>ANT: цена акции и годовые выручки</h1>
+    <p class="lede">Сколько годовых выручек стоит Anthropic при разной цене акции и какая цена соответствует нужному мультипликатору. Это арифметика по цифрам проспекта, а не прогноз и не оценка справедливой цены.</p>
+    <div class="byline">
+      <span class="author">Автор: <a href="https://t.me/tradertrend" target="_blank" rel="noopener">TRADER 80/20</a></span>
+      <span>Данные на <strong>19.11.2026, 18:35 МСК</strong>; ANT на Nasdaq ещё не торгуется</span>
+    </div>
+  </header>
+
+
+  <section class="card" aria-labelledby="h-calc">
+    <h2 id="h-calc">Калькулятор</h2>
+    <div class="form">
+      <label class="field">Цена ANT, $
+        <input id="price" type="number" inputmode="decimal" min="1" step="0.01" value="83">
+      </label>
+      <label class="field">Годовая выручка
+        <select id="rev">
+          <option value="rr" selected>Темп на 31.10 — $81 млрд</option>
+          <option value="q3">Q3 × 4 — $67,8 млрд</option>
+          <option value="ttm">За 12 мес. — $35,3 млрд</option>
+          <option value="custom">Своя, млрд $</option>
+        </select>
+        <input id="revCustom" class="hidden" type="number" inputmode="decimal" min="1" step="1" value="100" aria-label="Своя годовая выручка, млрд долларов">
+      </label>
+      <label class="field">База акций
+        <select id="shares">
+          <option value="fd" selected>Полная — 18,14 млрд</option>
+          <option value="base">Базовая — 13,22 млрд</option>
+          <option value="opt">С опционом — 13,37 млрд</option>
+        </select>
+        <span class="small">Полная — как у аналитиков и СМИ; базовая — акции в обращении</span>
+      </label>
+    </div>
+    <div class="chips" role="group" aria-label="Быстрый выбор цены">
+      <button class="chip" type="button" data-p="70">Низ диапазона $70</button>
+      <button class="chip" type="button" data-p="78">Верх диапазона $78</button>
+      <button class="chip" type="button" data-p="83">IPO $83</button>
+      <button class="chip" type="button" data-p="104.98">Bybit, дериватив $104,98</button>
+    </div>
+    <div class="out" aria-live="polite">
+      <div class="stat key"><div class="label">Годовых выручек</div><div class="value" id="o-mult">—</div><div class="sub" id="o-mult-sub">&nbsp;</div></div>
+      <div class="stat"><div class="label">Капитализация</div><div class="value" id="o-cap">—</div><div class="sub" id="o-cap-sub">&nbsp;</div></div>
+      <div class="stat"><div class="label">Одна годовая выручка = </div><div class="value" id="o-per">—</div><div class="sub">к цене акции</div></div>
+    </div>
+
+    <div class="form">
+      <label class="field">Хочу столько годовых выручек
+        <input id="mult" type="number" inputmode="decimal" min="1" step="0.5" value="20">
+      </label>
+      <div class="stat"><div class="label">Цена акции для этого</div><div class="value" id="o-price">—</div><div class="sub" id="o-price-sub">&nbsp;</div></div>
+      <div class="stat"><div class="label">Капитализация при этом</div><div class="value" id="o-price-cap">—</div><div class="sub" id="o-price-cap-sub">&nbsp;</div></div>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Главные цифры">
+    <div class="stat"><div class="label">Годовой темп выручки (run-rate)</div><div class="value">$81&nbsp;млрд</div><div class="sub">на 31.10; на 30.09 — ≈$71&nbsp;млрд</div></div>
+    <div class="stat"><div class="label">Цена IPO $83</div><div class="value">18,6×</div><div class="sub">годовых выручек по полной базе акций; 13,5× — по базовой</div></div>
+    <div class="stat"><div class="label">Bybit ANTUSDT $104,98</div><div class="value">23,5×</div><div class="sub">дериватив, а не акция: марк-цена 19.11, 18:34 МСК; 17,1× — по базовой</div></div>
+    <div class="stat"><div class="label">Одна годовая выручка в цене акции</div><div class="value">$4,47</div><div class="sub">по полной базе; $6,13 — по базовой</div></div>
+    <div class="stat"><div class="label">Деньги и краткосрочные вложения после IPO</div><div class="value">$232,4&nbsp;млрд</div><div class="sub">расчёт компании в проспекте; ≈$12,8 на акцию по полной базе</div></div>
+    <div class="stat"><div class="label">Фактическая выручка за 12 месяцев</div><div class="value">$35,3&nbsp;млрд</div><div class="sub">до 30.09; при $83 — 42,7× по полной базе</div></div>
+  </section>
+
+  <p class="callout"><b>Главное различие.</b> При $83 Anthropic стоит 18,6 годовых темпов выручки, но 42,7 фактически полученных годовых выручек (по полной базе акций). Годовой темп $81&nbsp;млрд — это последние 28 дней потребления в пересчёте на год, а не уже заработанная сумма: за 12 месяцев до 30 сентября компания получила $35,3&nbsp;млрд.</p>
+
+  <section class="card" aria-labelledby="h-ladder">
+    <h2 id="h-ladder">Лестница: сколько годовых выручек — какая цена</h2>
+    <p class="note" id="ladder-note">&nbsp;</p>
+    <div class="two">
+      <div class="table-wrap">
+        <table id="ladder">
+          <caption>Годовых выручек → цена акции, $</caption>
+          <thead><tr><th class="num" scope="col">Выручек</th><th class="num" scope="col">Полная база</th><th class="num" scope="col">Базовая</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <table id="pmult">
+          <caption>Цена акции → годовых выручек</caption>
+          <thead><tr><th class="num" scope="col">Цена, $</th><th class="num" scope="col">Полная база</th><th class="num" scope="col">Базовая</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="small">Подсвечены строки, ближайшие к цене из калькулятора (в левой таблице — по выбранной базе акций). Обе таблицы считаются от выбранной в калькуляторе выручки.</p>
+  </section>
+
+  <section class="card" aria-labelledby="h-refs">
+    <h2 id="h-refs">Ориентиры в годовых выручках</h2>
+    <div class="table-wrap">
+      <table id="refs">
+        <thead><tr><th scope="col">Ориентир</th><th class="num" scope="col">Цена, $</th><th class="num" scope="col">Полная база</th><th class="num" scope="col">Базовая</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="small">Оценки аналитиков вышли до финальной цены $83. Они сделаны по разным моделям и допущениям, часто от прогнозной выручки, поэтому это не единая шкала справедливой стоимости. Здесь они просто переведены в «годовые выручки» от выбранной базы. PitchBook и Morningstar считают стоимость по полной базе акций: $1,42&nbsp;трлн при $79 и $1,7&nbsp;трлн при $92. Цена Bybit — снимок деривативного контракта, а не котировка акции на Nasdaq.</p>
+  </section>
+
+  <section class="card" aria-labelledby="h-grow">
+    <h2 id="h-grow">Если годовой темп вырастет</h2>
+    <p class="note">Цена акции по полной базе (18,14&nbsp;млрд акций) при разных годовом темпе выручки и мультипликаторе. С 30.09 по 31.10 годовой темп вырос на $10&nbsp;млрд.</p>
+    <div class="table-wrap">
+      <table id="grid">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <h3>Как рос годовой темп выручки</h3>
+    <ul class="timeline">
+      <li><span class="when">май 2026</span><span>по данным СМИ</span><span class="v">&gt;$47 млрд</span></li>
+      <li><span class="when">17.08.2026</span><span>по данным TechCrunch</span><span class="v">$65 млрд</span></li>
+      <li><span class="when">30.09.2026</span><span>проспект: на $10 млрд меньше, чем на 31.10</span><span class="v">≈$71 млрд</span></li>
+      <li><span class="when">31.10.2026</span><span>финальный проспект</span><span class="v">≈$81 млрд</span></li>
+    </ul>
+  </section>
+
+  <section class="card" aria-labelledby="h-how">
+    <h2 id="h-how">Как считается</h2>
+    <ul class="note" style="margin:0; padding-left:18px; display:grid; gap:6px;">
+      <li><b>Годовые выручки</b> = капитализация ÷ годовая выручка. Капитализация = цена × число акций.</li>
+      <li><b>Годовой темп (run-rate)</b> по определению компании: плата за потребление за последние 28 дней × 13 плюс месячные подписки × 12. Это не выручка по отчётности: фактически за 12 месяцев до 30.09 — $35,3&nbsp;млрд.</li>
+      <li><b>Базовое число акций — 13,22&nbsp;млрд:</b> все акции классов A и N после IPO и частного размещения (13,37&nbsp;млрд, если андеррайтеры исполнят опцион). Сюда входят 846,8&nbsp;млн акций класса N, переданных фонду Anthropic Public Benefit Fund: они выпущены, но принадлежат дочерней структуре компании и в свободное обращение не входят.</li>
+      <li><b>Полное число акций — 18,14&nbsp;млрд:</b> итог таблицы акций в финальном проспекте. К базовому числу добавлены опционы (1,71&nbsp;млрд — уже за вычетом акций, которые компания может выкупить на деньги от их исполнения), RSU (1,07&nbsp;млрд), конвертация нот Amazon (1,55&nbsp;млрд), акции программы пожертвований (0,58&nbsp;млрд) и ≈3&nbsp;млн акций по сделкам покупки компаний. Аналитики и СМИ (≈$1,5&nbsp;трлн при $83) считают по полной базе. Терминалы могут показывать капитализацию по базовой.</li>
+      <li><b>Продажи инсайдеров</b> число акций не меняют: они меняют количество бумаг в свободном обращении, а не мультипликатор.</li>
+      <li><b>Деньги и долг</b> мультипликаторы здесь не учитывают: все расчёты — от капитализации. По проспекту после IPO у компании $232,4&nbsp;млрд денег и краткосрочных вложений и $109,7&nbsp;млрд конвертируемых нот. Конвертация нот Amazon уже заложена в полную базу акций, поэтому вычитать деньги и прибавлять долг нужно аккуратно, чтобы не посчитать ноты дважды.</li>
+    </ul>
+  </section>
+
+  <section class="card" aria-labelledby="h-src">
+    <h2 id="h-src">Источники</h2>
+    <ol class="sources">
+      <li><a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm" target="_blank" rel="noopener">SEC: финальный проспект 424(b)(4) — акции, выручка, годовой темп, деньги, поступления</a></li>
+      <li>Bybit: ANTUSDT, 19.11.2026, 18:34 МСК; Yahoo Finance: ANT, 19.11.2026</li>
+      <li><a href="https://pitchbook.com/news/reports/q4-2026-anthropic-the-ipo-and-why-1-42-trillion-holds" target="_blank" rel="noopener">PitchBook: $79, $1,42 трлн</a></li>
+      <li><a href="https://www.morningstar.com.au/stocks/anthropic-are-shares-undervalued-given-ipo-pricing-range" target="_blank" rel="noopener">Morningstar: $92, $1,7 трлн</a></li>
+      <li><a href="https://techora.ru/news/anthropic-poluchil-vtoroy-reyting-pokupat-s-2026-11-17" target="_blank" rel="noopener">KGI $100 и New Street $105</a></li>
+      <li><a href="https://fbroker.kz/news/53113-freedom-ocenil-akcii-anthropic-pered-ipo-ru-2" target="_blank" rel="noopener">Freedom Broker: $101,90</a></li>
+      <li><a href="https://www.globlex.co.th/research/research_36639_1_20261118%20ANTHROPIC%20%28IPO%29.pdf" target="_blank" rel="noopener">Globlex: $111</a></li>
+      <li><a href="https://www.technobezz.com/news/leverage-shares-anthropic-etfs-ipo" target="_blank" rel="noopener">Годовой темп больше $47 млрд в мае</a></li>
+      <li><a href="https://leverageshares.com/us/insights/anthropic-exploring-the-bull-case-ahead-of-the-ipo/" target="_blank" rel="noopener">Годовой темп $65 млрд на 17.08 (TechCrunch)</a></li>
+    </ol>
+  </section>
+
+  <footer class="bottom">
+    <div class="author">Автор: <a href="https://t.me/tradertrend" target="_blank" rel="noopener">TRADER 80/20</a></div>
+    <div>Материал носит информационный характер и не является инвестиционной рекомендацией. Мультипликаторы — арифметика по публичным данным: рынок может платить и больше, и меньше любой строки таблицы.</div>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var SH = { fd: 18137587873, base: 13219642276, opt: 13366642276 };
+  var REVS = { rr: 81e9, q3: 67.824e9, ttm: 35.282e9 };
+  var REV_LABEL = { rr: "годовой темп на 31.10 — $81 млрд", q3: "Q3 2026 × 4 — $67,8 млрд", ttm: "фактическая выручка за 12 месяцев до 30.09 — $35,3 млрд" };
+  var MULTS = [40, 38, 36, 34, 32, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8];
+  var PRICES = [60, 65, 70, 75, 78, 80, 83, 85, 90, 95, 100, 105, 110, 115, 120, 130, 140, 150, 175, 200];
+  var REFS = [
+    { n: "Низ диапазона IPO", p: 70 },
+    { n: "Верх диапазона IPO", p: 78 },
+    { n: "PitchBook, оценка стоимости", p: 79 },
+    { n: "Цена IPO", p: 83 },
+    { n: "Morningstar, fair value", p: 92 },
+    { n: "KGI Securities, цель", p: 100 },
+    { n: "Freedom Broker, оценка", p: 101.9 },
+    { n: "Bybit ANTUSDT (дериватив), марк 19.11, 18:34 МСК", p: 104.98 },
+    { n: "New Street, цель на 12 месяцев", p: 105 },
+    { n: "Globlex, цель на 12 месяцев", p: 111 }
+  ];
+  var GRID_RR = [60, 70, 81, 90, 100, 110, 120, 135, 150];
+  var GRID_M = [10, 12, 15, 18, 20, 25, 30];
+
+  function $(id) { return document.getElementById(id); }
+  function fmt(v, d) { return v.toLocaleString("ru-RU", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function cell(tr, text, cls) { var td = document.createElement("td"); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); return td; }
+
+  function revenue() {
+    var k = $("rev").value;
+    if (k === "custom") { var v = parseFloat($("revCustom").value); return v > 0 ? v * 1e9 : NaN; }
+    return REVS[k];
+  }
+  function revLabel() {
+    var k = $("rev").value;
+    if (k === "custom") { var v = parseFloat($("revCustom").value); return v > 0 ? "своя выручка — $" + fmt(v, 0) + " млрд" : "своя выручка"; }
+    return REV_LABEL[k];
+  }
+
+  function update() {
+    var R = revenue(), S = SH[$("shares").value], P = parseFloat($("price").value), M = parseFloat($("mult").value);
+    var ok = R > 0 && P > 0;
+    $("o-mult").textContent = ok ? fmt(P * S / R, 1) + "×" : "—";
+    $("o-mult-sub").textContent = ok ? "от: " + revLabel() : " ";
+    $("o-cap").textContent = P > 0 ? "$" + fmt(P * S / 1e12, 2) + " трлн" : "—";
+    $("o-cap-sub").textContent = P > 0 ? fmt(S / 1e9, 2) + " млрд акций × $" + fmt(P, 2) : " ";
+    $("o-per").textContent = R > 0 ? "$" + fmt(R / S, 2) : "—";
+    if (R > 0 && M > 0) {
+      $("o-price").textContent = "$" + fmt(M * R / S, 2);
+      $("o-price-sub").textContent = fmt(M, 1) + " × " + revLabel();
+      $("o-price-cap").textContent = "$" + fmt(M * R / 1e12, 2) + " трлн";
+      $("o-price-cap-sub").textContent = "при " + fmt(S / 1e9, 2) + " млрд акций";
+    } else {
+      $("o-price").textContent = "—"; $("o-price-sub").textContent = " ";
+      $("o-price-cap").textContent = "—"; $("o-price-cap-sub").textContent = " ";
+    }
+
+    $("ladder-note").textContent = ok || R > 0 ? "Считается от: " + revLabel() + ". Полная база — 18,14 млрд акций, базовая — 13,22 млрд." : " ";
+
+    var tb = $("ladder").tBodies[0]; tb.textContent = "";
+    var bestM = null, bestD = Infinity, curMult = ok ? P * S / R : NaN;
+    MULTS.forEach(function (m) { var d = Math.abs(m - curMult); if (d < bestD) { bestD = d; bestM = m; } });
+    MULTS.forEach(function (m) {
+      var tr = document.createElement("tr");
+      if (m === bestM && ok) tr.className = "mark";
+      cell(tr, m + "×", "num");
+      cell(tr, R > 0 ? fmt(m * R / SH.fd, 1) : "—", "num");
+      cell(tr, R > 0 ? fmt(m * R / SH.base, 1) : "—", "num");
+      tb.appendChild(tr);
+    });
+
+    var pb = $("pmult").tBodies[0]; pb.textContent = "";
+    var bestP = null, bd = Infinity;
+    PRICES.forEach(function (p) { var d = Math.abs(p - P); if (d < bd) { bd = d; bestP = p; } });
+    PRICES.forEach(function (p) {
+      var tr = document.createElement("tr");
+      if (p === bestP && P > 0) tr.className = "mark";
+      cell(tr, "$" + p, "num");
+      cell(tr, R > 0 ? fmt(p * SH.fd / R, 1) + "×" : "—", "num");
+      cell(tr, R > 0 ? fmt(p * SH.base / R, 1) + "×" : "—", "num");
+      pb.appendChild(tr);
+    });
+
+    var rb = $("refs").tBodies[0]; rb.textContent = "";
+    REFS.forEach(function (r) {
+      var tr = document.createElement("tr");
+      cell(tr, r.n);
+      cell(tr, fmt(r.p, r.p % 1 ? 2 : 0), "num");
+      cell(tr, R > 0 ? fmt(r.p * SH.fd / R, 1) + "×" : "—", "num");
+      cell(tr, R > 0 ? fmt(r.p * SH.base / R, 1) + "×" : "—", "num");
+      rb.appendChild(tr);
+    });
+  }
+
+  function buildGrid() {
+    var t = $("grid"), th = t.tHead, tb = t.tBodies[0];
+    var hr = document.createElement("tr");
+    var h0 = document.createElement("th"); h0.textContent = "Годовой темп, млрд $"; h0.scope = "col"; hr.appendChild(h0);
+    GRID_M.forEach(function (m) { var h = document.createElement("th"); h.className = "num"; h.scope = "col"; h.textContent = m + "×"; hr.appendChild(h); });
+    th.appendChild(hr);
+    GRID_RR.forEach(function (r) {
+      var tr = document.createElement("tr");
+      if (r === 81) tr.className = "mark";
+      var c0 = cell(tr, "$" + r + (r === 81 ? " — сейчас" : ""));
+      GRID_M.forEach(function (m) { cell(tr, fmt(m * r * 1e9 / SH.fd, 1), "num"); });
+      tb.appendChild(tr);
+    });
+  }
+
+  $("rev").addEventListener("change", function () { $("revCustom").classList.toggle("hidden", $("rev").value !== "custom"); update(); });
+  ["price", "revCustom", "shares", "mult"].forEach(function (id) { $(id).addEventListener("input", update); $(id).addEventListener("change", update); });
+  Array.prototype.forEach.call(document.querySelectorAll(".chip"), function (b) {
+    b.addEventListener("click", function () { $("price").value = b.getAttribute("data-p"); update(); });
+  });
+  buildGrid();
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>LOOKER_STUDIO_STARTER_CHECKLIST</title><style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+max-width:980px;margin:40px auto;padding:0 24px;line-height:1.55;color:#1f2937;background:#fff}
+h1,h2,h3{color:#1f3864;line-height:1.25}
+h1{border-bottom:3px solid #1f3864;padding-bottom:10px}
+h2{margin-top:32px;border-bottom:1px solid #d9e2f3;padding-bottom:6px}
+code{background:#f3f4f6;padding:2px 5px;border-radius:4px;font-size:.92em}
+pre{background:#f8fafc;border:1px solid #e5e7eb;padding:14px;overflow:auto;border-radius:8px}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.94em}
+th,td{border:1px solid #d1d5db;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef2ff}
+blockquote{border-left:4px solid #93c5fd;margin:0;padding:8px 16px;background:#eff6ff;color:#374151}
+li{margin:4px 0}
+.small{color:#6b7280;font-size:.9em}
+@media print{body{margin:0;max-width:none}h2{page-break-after:avoid}table{page-break-inside:avoid}}
+</style></head><body><h1 id="ltc-looker-studio-starter-checklist">LTC — Looker Studio Starter Checklist</h1>
+<p>Компактный чеклист для сборки первого investment-research дашборда по Litecoin.
+Полная версия логики и всех страниц — в <code>LOOKER_STUDIO_BUILD_GUIDE.md</code>.</p>
+<h2 id="_1">Что использовать</h2>
+<ul>
+<li><code>LTC_LOOKER_STARTER.xlsx</code> — 11 листов, ~2.3 MB. Быстрее загружается и проще подключается, чем полный workbook.</li>
+<li><code>LTC_LOOKER_DATASET.xlsx</code> — полная research-база (20 листов). Нужна, когда понадобятся blocks, transfers, mining, supply и valuation.</li>
+<li><code>KPI_LATEST</code> — одна строка для scorecards.</li>
+<li><code>MARKET_DAILY</code> — цена, MA, доходности, волатильность, drawdown.</li>
+<li><code>ONCHAIN_DAILY</code> — active addresses, transactions, hashrate, fees, issuance, supply, MVRV.</li>
+<li><code>PEER_DAILY</code> — дневная панель BTC, BCH, DOGE, DASH.</li>
+<li><code>PEER_LATEST</code> — пять активов на последнюю общую дату; LTC добавлен из базового ряда.</li>
+<li><code>DECISION_RULES</code> — 6 gate-проверок и итоговый research state.</li>
+</ul>
+<h2 id="1">1. Импорт</h2>
+<ol>
+<li>Загрузи <code>LTC_LOOKER_STARTER.xlsx</code> в Google Drive.</li>
+<li>Открой файл → <strong>File → Open with → Google Sheets</strong> → <strong>Save as Google Sheets</strong>.</li>
+<li>В Looker Studio: <strong>Create → Report</strong>.</li>
+<li><strong>Add data → Google Sheets →</strong> выбери файл.</li>
+<li>Подключи листы по одному. Каждый лист — отдельный источник.</li>
+<li>В настройках источника включи <strong>Use first row as headers</strong>.</li>
+</ol>
+<h2 id="2">2. Типы полей</h2>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Тип в Looker Studio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>date</code>, <code>as_of_date</code>, <code>first_date</code>, <code>last_date</code></td>
+<td>Date</td>
+</tr>
+<tr>
+<td><code>price_close_usd</code>, <code>ma_30_usd</code>, <code>ma_200_usd</code>, <code>ath_close_usd_in_dataset</code>, <code>high_52w_close_usd</code>, <code>low_52w_close_usd</code></td>
+<td>Currency / USD</td>
+</tr>
+<tr>
+<td><code>market_cap_usd</code>, <code>realized_cap_usd</code>, <code>fees_usd</code>, <code>issuance_usd</code>, <code>miner_revenue_usd</code></td>
+<td>Currency / USD</td>
+</tr>
+<tr>
+<td><code>return_1d</code>, <code>return_7d</code>, <code>return_30d</code>, <code>return_90d</code>, <code>return_365d</code>, <code>ytd_return</code>, <code>drawdown_from_ath</code>, <code>volatility_30d_annualized</code>, <code>year_return</code>, <code>monthly_return</code></td>
+<td>Percent</td>
+</tr>
+<tr>
+<td>Поля с суффиксом <code>_pct</code> (например, <code>return_30d_pct</code>)</td>
+<td>Number (процентные пункты)</td>
+</tr>
+<tr>
+<td><code>active_addresses</code>, <code>tx_count</code>, <code>transfer_count</code>, <code>block_count</code>, <code>supply_ltc</code>, <code>observations</code></td>
+<td>Number</td>
+</tr>
+<tr>
+<td><code>hashrate</code>, <code>mvrv</code>, <code>fee_to_issuance_30d_ratio</code>, <code>sharpe_30d</code>, <code>sortino_30d</code></td>
+<td>Number</td>
+</tr>
+<tr>
+<td><code>year</code>, <code>month</code>, <code>halving_epoch</code></td>
+<td>Number</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Text</td>
+</tr>
+</tbody>
+</table>
+<p>Важно: поля без <code>_pct</code> хранят доли. <code>0.042</code> = <code>4.2%</code>. Если поставить им Number, получится <code>0.04</code>, а не <code>4.2%</code>.</p>
+<h2 id="3-3">3. Минимальные 3 страницы</h2>
+<h3 id="page-1-market-overview">Page 1 — Market Overview</h3>
+<ol>
+<li><strong>Scorecards</strong> из <code>KPI_LATEST</code>:
+   - <code>price_close_usd</code>
+   - <code>return_1d</code>
+   - <code>return_30d</code>
+   - <code>ytd_return</code>
+   - <code>drawdown_from_ath</code>
+   - <code>volatility_30d_annualized</code></li>
+<li><strong>Time series</strong> из <code>MARKET_DAILY</code>:
+   - Dimension: <code>date</code>
+   - Metrics: <code>price_close_usd</code>, <code>ma_30_usd</code>, <code>ma_200_usd</code>
+   - Sort: <code>date</code> ascending.</li>
+<li><strong>Column chart</strong>:
+   - Dimension: <code>date</code>
+   - Metric: <code>volume</code>
+   - Title: <code>Volume (raw, unit unconfirmed)</code>.</li>
+<li><strong>Area chart</strong>:
+   - Dimension: <code>date</code>
+   - Metric: <code>drawdown_from_ath</code>
+   - Format: Percent.</li>
+<li><strong>Date range control</strong>:
+   - Default: last 365 days.
+   - Apply to the charts on this page.</li>
+</ol>
+<h3 id="page-2-on-chain">Page 2 — On-chain</h3>
+<ol>
+<li><strong>Time series</strong> из <code>ONCHAIN_DAILY</code>:
+   - Dimension: <code>date</code>
+   - Metrics: <code>active_addresses</code>, <code>tx_count</code>
+   - Dual axis or two separate charts.</li>
+<li><strong>Time series</strong>:
+   - Dimension: <code>date</code>
+   - Metric: <code>hashrate</code>.</li>
+<li><strong>Time series</strong>:
+   - Dimension: <code>date</code>
+   - Metrics: <code>fees_usd</code>, <code>issuance_usd</code>.</li>
+<li><strong>Scorecards</strong> из <code>KPI_LATEST</code>:
+   - <code>market_cap_usd</code>
+   - <code>mvrv</code>
+   - <code>active_addresses_30d_change</code>
+   - <code>tx_count_30d_change</code>
+   - <code>hashrate_30d_change</code></li>
+<li>Подпись: addresses ≠ users; hashrate = security proxy, not full attack-cost model.</li>
+</ol>
+<h3 id="page-3-decision-gates">Page 3 — Decision Gates</h3>
+<ol>
+<li><strong>Table</strong> из <code>DECISION_RULES</code>:
+   - Dimensions: <code>gate</code>, <code>metric</code>, <code>status</code>
+   - Metrics: <code>current_value</code>
+   - Sort: <code>gate</code> ascending.</li>
+<li><strong>Scorecard</strong>:
+   - <code>Overall research state</code> = <code>DEFENSIVE</code> (или актуальный статус).</li>
+<li>Цвета:
+   - <code>PASS</code> — зелёный;
+   - <code>MIXED</code> — жёлтый;
+   - <code>FAIL</code> — красный;
+   - <code>DEFENSIVE</code> — оранжевый.</li>
+</ol>
+<h2 id="4">4. Добавить позже</h2>
+<ul>
+<li><strong>Mining &amp; Tokenomics</strong> — <code>MINING_DAILY</code>, <code>SUPPLY_DAILY</code>, <code>LTC_BLOCKS</code> из полного workbook.</li>
+<li><strong>Valuation &amp; Peers</strong> — <code>PEER_DAILY</code>, <code>VALUATION_DAILY</code>, <code>market_cap_usd</code>, <code>mvrv</code>, <code>realized_cap_usd</code>.</li>
+<li><strong>Risk &amp; Returns</strong> — <code>volatility_30d_annualized</code>, <code>var_95_30d</code>, <code>var_99_30d</code>, <code>sharpe_30d</code>, <code>sortino_30d</code>.</li>
+<li><strong>Data &amp; Sources</strong> — <code>DATA_QUALITY</code>, <code>SOURCES</code>, <code>KPI_LATEST</code> coverage fields.</li>
+<li><strong>Monthly heatmap</strong> — <code>MONTHLY_RETURNS</code>: rows <code>year</code>, columns <code>month</code>, metric <code>monthly_return</code>.</li>
+</ul>
+<h2 id="5">5. Частые ошибки</h2>
+<table>
+<thead>
+<tr>
+<th>Проблема</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Looker Studio не видит XLSX</td>
+<td>Сначала открой файл как Google Sheets; Looker Studio подключает Google Sheets, а не локальный XLSX.</td>
+</tr>
+<tr>
+<td>Дата стала текстом</td>
+<td>В источнике данных измени тип <code>date</code> на Date; проверь формат <code>YYYY-MM-DD</code>.</td>
+</tr>
+<tr>
+<td>Доходность 0.04 вместо 4.2%</td>
+<td>Поставь тип Percent для поля без <code>_pct</code>.</td>
+</tr>
+<tr>
+<td>Scorecard показывает сумму</td>
+<td>Для <code>KPI_LATEST</code> используй одну строку; для <code>MARKET_DAILY</code> поставь aggregation = Average или Max, либо используй <code>KPI_LATEST</code>.</td>
+</tr>
+<tr>
+<td>Date range control не фильтрует часть графиков</td>
+<td>Все графики страницы должны использовать один источник или быть сгруппированы. Для смешанных источников добавь отдельные controls.</td>
+</tr>
+<tr>
+<td>Слишком много данных</td>
+<td>Начни с <code>LTC_LOOKER_STARTER.xlsx</code>, а полный workbook подключай по мере необходимости.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6">6. Обновление</h2>
+<pre><code class="language-bash">python3 01_LTC/fetch_ltc_research_data.py
+python3 01_LTC/build_ltc_looker_dataset.py
+python3 01_LTC/build_ltc_looker_starter.py
+</code></pre>
+<p>Затем замени файл в Google Drive или обнови листы в Google Sheets. Проверь <code>calculated_at_utc</code> и <code>coverage_end</code> в <code>KPI_LATEST</code>.</p>
+<h2 id="7">7. Ограничения</h2>
+<ul>
+<li>ATH — максимум дневного close в датасете, не внутридневной all-time high.</li>
+<li>Volume — raw field без подтверждённой единицы.</li>
+<li>Active addresses — не уникальные пользователи.</li>
+<li>Miner revenue — валовая выручка, не прибыль.</li>
+<li>Adjusted transfer value и miner costs — <code>N/A</code>; не подставлять gross values.</li>
+<li>MVRV — provider metric; низкое значение не является самостоятельным сигналом покупки.</li>
+<li>Это research decision-support, не инвестиционная рекомендация.</li>
+</ul><hr><p class="small">HTML-версия файла LOOKER_STUDIO_STARTER_CHECKLIST.md. Открывается в любом браузере.</p></body></html>

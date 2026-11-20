@@ -1,0 +1,6 @@
+asset_id,as_of_date,close_usd,return_1d,volume,market_cap_usd,source_url,quality_status
+DXY,2026-11-20,103.78399658203125,-0.001116505699172321,0,,https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?range=5y&interval=1d&events=history,market-data API; close is unadjusted chart close
+GPRO,2026-11-19,0.5360000133514404,-0.07745259789063152,6643900,,https://query1.finance.yahoo.com/v8/finance/chart/GPRO?range=5y&interval=1d&events=history,market-data API; close is unadjusted chart close
+LYFT,2026-11-19,16.90999984741211,-0.03920457494899199,10626100,,https://query1.finance.yahoo.com/v8/finance/chart/LYFT?range=5y&interval=1d&events=history,market-data API; close is unadjusted chart close
+SPY,2026-11-19,715.8699951171875,-0.01962478341589069,76476400,,https://query1.finance.yahoo.com/v8/finance/chart/SPY?range=5y&interval=1d&events=history,market-data API; close is unadjusted chart close
+USDT,2026-11-20,0.999186,,54135701535,175121155362,https://api.coingecko.com/api/v3/coins/tether?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false,CoinGecko snapshot; intraday peg deviations require exchange-level data

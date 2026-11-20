@@ -1,0 +1,425 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>LTC_RESEARCH_MEMO</title><style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+max-width:980px;margin:40px auto;padding:0 24px;line-height:1.55;color:#1f2937;background:#fff}
+h1,h2,h3{color:#1f3864;line-height:1.25}
+h1{border-bottom:3px solid #1f3864;padding-bottom:10px}
+h2{margin-top:32px;border-bottom:1px solid #d9e2f3;padding-bottom:6px}
+code{background:#f3f4f6;padding:2px 5px;border-radius:4px;font-size:.92em}
+pre{background:#f8fafc;border:1px solid #e5e7eb;padding:14px;overflow:auto;border-radius:8px}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.94em}
+th,td{border:1px solid #d1d5db;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef2ff}
+blockquote{border-left:4px solid #93c5fd;margin:0;padding:8px 16px;background:#eff6ff;color:#374151}
+li{margin:4px 0}
+.small{color:#6b7280;font-size:.9em}
+@media print{body{margin:0;max-width:none}h2{page-break-after:avoid}table{page-break-inside:avoid}}
+</style></head><body><h1 id="litecoin-ltc-investment-research-memo">Litecoin (LTC) — Investment Research Memo</h1>
+<p><strong>Статус:</strong> Market-data POC / не инвестиционная рекомендация<br />
+<strong>Дата расчёта:</strong> 16 ноября 2026<br />
+<strong>Последняя дата рыночного ряда:</strong> 14 ноября 2026<br />
+<strong>Источник:</strong> <code>litecoin(1).xlsx</code>, провайдер в исходном файле не указан</p>
+<h2 id="executive-summary">Executive summary</h2>
+<p>Загруженный ряд описывает слабый рыночный профиль LTC на последней доступной дате: цена закрытия составляет <strong>$44,39</strong>, она находится ниже рассчитанной MA200 (<strong>$51,87</strong>) и примерно на <strong>88,5% ниже максимума дневного close в датасете</strong> (<strong>$386,45</strong>, 9 мая 2021 года).</p>
+<p>Последние наблюдаемые результаты:</p>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th style="text-align: right;">Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1D return</td>
+<td style="text-align: right;">-10,01%</td>
+</tr>
+<tr>
+<td>7D return</td>
+<td style="text-align: right;">-14,82%</td>
+</tr>
+<tr>
+<td>30D return</td>
+<td style="text-align: right;">-27,13%</td>
+</tr>
+<tr>
+<td>90D return</td>
+<td style="text-align: right;">+0,61%</td>
+</tr>
+<tr>
+<td>365D return</td>
+<td style="text-align: right;">-54,48%</td>
+</tr>
+<tr>
+<td>YTD return</td>
+<td style="text-align: right;">-44,41%</td>
+</tr>
+<tr>
+<td>30-observation annualized volatility</td>
+<td style="text-align: right;">62,45%</td>
+</tr>
+<tr>
+<td>Historical VaR 95%, 30D</td>
+<td style="text-align: right;">-8,34%</td>
+</tr>
+<tr>
+<td>Historical VaR 99%, 30D</td>
+<td style="text-align: right;">-10,01%</td>
+</tr>
+<tr>
+<td>Downside deviation, annualized</td>
+<td style="text-align: right;">59,17%</td>
+</tr>
+<tr>
+<td>Rolling Sharpe / Sortino, 30D, MAR 0</td>
+<td style="text-align: right;">-5,82 / -6,14</td>
+</tr>
+<tr>
+<td>52-week high / low close</td>
+<td style="text-align: right;">$101,77 / $40,85</td>
+</tr>
+</tbody>
+</table>
+<p>Эти цифры поддерживают вывод о высокой волатильности и значительной просадке. Дополненный on-chain срез позволяет проверить активность и безопасность, но всё ещё не отвечает на вопрос о денежном объёме переводов: в текущем покрытии нет transfer value в USD.</p>
+<h2 id="on-chain-mining-snapshot">On-chain и mining snapshot</h2>
+<p>На общей для market и on-chain данных дате <strong>14 ноября 2026</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th style="text-align: right;">Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Market cap</td>
+<td style="text-align: right;">$3,43 млрд</td>
+</tr>
+<tr>
+<td>Visible supply</td>
+<td style="text-align: right;">77,83 млн LTC</td>
+</tr>
+<tr>
+<td>Active addresses</td>
+<td style="text-align: right;">239 083</td>
+</tr>
+<tr>
+<td>Transactions</td>
+<td style="text-align: right;">162 313</td>
+</tr>
+<tr>
+<td>Hashrate</td>
+<td style="text-align: right;">2 797,15 в единицах Coin Metrics</td>
+</tr>
+<tr>
+<td>Blocks</td>
+<td style="text-align: right;">594</td>
+</tr>
+<tr>
+<td>Block height range</td>
+<td style="text-align: right;">3 212 647 — 3 213 240</td>
+</tr>
+<tr>
+<td>Average difficulty</td>
+<td style="text-align: right;">94 729 203</td>
+</tr>
+<tr>
+<td>Estimated block interval</td>
+<td style="text-align: right;">145,45 сек.</td>
+</tr>
+<tr>
+<td>Issuance / subsidy</td>
+<td style="text-align: right;">3 712,54 LTC</td>
+</tr>
+<tr>
+<td>Fees</td>
+<td style="text-align: right;">6,62 LTC</td>
+</tr>
+<tr>
+<td>Gross miner revenue</td>
+<td style="text-align: right;">$163,8 тыс.</td>
+</tr>
+<tr>
+<td>Fee share of gross miner revenue</td>
+<td style="text-align: right;">0,18%</td>
+</tr>
+<tr>
+<td>Supply inflation, trailing 365D</td>
+<td style="text-align: right;">1,71%</td>
+</tr>
+<tr>
+<td>Gross transfer/output value, non-coinbase</td>
+<td style="text-align: right;">41,94 млн LTC / $1,85 млрд</td>
+</tr>
+<tr>
+<td>Transfer transactions</td>
+<td style="text-align: right;">162 473</td>
+</tr>
+<tr>
+<td>Outputs / inputs</td>
+<td style="text-align: right;">372 619 / 357 222</td>
+</tr>
+<tr>
+<td>MVRV</td>
+<td style="text-align: right;">0,592</td>
+</tr>
+<tr>
+<td>Derived realized cap</td>
+<td style="text-align: right;">$5,79 млрд</td>
+</tr>
+<tr>
+<td>Remaining supply to 84m hard cap</td>
+<td style="text-align: right;">6,17 млн LTC, 92,66% mined</td>
+</tr>
+</tbody>
+</table>
+<p>Изменения за 30 дней: active addresses <strong>−5,87%</strong>, transactions <strong>−0,77%</strong>, hashrate <strong>+22,70%</strong>, market cap <strong>−23,66%</strong>. Безопасность по хешрейту не ухудшилась, но рыночная капитализация и часть activity-метрик слабее. Низкая fee share показывает, что валовая экономика майнеров почти полностью зависит от block subsidy. Это не оценка чистой прибыли майнеров.</p>
+<h2 id="blocks-transfers-mining-supply-valuation">Расширенный слой: blocks, transfers, mining, supply и valuation</h2>
+<h3 id="ltc_blocks"><code>ltc_blocks</code></h3>
+<p>В <code>LTC_BLOCKS_DAILY.csv</code> и листе <code>LTC_BLOCKS</code> добавлены дневные агрегаты Blockchair:</p>
+<ul>
+<li><code>block_height_min</code>, <code>block_height_max</code>, <code>block_count</code>;</li>
+<li><code>difficulty</code> как средняя сложность блоков за UTC-день;</li>
+<li><code>block_interval_sec_est = 86400 / block_count</code>;</li>
+<li><code>block_timestamp_utc</code> как якорь даты <code>00:00:00 UTC</code>.</li>
+</ul>
+<p>Последнее поле помечено как <code>daily_utc_anchor_not_exact_block_time</code>: агрегированный endpoint не выдаёт один точный timestamp блока для каждой строки. Поэтому в отчёте нельзя называть его временем конкретного блока.</p>
+<h3 id="transfer-value-outputs">Transfer value и outputs</h3>
+<p>В <code>LTC_TRANSFER_DAILY.csv</code> и листе <code>TRANSFER_DAILY</code> добавлены агрегаты всех non-coinbase transactions:</p>
+<ul>
+<li><code>transfer_value_ltc</code> и <code>transfer_value_usd</code> — gross output value;</li>
+<li>input value и fee revenue;</li>
+<li><code>output_count</code>, <code>input_count</code>, <code>outputs_per_transfer_tx</code>;</li>
+<li><code>transfer_tx_count</code>.</li>
+</ul>
+<p>Это полезнее, чем один <code>tx_count</code>, но это не adjusted transfer value: в gross output остаются change outputs, self-transfers, биржевые внутренние перемещения и batching. Поля <code>adjusted_transfer_value_ltc/usd</code> оставлены <code>NULL</code> со статусом <code>NOT_AVAILABLE</code>, чтобы не выдавать gross volume за экономический платёжный оборот.</p>
+<h3 id="ltc_mining_daily"><code>ltc_mining_daily</code></h3>
+<p>Лист <code>MINING_DAILY</code> объединяет difficulty, subsidy revenue, fee revenue, gross miner revenue, fee share и <code>miner_cost_usd</code>.</p>
+<p><code>miner_cost_usd</code> остаётся <code>N/A</code>: по публичным агрегатам нельзя надёжно восстановить электричество, capex, pool fees, энергомикс, эффективность оборудования и хеджирование. Поэтому <code>miner_revenue_usd</code> — валовая выручка, а не прибыль.</p>
+<h3 id="ltc_supply_daily"><code>ltc_supply_daily</code></h3>
+<p>Лист <code>SUPPLY_DAILY</code> содержит текущий supply, <code>max_supply_ltc = 84,000,000</code>, remaining supply, процент добытого supply, дневную и годовую эмиссию, модельный block reward и следующий halving block.</p>
+<p><code>estimated_years_to_max_at_current_issuance</code> — статический сценарий текущего темпа. Он не учитывает будущие халвинги и не является прогнозом даты полного выпуска.</p>
+<h3 id="realized-cap-mvrv">Realized cap / MVRV</h3>
+<p>Для LTC в каталоге Coin Metrics доступен <code>CapMVRVCur</code>. В отчёте <code>mvrv</code> берётся напрямую из этого metric, а <code>realized_cap_usd</code> рассчитывается как <code>market_cap_usd / mvrv</code>. Лист <code>VALUATION_DAILY</code> предназначен для графика market cap, realized cap и MVRV.</p>
+<p>MVRV является проверенным provider metric, но низкое значение не является самостоятельным сигналом покупки.</p>
+<h2 id="protocol-research-framework-litecoin">Как перенести protocol research framework на Litecoin</h2>
+<p>Для DeFi-протокола обычно смотрят пользователей, TVL, fees, расходы, экономику и value accrual токена. Для LTC соответствие выглядит так:</p>
+<table>
+<thead>
+<tr>
+<th>Вопрос</th>
+<th>Что смотрим по LTC</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Пользователи</td>
+<td>Active addresses и transactions</td>
+<td>Есть proxy, но адреса не равны пользователям</td>
+</tr>
+<tr>
+<td>TVL</td>
+<td>Для базового L1 не применим; вместо него market cap и supply</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Комиссии</td>
+<td>Fees в LTC/USD и fee share</td>
+<td>Есть, комиссия мала относительно issuance</td>
+</tr>
+<tr>
+<td>Расходы</td>
+<td>Issuance и security budget proxy</td>
+<td>Частично, затрат майнеров нет</td>
+</tr>
+<tr>
+<td>Реальная экономика</td>
+<td>Fee/issuance ratio, activity, supply inflation</td>
+<td>Слабая комиссионная самодостаточность</td>
+</tr>
+<tr>
+<td>Ценность держателя</td>
+<td>Price, market cap, scarcity и network demand</td>
+<td>Косвенная, fee distribution нет</td>
+</tr>
+</tbody>
+</table>
+<p>Главное отличие от ETHFI: LTC не даёт держателю автоматического права на комиссионный денежный поток протокола. Поэтому рост сети может поддерживать monetary demand, но не гарантирует value accrual для монеты.</p>
+<h2 id="research-question">Research question</h2>
+<p>Проверить, сохраняется ли инвестиционная теза Litecoin как платёжной Proof-of-Work сети, сопоставив:</p>
+<ol>
+<li>сетевую активность и платёжное использование;</li>
+<li>денежную модель и выпуск;</li>
+<li>экономику майнинга и безопасность;</li>
+<li>рыночную оценку и поведение цены;</li>
+<li>конкурентную позицию относительно BTC, BCH, DOGE и DASH.</li>
+</ol>
+<p>На текущем этапе пункты 1–4 покрыты частично: gross transfer value и MVRV добавлены, но adjusted transfer value и полноценная конкурентная экономика ещё не собраны.</p>
+<h2 id="_1">Что реально измерено</h2>
+<ul>
+<li>Дневные OHLC и исходное поле <code>volume</code>.</li>
+<li>Доходности на 1, 7, 30, 90 и 365 календарных дней, если точная дата сравнения присутствует.</li>
+<li>MA7, MA30, MA90 и MA200 по trailing observations.</li>
+<li>Реализованная 30-наблюдательная волатильность с annualization через <code>sqrt(365)</code>.</li>
+<li>Просадка от максимального дневного close внутри загруженного ряда.</li>
+<li>Годовые и месячные сводки.</li>
+<li>Контекст халвингов и доходность после дат, если рыночные наблюдения покрывают соответствующий горизонт.</li>
+<li>Market cap, MVRV, derived realized cap, supply, active addresses, transaction count, transfer count, hashrate, block count, issuance и fees в native units из Coin Metrics Community API.</li>
+<li>Daily block aggregates, difficulty, height range, reward and fee totals из Blockchair.</li>
+<li>Daily gross transfer/output value, inputs, outputs and non-coinbase transfer counts из Blockchair.</li>
+<li>Peer panel по BTC, BCH, DOGE и DASH на общей последней дате рынка.</li>
+</ul>
+<h2 id="-">Халвинг-контекст</h2>
+<table>
+<thead>
+<tr>
+<th>Халвинг</th>
+<th style="text-align: right;">Цена на дату / ближайшее наблюдение</th>
+<th style="text-align: right;">+30D</th>
+<th style="text-align: right;">+90D</th>
+<th style="text-align: right;">+180D</th>
+<th style="text-align: right;">+365D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2015-08-25</td>
+<td style="text-align: right;">н/д, ряд начинается в 2018</td>
+<td style="text-align: right;">н/д</td>
+<td style="text-align: right;">н/д</td>
+<td style="text-align: right;">н/д</td>
+<td style="text-align: right;">н/д</td>
+</tr>
+<tr>
+<td>2019-08-05</td>
+<td style="text-align: right;">$96,83</td>
+<td style="text-align: right;">-30,51%</td>
+<td style="text-align: right;">-39,46%</td>
+<td style="text-align: right;">-26,87%</td>
+<td style="text-align: right;">-40,59%</td>
+</tr>
+<tr>
+<td>2023-08-02</td>
+<td style="text-align: right;">$87,49</td>
+<td style="text-align: right;">-27,98%</td>
+<td style="text-align: right;">-21,19%</td>
+<td style="text-align: right;">-21,76%</td>
+<td style="text-align: right;">-20,49%</td>
+</tr>
+<tr>
+<td>2027-08-02 (estimate)</td>
+<td style="text-align: right;">н/д, дата в будущем</td>
+<td style="text-align: right;">н/д</td>
+<td style="text-align: right;">н/д</td>
+<td style="text-align: right;">н/д</td>
+<td style="text-align: right;">н/д</td>
+</tr>
+</tbody>
+</table>
+<p>Эта таблица не доказывает причинный эффект халвинга. Она показывает только поведение цены в двух покрытых исторических эпизодах. Выборка мала, рыночный режим менялся, а фактический момент исполнения халвинга зависит от высоты блока.</p>
+<h2 id="preliminary-thesis">Preliminary thesis</h2>
+<h3 id="_2">Поддерживает тезу</h3>
+<ul>
+<li>У сети есть понятная PoW-модель и предсказуемое снижение block subsidy.</li>
+<li>Датасет допускает воспроизводимый мониторинг цены, доходности, drawdown и volatility.</li>
+<li>Халвинг можно использовать как исследовательскую временную ось для дальнейшего сравнения с adoption и mining metrics.</li>
+</ul>
+<h3 id="_3">Ослабляет тезу</h3>
+<ul>
+<li>Цена на последней дате ниже MA200 и значительно ниже максимума close в истории ряда.</li>
+<li>365-дневная доходность отрицательная, а 30-дневная волатильность остаётся высокой.</li>
+<li>Два покрытых халвинга не дали положительной доходности на горизонтах 30–365 дней в этом конкретном ряду.</li>
+<li>Активные адреса и transactions теперь доступны, а gross transfer value добавлен, но он не заменяет adjusted transfer value и не доказывает платёжное использование.</li>
+</ul>
+<p>После расширения данных формулировка точнее:</p>
+<ul>
+<li>hashrate и block production выглядят устойчиво в последнем 30-дневном сравнении;</li>
+<li>activity не подтверждает ускорение adoption: active addresses снижаются, transactions почти не растут;</li>
+<li>fee share остаётся очень низкой, поэтому долгосрочная безопасность пока опирается на issuance, а не на комиссионный спрос;</li>
+<li>рыночный тренд и 30D momentum остаются слабыми.</li>
+</ul>
+<h2 id="decision-gates">Decision gates</h2>
+<p>На дату 14 ноября 2026 research framework даёт состояние <strong>DEFENSIVE</strong>:</p>
+<ol>
+<li>Market trend: <code>FAIL</code>, цена на 14,43% ниже MA200.</li>
+<li>Momentum: <code>MIXED</code>, 30D доходность отрицательная, 90D около нуля.</li>
+<li>Adoption: <code>FAIL</code>, active addresses и transactions не растут одновременно.</li>
+<li>Security: <code>PASS</code>, hashrate за 30 дней вырос и блоки производятся.</li>
+</ol>
+<p>Это означает «не увеличивать риск только на основании отскока», а не механический сигнал на полную продажу. Для смены состояния нужны подтверждения в нескольких независимых блоках.</p>
+<h2 id="investment-research">Что ещё остаётся до полноценного investment research</h2>
+<ol>
+<li>Adjusted transfer value в native/USD с явной UTXO-методологией, исключающей change и self-transfers.</li>
+<li>Точные timestamps отдельных блоков, если нужен настоящий block-level, а не daily aggregate слой.</li>
+<li>Полноценная модель затрат майнеров: electricity, capex, pool fees, энергомикс, эффективность ASIC и чувствительность к цене LTC.</li>
+<li>Детальная модель эмиссии по будущим халвингам с блок-временной симуляцией, а не статическая years-to-max оценка.</li>
+<li>Расширенный UTXO output layer для realized-cap audit и оценки long-term holder behaviour.</li>
+<li>Полная конкурентная экономика с одинаковыми transfer, mining cost и valuation definitions для BTC, BCH, DOGE и DASH.</li>
+<li>Источники, URL, методика извлечения и дата обновления уже записываются на листе <code>SOURCES</code>; перед коммерческим распространением нужно проверить API terms и rate limits.</li>
+</ol>
+<h2 id="data-quality">Ограничения и data quality</h2>
+<ul>
+<li>Покрытие: 22 августа 2018 — 14 ноября 2026, 2 984 наблюдения.</li>
+<li>В ряду пять разрывов дат; пропуски не интерполировались.</li>
+<li>Единица измерения <code>volume</code> не подтверждена. Нельзя называть его USD-объёмом.</li>
+<li><code>ATH</code> в этом memo — максимум дневного close, не внутридневной high.</li>
+<li>Адреса не равны пользователям, а gross output volume не равен платёжному обороту. Эти метрики потребуют отдельной методологии.</li>
+<li>MWEB и другие особенности приватности могут ограничивать полноту наблюдаемой активности.</li>
+<li>On-chain и mining-метрики добавлены из Coin Metrics Community API v4. Перед коммерческим использованием нужно отдельно проверить лицензию Community Data и условия распространения.</li>
+<li>Block и transfer агрегаты добавлены из Blockchair. <code>block_timestamp_utc</code> — UTC day anchor, а не timestamp отдельного блока; API terms и rate limits нужно проверить перед регулярным коммерческим использованием.</li>
+<li><code>miner_revenue_usd</code> — proxy: <code>(issuance_ltc + fees_ltc) × PriceUSD</code>, без затрат майнеров и структуры пулов.</li>
+<li><code>transfer_value_usd</code> — gross non-coinbase output value, рассчитанный из native units и Coin Metrics PriceUSD; это не adjusted value и не чистый платёжный оборот.</li>
+<li><code>mvrv</code> — Coin Metrics <code>CapMVRVCur</code>; <code>realized_cap_usd</code> — derived field <code>market_cap_usd / mvrv</code>.</li>
+<li><code>miner_cost_usd</code> — <code>N/A</code>, так как фактические затраты майнеров не наблюдаются в текущих источниках.</li>
+</ul>
+<h2 id="_4">Репродуцируемость</h2>
+<p>Пересборка:</p>
+<pre><code class="language-bash">python3 fetch_ltc_research_data.py --start 2018-08-22 --end 2026-11-16
+python3 build_ltc_looker_dataset.py
+</code></pre>
+<p><code>fetch_ltc_research_data.py</code> обновляет также <code>LTC_BLOCKS_DAILY.csv</code> и <code>LTC_TRANSFER_DAILY.csv</code>. Для повторяющихся коммерческих запусков проверьте лимиты Blockchair и при необходимости задайте <code>BLOCKCHAIR_API_KEY</code>.</p>
+<p>Дашборд собирается по <code>LOOKER_STUDIO_BUILD_GUIDE.md</code>. Поле без суффикса <code>_pct</code> хранит процент как долю для корректного форматирования в Looker Studio; поле с <code>_pct</code> оставлено как audit value в процентных пунктах.</p>
+<h2 id="decision-card-16-2026">Decision Card — 16 ноября 2026</h2>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>decision_status</code></td>
+<td><code>wait</code></td>
+</tr>
+<tr>
+<td><code>confidence</code></td>
+<td><code>medium</code></td>
+</tr>
+<tr>
+<td><code>valuation_range</code></td>
+<td><code>N/A</code>: market cap/realized cap и MVRV доступны, но диапазон справедливой стоимости без adjusted transfer value и полноценной mining-cost модели незащищаем</td>
+</tr>
+<tr>
+<td><code>max_position_pct</code></td>
+<td>до <code>3%</code> как watchlist-risk budget; не увеличивать на одном ценовом отскоке</td>
+</tr>
+<tr>
+<td><code>main_risk</code></td>
+<td>спрос и fee revenue недостаточны, а валовая безопасность сети в основном зависит от block subsidy</td>
+</tr>
+<tr>
+<td><code>thesis_invalidation</code></td>
+<td>устойчивое ухудшение activity/hashrate, проблемы с выпуском/консенсусом или невозможность подтвердить платёжное использование после расширения UTXO-аналитики</td>
+</tr>
+<tr>
+<td><code>next_catalyst</code></td>
+<td>обновление on-chain/mining ряда и проверка adjusted transfer value; ближайшая полноценная проверка — после следующего месячного среза</td>
+</tr>
+<tr>
+<td><code>next_review_date</code></td>
+<td><code>2026-12-14</code></td>
+</tr>
+</tbody>
+</table>
+<p>Допустимое действие — <code>wait</code>, а не автоматическая продажа и не усреднение только потому, что цена ниже исторического максимума.</p><hr><p class="small">HTML-версия файла LTC_RESEARCH_MEMO.md. Открывается в любом браузере.</p></body></html>

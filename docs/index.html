@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marina Rebeeva — on-chain research / портфолио</title>
+<meta name="description" content="Independent on-chain research for DeFi and digital assets: wallet forensics, supply reconciliation, liquidity and decision cards. RU / EN.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="monogram">MR</span>
+      <span>Marina Rebeeva<small class="ru">on-chain research</small><small class="en">on-chain research</small></span>
+    </a>
+    <div class="navlinks">
+      <a href="index.html#work"><span class="ru">Кейсы</span><span class="en">Work</span></a>
+      <a href="method.html"><span class="ru">Методика</span><span class="en">Method</span></a>
+      <a class="keep" href="cv.html">CV</a>
+      <a href="index.html#contact"><span class="ru">Контакты</span><span class="en">Contact</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-setlang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-setlang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow"><span class="ru">Independent on-chain research · Minsk / remote</span><span class="en">Independent on-chain research · Minsk / remote</span></div>
+      <h1 class="ru">Я читаю протоколы <em>по кошелькам</em>, а не по презентациям.</h1>
+      <h1 class="en">I read protocols <em>through wallets</em>, not decks.</h1>
+      <p class="lede ru">Исследую DeFi и цифровые активы: проверяю, куда реально идут токены и деньги — от контракта и кошелька до выручки, ликвидности и решения с ценой ошибки.</p>
+      <p class="lede en">Independent research for DeFi and digital assets. I trace where tokens and money actually go — from contract and wallet to revenue, liquidity, and a decision with a defined cost of being wrong.</p>
+      <div class="cta">
+        <a class="btn primary" href="ethfi.html"><span class="ru">Кейс ETHFI</span><span class="en">ETHFI case</span> <span class="arrow">→</span></a>
+        <a class="btn" href="method.html"><span class="ru">Как я работаю</span><span class="en">How I work</span></a>
+      </div>
+      <p class="tiny dim" style="margin-top:18px"><span class="ru">RU / EN · данные на 20.11.2026 · без платных терминалов</span><span class="en">RU / EN · data as of 20 Nov 2026 · no paid terminals</span></p>
+    </div>
+
+    <aside class="panel" aria-label="ETHFI evidence snapshot">
+      <div class="panel-head">
+        <span class="mono">Case 04 / ETHFI</span>
+        <span class="status"><span class="dot" style="width:6px;height:6px;box-shadow:none;margin:0"></span>WAIT · 0–2%</span>
+      </div>
+      <div class="flow">
+        <div class="node">
+          <span class="dot"></span>
+          <div><b>Funding Safe</b><span>0xf40b…7021</span></div>
+          <span class="amt">$2.2M in</span>
+        </div>
+        <div class="node">
+          <span class="dot"></span>
+          <div><b>CoW Settlement</b><span>0x9008…ab41</span></div>
+          <span class="amt">2.54M ETHFI</span>
+        </div>
+        <div class="node">
+          <span class="dot"></span>
+          <div><b>Buyback Safe</b><span>0x43f4…408c</span></div>
+          <span class="amt">$1.65M spent</span>
+        </div>
+        <div class="node">
+          <span class="dot inferred"></span>
+          <div><b>LZMultiCall → Optimism</b><span>0xAcdD…05f1</span></div>
+          <span class="amt">cashback leg</span>
+        </div>
+      </div>
+      <div class="mini-result">
+        <div><b>$0</b><span class="ru">holder revenue с апр. 2026</span><span class="en">holder revenue since Apr 2026</span></div>
+        <div><b>−70.9%</b><span class="ru">TVL от пика</span><span class="en">TVL from peak</span></div>
+        <div><b>10.7×</b><span class="ru">mcap / revenue</span><span class="en">mcap / revenue</span></div>
+        <div><b>17.3%</b><span class="ru">buyback / revenue, 30d</span><span class="en">buyback / revenue, 30d</span></div>
+      </div>
+      <p class="tiny dim" style="margin:12px 0 0"><span class="ru">Зелёный — подтверждено транзакциями. Янтарный — вывод, не доказанный on-chain.</span><span class="en">Mint — verified by transactions. Amber — inference not yet proven on-chain.</span></p>
+    </aside>
+  </div>
+</header>
+
+<section class="proof">
+  <div class="wrap">
+    <div><b>2.54M</b><span class="ru">ETHFI прослежено через buyback</span><span class="en">ETHFI traced through the buyback</span></div>
+    <div><b>93,377</b><span class="ru">держателей; разобран топ-250</span><span class="en">holders; top 250 classified</span></div>
+    <div><b>$1.23M</b><span class="ru">глубина DEX-ликвидности</span><span class="en">DEX liquidity mapped</span></div>
+    <div><b>0</b><span class="ru">платных источников данных</span><span class="en">paid data feeds used</span></div>
+  </div>
+</section>
+
+<main>
+<section class="section" id="what">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="ru">Что я делаю</span><span class="en">What I do</span></div>
+        <h2 class="ru">Три вопроса, на которые отвечает on-chain.</h2>
+        <h2 class="en">Three questions on-chain data can answer.</h2>
+      </div>
+      <p class="ru">Не «нравится / не нравится», а проверяемая цепочка: кто держит, куда уходит, чем это обеспечено и при каком условии вывод ломается.</p>
+      <p class="en">Not “like / don’t like”, but a testable chain: who holds, where value goes, what backs it, and what would break the conclusion.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card">
+        <div class="num">01 / FLOW</div>
+        <p class="q ru">Куда реально уходят токены?</p>
+        <p class="q en">Where do the tokens actually go?</p>
+        <p class="ru">Собираю путь от genesis и treasury до CEX, вестинга и мостов. Отделяю политику из блога от движения средств в блокчейне.</p>
+        <p class="en">I map the path from genesis and treasury to CEX, vesting and bridges. Policy from a blog post is treated separately from money moving on-chain.</p>
+        <span class="out">→ wallet graph · verified / inferred</span>
+      </article>
+      <article class="card">
+        <div class="num">02 / SUPPLY</div>
+        <p class="q ru">Какое предложение считать настоящим?</p>
+        <p class="q en">Which supply number is real?</p>
+        <p class="ru">Сверяю RPC, агрегаторы и страницу разлоков. Если числа расходятся, публикую разрыв, а не среднее.</p>
+        <p class="en">I reconcile RPC, aggregators and the unlock page. When numbers disagree, I publish the gap rather than an average.</p>
+        <span class="out">→ source table · chosen base</span>
+      </article>
+      <article class="card">
+        <div class="num">03 / RISK</div>
+        <p class="q ru">Что докажет, что я ошибаюсь?</p>
+        <p class="q en">What would prove me wrong?</p>
+        <p class="ru">Заканчиваю решением: действие, максимальная позиция, триггеры апгрейда и условия отмены. Без «сильной идеи» без цены ошибки.</p>
+        <p class="en">I end with a decision: action, maximum position, upgrade triggers and invalidation. No “strong idea” without a cost of being wrong.</p>
+        <span class="out">→ decision card · invalidation</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work" style="padding-top:20px">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="ru">Избранные работы</span><span class="en">Selected work</span></div>
+        <h2 class="ru">Кейсы, где вывод изменился после проверки.</h2>
+        <h2 class="en">Cases where the conclusion changed after verification.</h2>
+      </div>
+      <p class="ru">Три полных цикла: вопрос → первичные данные → сверка → решение. ETHFI — свежий кейс, LTC и SNX — предыдущие.</p>
+      <p class="en">Three full cycles: question → primary data → reconciliation → decision. ETHFI is the newest; LTC and SNX are the prior cases.</p>
+    </div>
+
+    <article class="case">
+      <div>
+        <div class="top"><span class="ticker">ETHFI</span><span class="badge wait">WAIT · 0–2%</span><span class="mono dim">20.11.2026</span></div>
+        <h3 class="ru">Buyback есть. Holder yield — нет.</h3>
+        <h3 class="en">The buyback is real. Holder yield is not.</h3>
+        <p class="ru">Протокол покупает ETHFI через CoW на реальные деньги, но токены уходят в LayerZero и кэшбэк, а не к держателям. TVL упал на 71% от пика, holder revenue не начисляется с апреля. Решение — ждать, не покупать «дешёвый токен».</p>
+        <p class="en">The protocol buys ETHFI through CoW with real money, but the tokens route to LayerZero and cashback, not to holders. TVL is 71% below peak and holder revenue has been zero since April. The decision is to wait, not to buy a “cheap token”.</p>
+        <div class="facts">
+          <div><b>$1.65M</b><span class="ru">buyback, 30d</span><span class="en">buyback, 30d</span></div>
+          <div><b>0</b><span class="ru">holder revenue</span><span class="en">holder revenue</span></div>
+          <div><b>−70.9%</b><span class="ru">TVL от пика</span><span class="en">TVL from peak</span></div>
+          <div><b>17.3%</b><span class="ru">от revenue vs 30% на buyback</span><span class="en">of revenue vs 30% buyback policy</span></div>
+        </div>
+      </div>
+      <div class="side">
+        <div>
+          <div class="kicker"><span class="ru">Главный вывод</span><span class="en">Core finding</span></div>
+          <p class="small muted" style="margin:0">«The buyback is real; the distribution leg is not verified.»</p>
+        </div>
+        <div>
+          <a class="btn" href="ethfi.html"><span class="ru">Открыть разбор</span><span class="en">Read the case</span> <span class="arrow">→</span></a>
+          <p class="tiny dim" style="margin:10px 0 0"><span class="ru">12 минут · 5 графиков · 6 источников</span><span class="en">12 min · 5 charts · 6 sources</span></p>
+        </div>
+      </div>
+      <div style="grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;margin-top:2px">
+        <img src="assets/ethfi_buyback.svg" alt="ETHFI buybacks via CoW, September–November 2026" loading="lazy">
+      </div>
+    </article>
+
+    <div class="grid-2">
+      <article class="case" style="grid-template-columns:1fr;margin-bottom:0">
+        <div>
+          <div class="top"><span class="ticker">LTC</span><span class="badge wait">WAIT · 3%</span><span class="mono dim">14.11.2026</span></div>
+          <h3 class="ru">Сеть, у которой безопасность оплачивают эмиссией.</h3>
+          <h3 class="en">A network whose security is paid for by emissions.</h3>
+          <p class="ru">Комиссии — 0.18% валовой выручки майнеров. Хешрейт вырос, но экономика блока почти целиком зависит от субсидии. Halving — событие, а не тезис.</p>
+          <p class="en">Fees are 0.18% of gross miner revenue. Hashrate rose, but block economics still depend almost entirely on the subsidy. The halving is an event, not a thesis.</p>
+          <div class="facts">
+            <div><b>0.18%</b><span>fee share</span></div>
+            <div><b>0.59</b><span>MVRV</span></div>
+            <div><b>−88.5%</b><span class="ru">от пика 2021</span><span class="en">from 2021 high</span></div>
+          </div>
+        </div>
+        <div class="side" style="border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:14px">
+          <a class="btn" href="assets/LTC_Research_Memo.pdf" target="_blank" rel="noopener"><span class="ru">PDF-мемо</span><span class="en">PDF memo</span> <span class="arrow">↗</span></a>
+        </div>
+      </article>
+
+      <article class="case" style="grid-template-columns:1fr;margin-bottom:0">
+        <div>
+          <div class="top"><span class="ticker">SNX</span><span class="badge def">DEFENSIVE · 0%</span><span class="mono dim">19.11.2026</span></div>
+          <h3 class="ru">Lock — это не burn.</h3>
+          <h3 class="en">A lock is not a burn.</h3>
+          <p class="ru">SIP-423 создал 236.5M SNX (+68.6% к supply) и отправил их на Safe. Исходящих переводов нет — на дату. Это обещаниеcustody, а не on-chain вестинг; sell-side риск не исчез.</p>
+          <p class="en">SIP-423 minted 236.5M SNX (+68.6% to supply) into a Safe. No outflows as of the snapshot — a custody promise, not an on-chain vest. The sell-side risk did not disappear.</p>
+          <div class="facts">
+            <div><b>+68.6%</b><span class="ru">к supply</span><span class="en">supply increase</span></div>
+            <div><b>40.7%</b><span class="ru">post-mint supply</span><span class="en">of post-mint supply</span></div>
+            <div><b>−99%</b><span class="ru">TVL за год</span><span class="en">TVL YoY</span></div>
+          </div>
+        </div>
+        <div class="side" style="border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:14px">
+          <a class="btn" href="assets/SNX_SIP423_Report.pdf" target="_blank" rel="noopener"><span class="ru">PDF-отчёт</span><span class="en">PDF report</span> <span class="arrow">↗</span></a>
+        </div>
+      </article>
+    </div>
+
+    <p class="small dim" style="margin:22px 0 0"><span class="ru">Также: LYFT (unit economics), GPRO (event-driven / binary risk), ZNTL (clinical binary), Anthropic (private-market economics). Краткие записки — по запросу.</span><span class="en">Also: LYFT (unit economics), GPRO (event-driven / binary risk), ZNTL (clinical binary), Anthropic (private-market economics). Short notes available on request.</span></p>
+  </div>
+</section>
+
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="ru">Доказательства, не прилагательные</span><span class="en">Evidence, not adjectives</span></div>
+        <h2 class="ru">Навыки, которые видно в артефактах.</h2>
+        <h2 class="en">Skills you can inspect in the artifacts.</h2>
+      </div>
+      <p class="ru">Каждая строка — конкретная работа, а не уровень владения. Ссылки ведут к разделу кейса или методике.</p>
+      <p class="en">Each row is a piece of work, not a proficiency bar. Links go to the case section or the method.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th><span class="ru">Навык</span><span class="en">Skill</span></th>
+          <th><span class="ru">Что сделано</span><span class="en">What I did</span></th>
+          <th><span class="ru">Артефакт</span><span class="en">Artifact</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td><b>Wallet forensics</b></td><td><span class="ru">Проследила 2.54M ETHFI от funding Safe через CoW до LayerZero; разметила treasury, вестинг и CEX-кошельки.</span><span class="en">Traced 2.54M ETHFI from the funding Safe through CoW to LayerZero; labelled treasury, vesting and CEX wallets.</span></td><td><a href="ethfi.html#buyback">ETHFI §5</a></td></tr>
+          <tr><td><b>Supply reconciliation</b></td><td><span class="ru">Нашла конфликт 998.5M on-chain / 983.6M DefiLlama / 1B max и доказала burn 1.46M ETHFI.</span><span class="en">Found the 998.5M on-chain / 983.6M DefiLlama / 1B max conflict and verified the 1.46M ETHFI burn.</span></td><td><a href="ethfi.html#supply">ETHFI §3</a></td></tr>
+          <tr><td><b>Market microstructure</b></td><td><span class="ru">Собрала $1.23M глубины DEX и котировки проскальзывания на $10k / $50k / $250k.</span><span class="en">Mapped $1.23M of DEX depth and quoted slippage at $10k / $50k / $250k.</span></td><td><a href="ethfi.html#liquidity">ETHFI §7</a></td></tr>
+          <tr><td><b>Protocol economics</b></td><td><span class="ru">Разделила $13.6M fees, $3.8M revenue и $0 holder revenue; построила три сценария оценки.</span><span class="en">Separated $13.6M fees, $3.8M revenue and $0 holder revenue; built three valuation scenarios.</span></td><td><a href="ethfi.html#economics">ETHFI §6</a></td></tr>
+          <tr><td><b>Data engineering</b></td><td><span class="ru">Python-пайплайн на stdlib: кэш сырых JSON, CSV-выходы, SVG-графики без pandas и matplotlib.</span><span class="en">Stdlib Python pipeline: raw-JSON cache, CSV outputs, SVG charts without pandas or matplotlib.</span></td><td><a href="method.html#pipeline">Method</a></td></tr>
+          <tr><td><b>Communication</b></td><td><span class="ru">Двуязычный мемо, decision card, дашборд и CV для нетехнического аллокатора.</span><span class="en">Bilingual memo, decision card, dashboard and CV for a non-technical allocator.</span></td><td><a href="cv.html">CV</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" id="how">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:24px">
+      <div>
+        <div class="kicker"><span class="ru">Метод</span><span class="en">Method</span></div>
+        <h2 class="ru">Четыре шага, которые нельзя пропустить.</h2>
+        <h2 class="en">Four steps I don’t skip.</h2>
+      </div>
+      <p class="ru">Подробная версия — на странице методики: правила, пайплайн, ограничения и чек-лист качества данных.</p>
+      <p class="en">The full version is on the method page: rules, pipeline, limitations and a data-quality checklist.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3 class="ru">Вопрос</h3><h3 class="en">Question</h3><p class="ru">Сначала формулирую, какое решение изменит ответ. Иначе данные бесконечны.</p><p class="en">First I define which decision the answer changes. Otherwise data is infinite.</p></div>
+      <div class="step"><h3 class="ru">Первичные данные</h3><h3 class="en">Primary data</h3><p class="ru">RPC, контракты, логи, официальные документы. Агрегатор — только как перекрёстная проверка.</p><p class="en">RPC, contracts, logs, official documents. Aggregators are cross-checks, not the source of truth.</p></div>
+      <div class="step"><h3 class="ru">Сверка</h3><h3 class="en">Reconciliation</h3><p class="ru">Расхождение — это находка. Фиксирую базу, допущения и статус каждого числа.</p><p class="en">A discrepancy is a finding. I record the base, assumptions and status of every number.</p></div>
+      <div class="step"><h3 class="ru">Решение</h3><h3 class="en">Decision</h3><p class="ru">Действие, размер, горизонт, апгрейд и отмена. Всё, что можно проверить позже.</p><p class="en">Action, size, horizon, upgrade and invalidation. Everything is checkable later.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap about">
+    <div class="portrait">
+      <div class="quote ru">«Выход — не призыв. Это <span>позиция с условием отмены</span>».</div>
+      <div class="quote en">“The output is not a call. It is a <span>position with a falsification condition</span>.”</div>
+    </div>
+    <div>
+      <div class="kicker"><span class="ru">Кто я</span><span class="en">About</span></div>
+      <h2 style="margin-bottom:16px" class="ru">Марина Ребеева. Исследователь, а не продавец идей.</h2>
+      <h2 style="margin-bottom:16px" class="en">Marina Rebeeva. A researcher, not an idea salesperson.</h2>
+      <p class="ru">9+ лет предпринимательства: B2B-партнёрства, переговоры, P&amp;L и unit economics. Около 5 лет личного инвестирования. Перехожу в part-time research и собираю портфолио, в котором каждый вывод можно воспроизвести.</p>
+      <p class="en">9+ years in entrepreneurship: B2B partnerships, negotiation, P&amp;L and unit economics. Around five years of personal investing. Moving into part-time research with a portfolio where every conclusion can be reproduced.</p>
+      <ul class="ru">
+        <li>Python (stdlib + API), SQL, Dune, Looker Studio, Power BI, Excel.</li>
+        <li>RU — родной, EN — B1 (письменная коммуникация предпочтительна).</li>
+        <li>Remote, 15–20 часов в неделю; гражданство и разрешение на работу — Беларусь.</li>
+        <li>Личный капитал; клиентскими активами не управляла.</li>
+      </ul>
+      <ul class="en">
+        <li>Python (stdlib + APIs), SQL, Dune, Looker Studio, Power BI, Excel.</li>
+        <li>RU native, EN B1 (written communication preferred).</li>
+        <li>Remote, 15–20 hours per week; Belarusian citizenship and work authorization.</li>
+        <li>Personal capital only; no client assets managed.</li>
+      </ul>
+      <div class="contact" id="contact">
+        <a class="btn primary" href="mailto:rebeeva979@gmail.com">rebeeva979@gmail.com</a>
+        <a class="btn" href="https://t.me/marina_rebeeva" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn" href="cv.html"><span class="ru">CV на сайте</span><span class="en">Web CV</span></a>
+      </div>
+      <p class="tiny dim" style="margin-top:14px"><span class="ru">Минск, Беларусь · remote · +375 (25) 648-81-76</span><span class="en">Minsk, Belarus · remote · +375 (25) 648-81-76</span></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><span class="ru">© 2026 Marina Rebeeva. Независимое исследование, не инвестиционная рекомендация. Все рыночные и on-chain значения — point-in-time снимки; перед использованием проверяйте источники и условия провайдеров.</span><span class="en">© 2026 Marina Rebeeva. Independent research, not investment advice. All market and on-chain values are point-in-time snapshots; verify sources and provider terms before use.</span></p>
+    <div class="links">
+      <a href="method.html"><span class="ru">Методика</span><span class="en">Method</span></a>
+      <a href="cv.html">CV</a>
+      <a href="mailto:rebeeva979@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

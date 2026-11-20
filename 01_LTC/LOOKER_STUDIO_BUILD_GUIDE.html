@@ -1,0 +1,163 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>LOOKER_STUDIO_BUILD_GUIDE</title><style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+max-width:980px;margin:40px auto;padding:0 24px;line-height:1.55;color:#1f2937;background:#fff}
+h1,h2,h3{color:#1f3864;line-height:1.25}
+h1{border-bottom:3px solid #1f3864;padding-bottom:10px}
+h2{margin-top:32px;border-bottom:1px solid #d9e2f3;padding-bottom:6px}
+code{background:#f3f4f6;padding:2px 5px;border-radius:4px;font-size:.92em}
+pre{background:#f8fafc;border:1px solid #e5e7eb;padding:14px;overflow:auto;border-radius:8px}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.94em}
+th,td{border:1px solid #d1d5db;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef2ff}
+blockquote{border-left:4px solid #93c5fd;margin:0;padding:8px 16px;background:#eff6ff;color:#374151}
+li{margin:4px 0}
+.small{color:#6b7280;font-size:.9em}
+@media print{body{margin:0;max-width:none}h2{page-break-after:avoid}table{page-break-inside:avoid}}
+</style></head><body><h1 id="litecoin-investment-research-looker-studio">Litecoin Investment Research в Looker Studio</h1>
+<p>Этот файл описывает сборку рабочего investment-research дашборда по LTC из <code>LTC_LOOKER_DATASET.xlsx</code>.
+Дашборд предназначен для дисциплинированной проверки тезиса и риска. Он не превращает on-chain метрики в автоматическую рекомендацию купить или продать.</p>
+<h2 id="0">0. Что использовать</h2>
+<ul>
+<li><code>LTC_LOOKER_STARTER.xlsx</code> — компактная версия на 11 листов для быстрой сборки в Looker Studio.</li>
+<li><code>LTC_LOOKER_DATASET.xlsx</code> — полная research-база на 20 листов, когда понадобятся blocks, transfers, mining, supply и valuation.</li>
+<li><code>LOOKER_STUDIO_STARTER_CHECKLIST.md</code> — короткий чеклист на 3 первые страницы.</li>
+<li><code>LTC_Dashboard.html</code> — локальный интерактивный дашборд без Google-аккаунта. Это не Looker Studio, но готовый portfolio-артефакт.</li>
+<li><code>LTC_RESEARCH_MEMO.md</code> — текстовый investment memo с выводами и ограничениями.</li>
+</ul>
+<p>Для первого прохода используй <code>LTC_LOOKER_STARTER.xlsx</code>: он быстрее загружается и не перегружает интерфейс. Полный workbook подключай по мере необходимости.</p>
+<h2 id="1">1. Подготовка источника</h2>
+<ol>
+<li>Загрузить <code>LTC_LOOKER_STARTER.xlsx</code> (или полный <code>LTC_LOOKER_DATASET.xlsx</code>) в Google Drive.</li>
+<li>Открыть файл через Google Sheets и сохранить как Google-таблицу.</li>
+<li>В Looker Studio создать отчёт → <strong>Add data</strong> → <strong>Google Sheets</strong>.</li>
+<li>Выбрать лист <code>MARKET_DAILY</code>, включить <code>Use first row as headers</code> и отключить агрегацию даты.</li>
+<li>Добавить отдельные источники для <code>KPI_LATEST</code>, <code>ONCHAIN_DAILY</code>, <code>PEER_LATEST</code>, <code>DECISION_RULES</code>, <code>YEARLY_SUMMARY</code>, <code>MONTHLY_RETURNS</code>, <code>DATA_QUALITY</code> и <code>SOURCES</code>. В полном workbook дополнительно доступны <code>LTC_BLOCKS</code>, <code>TRANSFER_DAILY</code>, <code>MINING_DAILY</code>, <code>SUPPLY_DAILY</code>, <code>VALUATION_DAILY</code> и <code>PEER_DAILY</code>.</li>
+<li>В настройках полей проверить типы:
+   - <code>date</code> → Date;
+   - <code>price_*_usd</code>, <code>ma_*_usd</code>, <code>high_water_mark_usd</code> → Currency / USD;
+   - поля без суффикса <code>_pct</code> (<code>return_1d</code>, <code>drawdown_from_ath</code>, <code>year_return</code> и т. п.) → Percent;
+   - поля с суффиксом <code>_pct</code> оставить как Number. Они хранят процентные пункты, например <code>4.2</code> означает <code>4.2%</code>;
+   - <code>market_cap_usd</code>, <code>fees_usd</code>, <code>issuance_usd</code>, <code>miner_revenue_usd</code> → Currency / USD;
+   - <code>transfer_value_usd</code>, <code>realized_cap_usd</code>, <code>subsidy_revenue_usd</code>, <code>fee_revenue_usd</code>, <code>miner_revenue_usd_blockchair</code> → Currency / USD;
+   - <code>supply_ltc</code>, <code>fees_ltc</code>, <code>issuance_ltc</code>, <code>miner_revenue_ltc</code>, <code>transfer_value_ltc</code>, <code>remaining_supply_ltc</code> → Number;
+   - <code>active_addresses</code>, <code>tx_count</code>, <code>transfer_tx_count</code>, <code>block_count</code>, <code>output_count</code>, <code>input_count</code> → Number;
+   - <code>mvrv</code>, <code>difficulty</code>, <code>block_interval_sec_est</code>, <code>estimated_years_to_max_at_current_issuance</code> → Number.</li>
+</ol>
+<h2 id="2">2. Страницы отчёта</h2>
+<h3 id="page-1-market-overview">Page 1 — Market Overview</h3>
+<ul>
+<li>Scorecards: <code>price_close_usd</code>, <code>return_1d</code>, <code>return_30d</code>, <code>ytd_return</code>, <code>drawdown_from_ath</code>, <code>volatility_30d_annualized</code>.</li>
+<li>Time series: dimension <code>date</code>, metrics <code>price_close_usd</code>, <code>ma_30_usd</code>, <code>ma_200_usd</code>.</li>
+<li>Column chart: <code>date</code> → <code>volume</code>. Заголовок должен содержать <code>raw volume, unit unconfirmed</code>.</li>
+<li>Area chart: <code>date</code> → <code>drawdown_from_ath</code>.</li>
+<li>Date range control: по умолчанию последние 365 дней.</li>
+</ul>
+<h3 id="page-2-cycles-drawdowns">Page 2 — Cycles &amp; Drawdowns</h3>
+<ul>
+<li>Time series с ценой LTC и вертикальными reference lines на <code>2019-08-05</code> и <code>2023-08-02</code>.</li>
+<li>Отдельно подписать <code>2027-08-02</code> как estimate, а не как гарантированную дату.</li>
+<li>Bar chart: <code>YEARLY_SUMMARY</code>, dimension <code>year</code>, metric <code>year_return</code>.</li>
+<li>Pivot / heatmap: <code>MONTHLY_RETURNS</code>, dimensions <code>year</code> и <code>month</code>, metric <code>monthly_return</code>.</li>
+<li>Таблица халвингов: <code>halving_date</code>, <code>price_on_or_after_date_usd</code>, <code>return_30d</code>, <code>return_90d</code>, <code>return_180d</code>, <code>return_365d</code>.</li>
+</ul>
+<h3 id="page-3-network-activity">Page 3 — Network Activity</h3>
+<ul>
+<li>Active addresses: <code>date</code> → <code>active_addresses</code>.</li>
+<li>Transactions: <code>date</code> → <code>tx_count</code>.</li>
+<li>Activity change scorecards: <code>active_addresses_30d</code>, <code>tx_count_30d</code>.</li>
+<li>Activity efficiency: <code>date</code> → <code>active_addresses_per_tx</code>.</li>
+<li>Gross transfer demand: source <code>TRANSFER_DAILY</code>, <code>date</code> → <code>transfer_value_usd</code> and <code>transfer_tx_count</code>.</li>
+<li>Output structure: <code>date</code> → <code>output_count</code>, <code>input_count</code>, <code>outputs_per_transfer_tx</code>.</li>
+<li>Подпись на странице: «адреса не равны пользователям; биржи могут агрегировать множество пользователей».</li>
+</ul>
+<h3 id="page-4-mining-tokenomics">Page 4 — Mining &amp; Tokenomics</h3>
+<ul>
+<li>Hashrate: <code>date</code> → <code>hashrate</code>.</li>
+<li>Difficulty and interval: source <code>LTC_BLOCKS</code>, <code>date</code> → <code>difficulty</code>, <code>block_interval_sec_est</code>, <code>block_count</code>.</li>
+<li>Blocks and issuance: <code>date</code> → <code>block_count</code>, <code>issuance_ltc</code>, <code>subsidy_revenue_ltc</code>.</li>
+<li>Miner revenue: source <code>MINING_DAILY</code>, <code>date</code> → <code>miner_revenue_usd_blockchair</code>, <code>subsidy_revenue_usd</code>, <code>fee_revenue_usd</code>.</li>
+<li>Fee share: <code>date</code> → <code>fee_share_of_miner_revenue_blockchair</code>.</li>
+<li>Supply: source <code>SUPPLY_DAILY</code>, <code>date</code> → <code>supply_ltc</code>, <code>remaining_supply_ltc</code>, <code>supply_mined</code>, <code>supply_inflation_365d</code>, <code>estimated_years_to_max_at_current_issuance</code>.</li>
+<li>В тексте рядом с графиком указать, что miner revenue — валовая выручка до затрат, а <code>miner_cost_usd</code> намеренно <code>N/A</code>.</li>
+</ul>
+<h3 id="page-5-valuation-peers">Page 5 — Valuation &amp; Peers</h3>
+<ul>
+<li>Market cap: <code>date</code> → <code>market_cap_usd</code>.</li>
+<li>MVRV / realized cap: source <code>VALUATION_DAILY</code>, <code>date</code> → <code>mvrv</code>, <code>realized_cap_usd</code>, <code>market_cap_usd</code>.</li>
+<li>Таблица последней общей даты: <code>PEER_LATEST</code> — BTC, BCH, DOGE, DASH и LTC. LTC добавлен из базового ряда, остальные — из Coin Metrics; это явно указано в поле <code>source</code>.</li>
+<li>Сравнивать одновременно market cap, active addresses, transactions и hashrate. Не строить рейтинг по одной метрике.</li>
+<li>Gross transfer value теперь есть в <code>TRANSFER_DAILY</code>, но он включает change/self-transfers и поэтому не является adjusted transfer value. NVT можно строить только с явной подписью gross output proxy.</li>
+</ul>
+<h3 id="page-6-risk-returns">Page 6 — Risk &amp; Returns</h3>
+<ul>
+<li>Rolling volatility: <code>date</code> → <code>volatility_30d_annualized</code>.</li>
+<li>Tail-risk scorecards: <code>var_95_30d</code>, <code>var_99_30d</code>, <code>downside_deviation_30d_annualized</code>.</li>
+<li>Risk-adjusted scorecards: <code>sharpe_30d</code>, <code>sortino_30d</code>, both with MAR = 0.</li>
+<li>Price vs MA200: <code>date</code> → <code>price_vs_ma_200</code>.</li>
+<li>Таблица по годам: <code>year</code>, <code>year_return</code>, <code>realized_vol_annualized</code>, <code>year_max_drawdown</code>.</li>
+<li>Scorecards: <code>high_52w_close_usd</code>, <code>low_52w_close_usd</code>, <code>ma_200_usd</code>.</li>
+</ul>
+<h3 id="page-7-network-economics">Page 7 — Network Economics</h3>
+<p>Эта страница отвечает на вопросы, которые обычно задают по DeFi-протоколу, но переводит их на уровень Litecoin-сети. Источник: <code>ECONOMICS_FRAMEWORK</code>.</p>
+<ul>
+<li>Пользователи: <code>active_addresses</code>, <code>tx_count</code>, их 30-дневная динамика.</li>
+<li>TVL: пометить как <code>N/A</code> для базового L1. Вместо TVL показывать <code>market_cap_usd</code> и <code>supply_ltc</code>; wrappers/bridges потребуют отдельного датасета.</li>
+<li>Комиссии: <code>fees_usd_30d_sum</code>, <code>fee_to_issuance_30d_ratio</code>, <code>fee_share_of_miner_revenue</code>.</li>
+<li>Расходы/бюджет безопасности: <code>issuance_usd_30d_sum</code>, <code>miner_revenue_usd_blockchair</code>, <code>miner_cost_usd</code>, <code>hashrate</code>.</li>
+<li>Transfer demand: <code>transfer_value_usd</code>, <code>output_count</code>, <code>outputs_per_transfer_tx</code>.</li>
+<li>Реальная экономика: <code>fee_to_issuance_30d_ratio</code>, <code>supply_inflation_365d</code>, <code>mvrv</code>, adoption gates.</li>
+<li>Ценность для держателя: <code>price_close_usd</code>, <code>market_cap_usd</code>, supply inflation и отсутствие прямого fee distribution.</li>
+</ul>
+<p>Ключевая оговорка: у LTC нет прямого аналога ETHFI value accrual. Держатель LTC получает потенциальную ценность через спрос на денежный актив, scarcity и сетевое использование, а не через распределение протокольных комиссий.</p>
+<h3 id="page-8-decision-gates">Page 8 — Decision Gates</h3>
+<ul>
+<li>Scorecard со статусом <code>DECISION_RULES[Overall research state]</code>.</li>
+<li>Таблица <code>gate</code>, <code>current_value</code>, <code>status</code>, <code>interpretation</code>.</li>
+<li>Четыре основные проверки:
+  1. <code>Market trend</code>: close выше MA200;
+  2. <code>Momentum</code>: 30D и 90D доходности положительны;
+  3. <code>Adoption</code>: активные адреса и транзакции растут за 30 дней;
+  4. <code>Security</code>: hashrate не снижается, блоки производятся.</li>
+<li>Логика использования: <code>CONFIRMATION</code> означает, что минимум три из четырёх gate проходят и нет hard fail; <code>CAUTION</code> означает смешанную картину; <code>DEFENSIVE</code> — два и более hard fail.</li>
+<li>Это framework для pre-trade review, а не персональная рекомендация и не замена лимитам позиции.</li>
+</ul>
+<h3 id="page-9-data-sources">Page 9 — Data &amp; Sources</h3>
+<ul>
+<li>Coverage scorecards из <code>KPI_LATEST</code>: <code>coverage_start</code>, <code>coverage_end</code>, <code>observations</code>, <code>date_gaps</code>.</li>
+<li>Таблица <code>DATA_QUALITY</code>.</li>
+<li>Таблица <code>SOURCES</code>.</li>
+<li>Текстовый блок с ограничениями исследования.</li>
+</ul>
+<h2 id="3">3. Правила интерпретации</h2>
+<ul>
+<li><code>ATH</code> в этом POC — максимум дневного close внутри загруженного ряда, не внутридневной максимум.</li>
+<li><code>volume</code> оставлен как raw field: источник не подтвердил единицу измерения, поэтому нельзя подписывать его как USD.</li>
+<li><code>return_*_pct</code> — audit fields в процентных пунктах. Для графиков и scorecards используйте нормализованные aliases без <code>_pct</code>.</li>
+<li>Calendar returns считаются только при наличии точной даты сравнения. Пропуски дат не интерполируются.</li>
+<li>Волатильность годовая считается через <code>sqrt(365)</code>, поскольку ряд относится к криптоактиву.</li>
+<li>VaR 95/99% — исторический empirical nearest-rank на последних 30 дневных доходностях, не прогноз максимального убытка.</li>
+<li>Sharpe и Sortino используют MAR = 0 и короткое 30-дневное окно, поэтому их нельзя трактовать как устойчивую долгосрочную оценку качества.</li>
+<li>On-chain источник — Coin Metrics Community API v4. Проверяйте условия Community Data перед коммерческим использованием.</li>
+<li><code>active_addresses</code> — адресная активность, не число пользователей.</li>
+<li><code>tx_count</code> — число транзакций, не экономический объём переводов.</li>
+<li><code>transfer_value_usd</code> — gross non-coinbase output value; в нём остаются change и self-transfers. <code>adjusted_transfer_value_*</code> пока <code>N/A</code>.</li>
+<li><code>hashrate</code> — proxy сетевой безопасности, не полная оценка стоимости атаки.</li>
+<li><code>fees_usd</code>, <code>transfer_value_usd</code> и mining USD fields рассчитаны из native units и Coin Metrics PriceUSD. Это не vendor historical USD fields.</li>
+<li><code>miner_cost_usd</code> остаётся N/A: нет проверенной модели электричества, capex, pool fee и структуры майнеров.</li>
+<li><code>mvrv</code> берётся из Coin Metrics <code>CapMVRVCur</code>; <code>realized_cap_usd</code> рассчитывается как <code>market_cap_usd / mvrv</code>.</li>
+<li><code>block_timestamp_utc</code> в <code>LTC_BLOCKS</code> — UTC day anchor агрегированного дня, не timestamp отдельного блока.</li>
+<li>Peer-сравнение использует последнюю общую дату рыночного ряда, чтобы не смешивать разные as-of dates.</li>
+</ul>
+<h2 id="4">4. Обновление</h2>
+<p>Для полного обновления:</p>
+<pre><code class="language-bash">python3 fetch_ltc_research_data.py --start 2018-08-22 --end 2026-11-16
+python3 build_ltc_looker_dataset.py
+</code></pre>
+<p>Затем заменить листы в Google Sheets или обновить импортированный файл. Перед публикацией отчёта проверить <code>DATA_QUALITY</code>, <code>LTC_CATALOG.csv</code>, дату <code>calculated_at_utc</code> и общий as-of в <code>KPI_LATEST</code>.</p>
+<h2 id="5-research-">5. Минимальный вывод для research-кейса</h2>
+<p>В отчёте отдельно показать:</p>
+<ol>
+<li>Что измерено: цена, доходности, rolling volatility, drawdown, halving context, supply, activity, mining и peers.</li>
+<li>Что не измерено: adjusted transfer value, фактические затраты майнеров, полная модель стоимости атаки и protocol-level fee distribution.</li>
+<li>Какие выводы предварительные: это decision-support dashboard, а не автономный торговый бот и не fair-value модель.</li>
+</ol><hr><p class="small">HTML-версия файла LOOKER_STUDIO_BUILD_GUIDE.md. Открывается в любом браузере.</p></body></html>

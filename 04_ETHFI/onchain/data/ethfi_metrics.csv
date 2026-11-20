@@ -1,0 +1,46 @@
+metric,value,unit,as_of,source
+price,0.466431,USD,2026-11-20,CoinGecko /coins/ether-fi
+market_cap,465748391.0,USD,2026-11-20,CoinGecko
+fdv,465748391.0,USD,2026-11-20,CoinGecko (circulating = total)
+circulating_supply,998535999.0,ETHFI,2026-11-20,on-chain totalSupply; CoinGecko
+max_supply,1000000000.0,ETHFI,2026-11-20,token docs
+burned_supply,1464001.0,ETHFI,2026-11-20,1B genesis - on-chain totalSupply
+defillama_locked,16399443,ETHFI,2026-11-20,DefiLlama unlocks page
+tvl,3728382357.33097,USD,2026-11-20,DefiLlama protocol
+tvl_peak,12793573173.17942,USD,2025-08-14,DefiLlama protocol
+tvl_drawdown_from_peak,-70.85738044515047,%,2026-11-20,computed
+fees_30d,13621953.0,USD,2026-11-20,DefiLlama dailyFees
+revenue_30d,3824601.0,USD,2026-11-20,DefiLlama dailyRevenue
+holders_revenue_30d,0.0,USD,2026-11-20,DefiLlama dailyHoldersRevenue
+fees_365d,178083989.0,USD,2026-11-20,DefiLlama
+revenue_365d,43391303.0,USD,2026-11-20,DefiLlama
+holders_revenue_365d,6549981.0,USD,2026-11-20,DefiLlama
+holders_revenue_last_nonzero,2026-04-01,date,2026-11-20,DefiLlama daily series
+cumulative_revenue,110191116.49,USD,2026-11-20,DefiLlama
+cumulative_holders_revenue,16591119.0,USD,2026-11-20,DefiLlama
+holders_revenue_share_cumulative,15.056675645450666,%,2026-11-20,computed
+buyback_ethfi,2542499.139287336,ETHFI,2026-11-20,"CoW -> 0x43f4 Safe, on-chain"
+buyback_usdc,1645540.586684,USD,2026-11-20,on-chain
+buyback_avg_price,0.6472138225168667,USD,2026-11-20,computed
+buyback_txs,566,count,2026-11-20,on-chain
+buyback_30d_ethfi,1155695.9429255363,ETHFI,2026-11-20,on-chain
+buyback_30d_usdc,663000.0,USD,2026-11-20,on-chain
+buyback_annualized_pct_mcap,1.708218461671508,%,2026-11-20,computed
+dex_liquidity,1229199.5899999999,USD,2026-11-20,DexScreener
+dex_liquidity_pct_mcap,0.26391923488147917,%,2026-11-20,computed
+top1_holder_share,15.34252144974495,%,2026-11-20,Blockscout holders
+top5_holder_share,45.83944510372069,%,2026-11-20,Blockscout holders
+top10_holder_share,62.18508742015849,%,2026-11-20,Blockscout holders
+top20_holder_share,73.96358686234473,%,2026-11-20,Blockscout holders
+eoa_float_share,47.46502571979758,%,2026-11-20,computed
+eoa_top1_share_of_float,21.42547064473742,%,2026-11-20,computed
+eoa_top5_share_of_float,51.967890457970334,%,2026-11-20,computed
+eoa_gini,0.804921169369477,index,2026-11-20,computed
+eoa_hhi,760.9569674191215,index,2026-11-20,computed
+eoa_nakamoto_50,5,wallets,2026-11-20,computed
+mcap_revenue,10.733680687118339,x,2026-11-20,computed
+mcap_fees,2.61532995535045,x,2026-11-20,computed
+mcap_tvl,0.1249196960939957,x,2026-11-20,computed
+buyback_30d_pct_revenue,17.3351416265383,%,2026-11-20,computed: 30d buyback USD / 30d protocol revenue
+buyback_mark_vs_spot_pct,-27.93247242678526,%,2026-11-20,computed: spot / average buy price
+buyback_30d_vs_unlocks_30d,26.43748889045344,%,2026-11-20,computed vs DefiLlama unlock schedule

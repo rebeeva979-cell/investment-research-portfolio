@@ -1,0 +1,19 @@
+# Publish the site plus the research code and career documents.
+/*
+!/docs/
+!/04_ETHFI/
+!/01_LTC/
+!/02_SNX/
+!/05_OTHER_ASSETS/
+!/06_PORTFOLIO_CAREER/
+!/00_README/
+!/README.md
+!/Makefile
+!/requirements.txt
+!/.github/
+!/.gitignore
+
+__pycache__/
+*.pyc
+.venv/
+.DS_Store

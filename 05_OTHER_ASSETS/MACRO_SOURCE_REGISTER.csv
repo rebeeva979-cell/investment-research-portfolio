@@ -1,0 +1,4 @@
+source_id,provider,dataset,url,update_frequency,quality_status,limitations
+SRC-MACRO-001,Yahoo Finance chart,"SPY, DXY, GPRO, LYFT daily history",https://query1.finance.yahoo.com/v8/finance/chart/,daily,public market-data endpoint,unadjusted chart close; verify corporate actions and licensing
+SRC-MACRO-002,CoinGecko,USDT spot and market cap,https://api.coingecko.com/api/v3/coins/tether,daily,market-data aggregator,peg deviation requires exchange-level and reserve context
+SRC-MACRO-003,Farside Investors,Bitcoin/Ethereum ETF flows,https://farside.co.uk/bitcoin-etf-flow-all-data/; https://farside.co.uk/ethereum-etf-flow-all-data/,daily,manual HTML refresh in this environment,"Cloudflare may block automated requests; dash means not reported, not zero"

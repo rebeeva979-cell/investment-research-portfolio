@@ -1,0 +1,15 @@
+file,bytes,sha256,records,modified_utc,source
+buyback_ethfi_all.json,2145341,a8bdb02eaca996a84158c6ae5eb8e11d7a4212b2ef3440e989cf33cbc8e36ac9,600,2026-11-20T16:56:29Z,https://eth.blockscout.com/api/v2/addresses/0x43f4ca92f7f378bcdcf1508b866b5b6c47d6408c/token-transfers?token=0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB
+buyback_usdc_all.json,2153332,68ee3561c913bf73ada80da27e707c6d47aad8d14cbe5c3b4f180288effcefd6,600,2026-11-20T16:56:29Z,https://eth.blockscout.com/api/v2/addresses/0x43f4ca92f7f378bcdcf1508b866b5b6c47d6408c/token-transfers?token=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+cg_coin.json,39641,469ef0ab6d8169c4c495296ca9e3b3a86cf42b1200f9fe4f7b3b0f59c907ca6c,1,2026-11-20T16:56:29Z,https://api.coingecko.com/api/v3/coins/ether-fi?market_data=true
+cg_eth_price.json,30,77f6037f90122da5b64dd60a685604917e7778bc0553aed5d2d5175e5369adb8,1,2026-11-20T16:56:29Z,https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd
+dex_quotes.json,415,97b77802a43d20ce74a5d95d4f9184dd445fd14e8c5f6affa474ebedc84ac12d,1,2026-11-20T16:56:29Z,Uniswap V3 QuoterV2 eth_call; see SOURCES.md (point-in-time fixture)
+dex_token.json,12145,2baaa93de68ade6d89c8a9a3c5f6da0fd34321d793d38c76e856aa345a31b3cf,11,2026-11-20T16:56:29Z,https://api.dexscreener.com/latest/dex/tokens/0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB
+funding_usdc_all.json,711724,1917d1e82ae4ce98a804da3c062622fda7136f24dae41f6562e1591fe7ea4116,300,2026-11-20T16:56:29Z,https://eth.blockscout.com/api/v2/addresses/0xf40bcc0845528873784F36e5C105E62a93ff7021/token-transfers?token=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+holders_top.json,161913,c219374c899bfa28c602979f81c9f981b8fd1fece51bf26d8cdf50f8f71c15c6,250,2026-11-20T16:56:29Z,https://eth.blockscout.com/api/v2/tokens/0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB/holders
+ll_fees.json,226076,2f8481c9324f9bea20a92a7e55adfd2243dc0ab44a23afc6da4a5d3f5d8ee537,1,2026-11-20T16:56:29Z,https://api.llama.fi/summary/fees/ether.fi?dataType=dailyFees
+ll_holders_rev.json,210818,b210a5f1de78976d9f551bdb5af85162be735c9ff76958c13986d931a9eac3b5,1,2026-11-20T16:56:29Z,https://api.llama.fi/summary/fees/ether.fi?dataType=dailyHoldersRevenue
+ll_protocol.json,3340829,7279e5ad506cc4512512a108a44e7dc00737b4f33f36f493273fd69012a4a616,1,2026-11-20T16:56:29Z,https://api.llama.fi/protocol/ether.fi
+ll_revenue.json,224996,4e46e3dbe294cde29c26b1cff009525688c1c00e016a1c55e5265293852c617c,1,2026-11-20T16:56:29Z,https://api.llama.fi/summary/fees/ether.fi?dataType=dailyRevenue
+rpc_supply.json,160,263efaaff997c966763255367f686f4734b370fbd6ac74d77f5ee1c6d058bcda,1,2026-11-20T16:58:04Z,Ethereum JSON-RPC eth_call totalSupply() + eth_blockNumber
+safe_token_transfers.json,399534,c2c1fb2d05261e7fcaac5b0a8c390b80def0c5c1b814f319a34f7ee75c7c304c,169,2026-11-20T16:56:29Z,https://eth.blockscout.com/api/v2/addresses/0x7A6A41F353B3002751d94118aA7f4935dA39bB53/token-transfers?token=0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB

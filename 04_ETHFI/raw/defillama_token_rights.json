@@ -1,0 +1,59 @@
+{
+  "Domain": "Ether.fi SEZC",
+  "Buyback Details": "Portion of protocol revenue is used to buy back ETHFI, another portion goes to the Foundation treasury.",
+  "Revenue Decisions": [
+    "ETHFI"
+  ],
+  "Governance Links": "[Governance Forum](https://governance.ether.fi/), [Governance Docs](https://etherfi.gitbook.io/gov)\n",
+  "Value Accrual Details": "Value accrues through programmatic buybacks held by the Foundation. Rewards are bought on the market rather than emitted",
+  "Economic Rights (Summary)": "40% of revenue goes to Labs to cover expenses, 30% buys ETHFI on open market & is held in Foundation treasury, and 30% buys ETHFI on open market delivered to users as cashback rewards.",
+  "Value Accrual": "Buybacks",
+  "Associated Entities": [
+    "Labs (DevCo)",
+    "DAO"
+  ],
+  "Treasury Details": "A portion of protocol & re-staking rewards are directed toward DAO treasury, token holders can vote on treasury diversification activities.",
+  "IP & Brand": "Ether.fi SEZC",
+  "Burns": "N/A",
+  "Fee Switch Status": "ON",
+  "Governance Decisions": [
+    "ETHFI"
+  ],
+  "Ownership Links": "[ETHFI token details page](https://www.ether.fi/ethfi)\n",
+  "Economic Links": "[ETHFI Staking page](https://www.ether.fi/ethfi), [ETHFI Buyback Program](https://etherfi.gitbook.io/gov/ethfi-buyback-program), [DAO Proposal](https://snapshot.org/#/s:etherfi-dao.eth/proposal/0xed61adff5103b4e50be49b28fca8ecbbea9d685141d2d5a34d1d24232ac91891)\n",
+  "Treasury Decisions": [
+    "ETHFI"
+  ],
+  "Dividends Details": "A portion of bought back ETHFI is distributed to users as rewards.",
+  "Utility": "Staking",
+  "Burn Details": "No burn mechanism is currently active",
+  "Dividends": [
+    "N/A"
+  ],
+  "Revenue Details": "Token holders can vote on economic parameters including protocol fees.",
+  "Protocol Name": "Etherfi",
+  "Fee Switch Details": "After the DAO proposal passed in September 2026, Labs sends a share of interchange, swap and staking revenue, and the Foundation programmatically buys ETHFI by TWAP. 100% of eETH withdrawal fee revenue is allocated to weekly ETHFI buybacks.",
+  "Foundation Multisigs / Addresses": "0x7A6A41F353B3002751d94118aA7f4935dA39bB53\n",
+  "Token": [
+    "ETHFI"
+  ],
+  "Raise Details": "N/A\n",
+  "DefiLlama ID": "parent#ether-fi",
+  "Equity Statement": "The Foundation stewards the treasury and executes token holder decisions, but does not collect protocol revenue directly. Ether.fi Labs collects 40% of product revenue. $32.7M was raised from investors across two private rounds. Ether.fi states there is no intention at this time to accrue value to equity holders via dividends or share repurchases.\n",
+  "Governance Details (Summary)": "Can vote on grants, parameters, protocol fees, controller, contract and various other protocol upgrades, treasury diversification activities",
+  "Latest Treasury / Token Report": "[ETHFI DAO Treasury Dashboard](https://dune.com/ether_fi/ethfi-dao)\n",
+  "Brief description": "ETHFI is the governance and utility token of Ether.fi, allowing holders to stake for a share of monthly protocol revenue from staking and restaking activities, vote on incentives and ecosystem support.",
+  "Last Updated": "2026-10-09T04:00:00.000Z",
+  "Token Type": [
+    "Governance",
+    "Utility"
+  ],
+  "Buybacks": [
+    "ETHFI"
+  ],
+  "Fundraising": [
+    "Equity",
+    "Token Sale"
+  ],
+  "Equity Revenue Capture": "No"
+}

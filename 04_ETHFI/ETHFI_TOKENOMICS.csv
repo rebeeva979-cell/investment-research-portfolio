@@ -1,0 +1,8 @@
+category,metric,value,unit,as_of,source,quality_status,note
+supply,max_supply,1000000000,ETHFI,2026-11-20,https://etherfi.gitbook.io/gov/ethfi-allocations,official; last updated shown on source page,Official source says fully minted fixed supply; no further issuance.
+allocation,dao_treasury_pct,0.2162,share of max supply,2026-11-20,https://etherfi.gitbook.io/gov/ethfi-allocations,official,Use latest dated allocation page; older beta page shows a different bucket split.
+allocation,user_airdrops_pct,0.1927,share of max supply,2026-11-20,https://etherfi.gitbook.io/gov/ethfi-allocations,official,Older ETHFI page lists 17.57%; record source conflict rather than silently overwrite.
+allocation,partnerships_liquidity_pct,0.039,share of max supply,2026-11-20,https://etherfi.gitbook.io/gov/ethfi-allocations,official,Includes Protocol Guild commitment according to source.
+allocation,core_contributors_pct,0.2147,share of max supply,2026-11-20,https://etherfi.gitbook.io/gov/ethfi-allocations,official,Three-year vesting and one-year cliff stated on source page.
+allocation,investors_pct,0.3374,share of max supply,2026-11-20,https://etherfi.gitbook.io/gov/ethfi-allocations,official,Two-year vesting and one-year cliff stated on source page.
+value_accrual,buyback_and_holder_distribution,Buybacks,classification,2026-11-20,https://api.llama.fi/token-rights,independent registry; cross-check against governance and contracts,"40% of revenue goes to Labs to cover expenses, 30% buys ETHFI on open market & is held in Foundation treasury, and 30% buys ETHFI on open market delivered to users as cashback rewards."

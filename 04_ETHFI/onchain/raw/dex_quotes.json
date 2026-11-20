@@ -1,0 +1,23 @@
+{
+ "10000": {
+  "weth": 5.67357,
+  "usd_value": 9897.2,
+  "tokens": 21439.4,
+  "effective_price": 0.461636,
+  "slippage_pct": -1.03
+ },
+ "50000": {
+  "weth": 27.52938,
+  "usd_value": 48023.34,
+  "tokens": 107197.0,
+  "effective_price": 0.447992,
+  "slippage_pct": -3.95
+ },
+ "250000": {
+  "weth": 87.73499,
+  "usd_value": 153048.43,
+  "tokens": 535985.0,
+  "effective_price": 0.285546,
+  "slippage_pct": -38.78
+ }
+}

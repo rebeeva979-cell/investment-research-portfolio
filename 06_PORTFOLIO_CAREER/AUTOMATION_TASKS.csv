@@ -1,0 +1,19 @@
+id,priority,area,task,why,acceptance,effort_h,depends,status
+A01,P0,publishing,Опубликовать docs на GitHub Pages,Без URL портфолио не проверяемо,URL открывает все страницы PDF и CSV,3,github_account,todo
+A02,P0,reproducibility,Перенести ETHFI on-chain пайплайн в проект,Код и raw вне репозитория,python run.py воспроизводит три CSV,6,,done
+A03,P0,provenance,Manifest и source register,Не доказаны дата и источник каждого числа,У каждой метрики URL as_of и метод,4,A02,done
+A04,P0,quality,Consistency gate,Числа в HTML и CSV расходятся,make check пересчитывает KPI и проверяет ссылки,4,A02,done
+A05,P0,ci,CI/CD GitHub Actions,Ручная сборка не масштабируется,Push запускает тесты PDF и deploy,4,A01;A04,done
+A06,P0,monitoring,Weekly refresh и digest,Нет доказательства cadence,Понедельник 08:00 отчёт и Telegram дайджест,8,A03,todo
+A07,P1,data,DuckDB слой и SQL витрины,SQL файлы не исполняются,research.duckdb и KPI SQL views,8,A02,todo
+A08,P1,quality,Data-quality tests,Ошибки данных не блокируют публикацию,Freshness duplicates units supply holder checks,6,A07,todo
+A09,P1,onchain,Wallet label registry,Разметка адресов вручную,labels.csv и генерация top-250,4,A02,todo
+A10,P1,monitoring,ETHFI trigger alerts,Decision Card не срабатывает сама,Алерты по buyback TVL revenue CEX,4,A06,todo
+A11,P1,publishing,Шаблонизация сайта,Числа в HTML вручную,HTML из JSON auto as_of meta OG sitemap,8,A07,todo
+A12,P1,publishing,PDF конвейер,PDF собираются вручную,make pdf собирает CV casebook memo,3,A04,todo
+A13,P1,content,Публичная страница LTC,Один глубокий кейс мало,docs/ltc.html по шаблону,16,A11,todo
+A14,P1,equity,SEC/equity pipeline,LYFT GPRO ZNTL только briefs,EDGAR financials и обновление по 10-Q,16,A07,todo
+A15,P2,portfolio,Portfolio tracker и IPS drift,Нет контроля риск-бюджета,Weights vs target/min/max и monthly review,12,A07,todo
+A16,P2,distribution,Dune и Looker dashboards,Нужен инструмент вживую,Два публичных дашборда,12,A07,todo
+A17,P2,distribution,Substack и analytics,Нет дистрибуции,2-3 drafts публикация и метрика,12,A01,todo
+A18,P2,commercial,CRM платных пилотов,Нет перехода к доходу,20 контактов 5 интервью 1 пилот,16,A17,todo

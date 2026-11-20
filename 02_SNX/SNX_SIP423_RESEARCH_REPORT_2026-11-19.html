@@ -1,0 +1,865 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>SNX_SIP423_RESEARCH_REPORT_2026-11-19</title><style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+max-width:980px;margin:40px auto;padding:0 24px;line-height:1.55;color:#1f2937;background:#fff}
+h1,h2,h3{color:#1f3864;line-height:1.25}
+h1{border-bottom:3px solid #1f3864;padding-bottom:10px}
+h2{margin-top:32px;border-bottom:1px solid #d9e2f3;padding-bottom:6px}
+code{background:#f3f4f6;padding:2px 5px;border-radius:4px;font-size:.92em}
+pre{background:#f8fafc;border:1px solid #e5e7eb;padding:14px;overflow:auto;border-radius:8px}
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:.94em}
+th,td{border:1px solid #d1d5db;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eef2ff}
+blockquote{border-left:4px solid #93c5fd;margin:0;padding:8px 16px;background:#eff6ff;color:#374151}
+li{margin:4px 0}
+.small{color:#6b7280;font-size:.9em}
+@media print{body{margin:0;max-width:none}h2{page-break-after:avoid}table{page-break-inside:avoid}}
+</style></head><body><h1 id="synthetix-snx-sip-423-supply-overhang">Synthetix (SNX): SIP-423 и реальный масштаб supply overhang</h1>
+<p><strong>Ончейн-исследование · Марина Ребеева · 19 ноября 2026</strong></p>
+<p><strong>Статус:</strong> Research POC, не инвестиционная рекомендация<br />
+<strong>Дата среза:</strong> 19 ноября 2026<br />
+<strong>Сеть:</strong> Ethereum mainnet + Optimism (snapshot blocks)<br />
+<strong>Данные:</strong> <a href="SNX_SIP423_DATA_PACK.xlsx"><code>SNX_SIP423_DATA_PACK.xlsx</code></a> · <a href="build_snx_data_pack.py"><code>build_snx_data_pack.py</code></a><br />
+<strong>Первоисточники:</strong> <a href="https://github.com/Synthetixio/SIPs/blob/master/content/sips/sip-423.md">SIP-423</a> · <a href="https://www.coingecko.com/en/coins/havven">CoinGecko</a> · <a href="https://defillama.com/protocol/synthetix">DefiLlama</a></p>
+<hr />
+<h2 id="tldr">TL;DR</h2>
+<ol>
+<li><strong>Эмиссия реальна.</strong> 6 июля 2026 года Synthetix выпустила <strong>236 464 356 SNX</strong> по SIP-423. Total supply вырос с <strong>344 939 867.56</strong> до <strong>581 404 223.56 SNX</strong>: <strong>+68.55%</strong> к pre-mint supply и <strong>40.67%</strong> от post-mint supply.</li>
+<li><strong>Все новые токены лежат в одном Safe multisig</strong> <code>0x3265ff13f29fe2dd7501c608b914bfa5e1ffcf6d</code>. Исходящих переводов SNX с этого адреса на 19.11.2026 не найдено.</li>
+<li><strong>Это не on-chain vesting-контракт.</strong> Safe — мультиподпись; lock/vest из SIP-423 является обязательством и операционным состоянием, а не кодом, который нельзя обойти. Receipt-контракт для claim ещё не развёрнут.</li>
+<li><strong>Окно claim — ориентировочно 6 июля 2027 года</strong>, затем линейный vest до 6 июля 2028 года. Текст SIP одновременно говорит про истечение невостребованных receipt через 6 месяцев и оставляет поле «Unclaimed sUSD entitlement treatment» как <code>TBD</code> — это надо трактовать как неопределённость, а не как точную дату.</li>
+<li><strong>Рыночный контекст на 19.11.2026:</strong> цена <strong>$0.164855</strong>, reported market cap <strong>$95.83M</strong>, FDV <strong>$95.90M</strong>, 30-дневные fees <strong>$3 678</strong>, TVL <strong>$856 123</strong>.</li>
+<li><strong>При текущей цене claim стоит $38.98M против $59.12M sUSD par</strong> — дисконт <strong>−34.06%</strong>. Ниже $0.25 у получателей меньше стимула продавать; выше $0.25 стимул резко растёт.</li>
+<li><strong>Reported market cap завышен относительно pre-mint базы в 1.685x</strong>, потому что CoinGecko считает заблокированные токены circulating. Для comparability нужно показывать обе базы: 581.40M и 344.94M.</li>
+<li><strong>Вывод:</strong> это реальный, но отложенный supply overhang. Главный риск — не завтрашний unlock, а период 2027–2028 годов и отсутствие revenue/TVL поддержки. Research state: <strong>DEFENSIVE</strong>.</li>
+</ol>
+<hr />
+<h2 id="1">1. Что изменилось по сравнению с предыдущей версией</h2>
+<table>
+<thead>
+<tr>
+<th>Утверждение в старой версии</th>
+<th>Обновлённая проверка</th>
+<th>Комментарий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supply вырос с 344.5M до 581.4M (+69%)</td>
+<td>344 939 867.56 → 581 404 223.56 (+68.55%)</td>
+<td>Точные значения; округление +69% корректно</td>
+</tr>
+<tr>
+<td>236.46M новых SNX ушли на Safe</td>
+<td>236 464 356.00 SNX; Safe balance подтверждён <code>balanceOf</code></td>
+<td>Совпадает до токена</td>
+</tr>
+<tr>
+<td>С Safe не было исходящих переводов</td>
+<td>0 исходящих SNX-переводов на 2026-11-19 (Blockscout)</td>
+<td>Point-in-time observation, не гарантия</td>
+</tr>
+<tr>
+<td>Claim window откроется примерно с лета 2027</td>
+<td>T+365 дней от snapshot 2026-07-06 → 2027-07-06; vest до 2028-07-06</td>
+<td>Точная дата зависит от deployment receipt-контракта</td>
+</tr>
+<tr>
+<td>Protocol revenue ~$9k/мес; TVL $0.9M, год назад $144M</td>
+<td>30d fees <strong>$3 678</strong>; 1y fees <strong>$32 242</strong>; TVL <strong>$856 123</strong>; год назад <strong>$88 428 843</strong></td>
+<td>Старые $9k/$144M не воспроизводятся по указанным источникам; заменены на датированный срез DefiLlama</td>
+</tr>
+<tr>
+<td>Coinbase и CoinCodex не считают токены circulating; market cap отличается в 1.7x</td>
+<td>CoinGecko включает 580.98M из 581.40M в circulating; Coinbase/CoinCodex в этом проходе не проверены независимо</td>
+<td>Разница 1.685x подтверждена для CoinGecko vs pre-mint базы; методологию Coinbase/CoinCodex нельзя утверждать без dated snapshot</td>
+</tr>
+<tr>
+<td>Для оценки надо использовать 581M, а не 344.5M</td>
+<td>Для FDV — да, 581.40M; для circulating market cap — нужно показывать обе базы</td>
+<td>Это не взаимоисключающие, а разные вопросы</td>
+</tr>
+<tr>
+<td>Невостребованные токены сгорают через 6 месяцев</td>
+<td>В SIP есть и «after 6 months expire worthless», и строка «Unclaimed sUSD entitlement treatment = TBD»</td>
+<td>Не подавать 2028-01-06 как финальную дату</td>
+</tr>
+<tr>
+<td>Safe = заблокированные токены</td>
+<td>Safe — multisig, не vesting-контракт; signers/threshold не проверены</td>
+<td>Ключевое ограничение силы lock</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2">2. Исследовательский вопрос</h2>
+<ol>
+<li>Рост supply на +68.55% — это реальная эмиссия или артефакт агрегатора?</li>
+<li>Кто держит новые токены и когда они могут попасть на рынок?</li>
+<li>Насколько силён lock: это контракт или обещание?</li>
+<li>Что это значит для оценки SNX, market cap и FDV?</li>
+<li>Какой сценарий unlock реалистичен при текущих revenue и TVL?</li>
+</ol>
+<p>Почему это важно: <strong>40.67% всего supply</strong> сосредоточено в одном адресе. Даже если токены не продаются сегодня, рынок должен закладывать вероятность их выхода в 2027–2028 годах. При этом reported market cap и circulating supply у разных агрегаторов считаются по-разному, что меняет valuation в 1.685x.</p>
+<hr />
+<h2 id="3">3. Данные и методология</h2>
+<table>
+<thead>
+<tr>
+<th>Блок</th>
+<th>Метод</th>
+<th>Источник</th>
+<th>Ограничение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total supply</td>
+<td><code>eth_call</code> <code>totalSupply()</code> (0x18160ddd), decimals = 18</td>
+<td>Ethereum JSON-RPC</td>
+<td>Public endpoint; повторить на втором провайдере</td>
+</tr>
+<tr>
+<td>Pre-mint supply</td>
+<td><code>eth_call</code> <code>totalSupply()</code> на блоке 25 473 065</td>
+<td>Archive RPC</td>
+<td>Нужен архивный узел</td>
+</tr>
+<tr>
+<td>Safe balance</td>
+<td><code>eth_call</code> <code>balanceOf(address)</code> (0x70a08231)</td>
+<td>Ethereum JSON-RPC</td>
+<td>Point-in-time</td>
+</tr>
+<tr>
+<td>Mint path</td>
+<td><code>eth_getTransactionReceipt</code>, decoding <code>Transfer</code> logs</td>
+<td>Ethereum JSON-RPC</td>
+<td>Логи проверены по tx hash</td>
+</tr>
+<tr>
+<td>Safe inflows/outflows</td>
+<td>Address token transfers</td>
+<td>Blockscout API</td>
+<td>Индексация может отставать</td>
+</tr>
+<tr>
+<td>SIP terms</td>
+<td>Первоисточник <code>sip-423.md</code> + commit history</td>
+<td>GitHub Synthetixio/SIPs</td>
+<td>Governance text, не код</td>
+</tr>
+<tr>
+<td>Market data</td>
+<td><code>/coins/havven</code></td>
+<td>CoinGecko</td>
+<td>Aggregator methodology</td>
+</tr>
+<tr>
+<td>Fees</td>
+<td><code>/summary/fees/synthetix?dataType=dailyFees</code></td>
+<td>DefiLlama</td>
+<td>Fees ≠ revenue ≠ profit</td>
+</tr>
+<tr>
+<td>TVL</td>
+<td><code>/protocol/synthetix</code></td>
+<td>DefiLlama</td>
+<td>Coverage dependent</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Воспроизводимость:</strong> все значения и формулы собраны в <code>SNX_SIP423_DATA_PACK.xlsx</code>; скрипт <code>build_snx_data_pack.py</code> пересобирает пакет. On-chain часть можно повторить через публичный RPC, Blockscout и Etherscan; ссылки — в разделе 13.</p>
+<hr />
+<h2 id="4-supply-bridge">4. Supply bridge</h2>
+<table>
+<thead>
+<tr>
+<th>Шаг</th>
+<th style="text-align: right;">SNX</th>
+<th style="text-align: right;">Изменение</th>
+<th style="text-align: right;">Доля от total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pre-mint supply на snapshot block 25 473 065</td>
+<td style="text-align: right;">344 939 867.56</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">59.33%</td>
+</tr>
+<tr>
+<td>Mint по SIP-423</td>
+<td style="text-align: right;">+236 464 356.00</td>
+<td style="text-align: right;">+236 464 356.00</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td>Post-mint total supply</td>
+<td style="text-align: right;">581 404 223.56</td>
+<td style="text-align: right;">+236 464 356.00</td>
+<td style="text-align: right;">100.00%</td>
+</tr>
+<tr>
+<td>Safe balance</td>
+<td style="text-align: right;">236 464 356.00</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">40.67%</td>
+</tr>
+<tr>
+<td>CoinGecko circulating supply</td>
+<td style="text-align: right;">580 980 590.46</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">99.93%</td>
+</tr>
+<tr>
+<td>Pre-mint circulating basis</td>
+<td style="text-align: right;">344 939 867.56</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">59.33%</td>
+</tr>
+</tbody>
+</table>
+<p>Ключевые отношения:</p>
+<ul>
+<li><code>236 464 356 / 344 939 867.56 = 68.55%</code> — насколько вырос supply к pre-mint базе.</li>
+<li><code>236 464 356 / 581 404 223.56 = 40.67%</code> — какая доля post-mint supply создана одним mint.</li>
+<li><code>236 464 356 / 581 404 223.56 = 40.67%</code> — доля Safe, пока все токены лежат там.</li>
+<li><code>580 980 590.46 / 581 404 223.56 = 99.93%</code> — какую часть total supply CoinGecko считает circulating.</li>
+<li><code>59 116 089 × 4 = 236 464 356</code> — проверка 4:1.</li>
+</ul>
+<p>Важно: total supply — дробное число (<code>581 404 223.5556632</code>), потому что pre-mint supply уже была дробной. Mint сам по себе — ровно <code>236 464 356.0</code>.</p>
+<hr />
+<h2 id="5-custody">5. Путь токенов и custody</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Шаг</th>
+<th>Время (UTC)</th>
+<th>Откуда</th>
+<th>Куда</th>
+<th style="text-align: right;">SNX</th>
+<th>Tx</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>2026-07-06 11:43:59</td>
+<td><code>0x0000…0000</code> (mint)</td>
+<td><code>0xc5f0b419…</code></td>
+<td style="text-align: right;">236 464 356</td>
+<td><code>0x0bb737a85b740a2e9557859c587cf6ba3c89ad531b960483cdfc89e42e5bc0b9</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>2026-07-06 11:43:59</td>
+<td><code>0xc5f0b419…</code></td>
+<td><code>0x94433f0d…</code></td>
+<td style="text-align: right;">236 464 356</td>
+<td>та же tx</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>2026-07-06 11:43:59</td>
+<td><code>0x94433f0d…</code></td>
+<td><code>0xc1c33291…</code></td>
+<td style="text-align: right;">236 464 356</td>
+<td>та же tx</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>2026-07-06 11:46:23</td>
+<td><code>0xc1c33291…</code></td>
+<td>Safe <code>0x3265ff13…</code></td>
+<td style="text-align: right;">236 464 356</td>
+<td><code>0xda4c600d3e85437e73f5f4128948877500158e881a32c83b4694c38699d3644c</code></td>
+</tr>
+</tbody>
+</table>
+<p>Проверки:</p>
+<ul>
+<li>Mint tx: block <code>25 473 272</code>, статус <code>success</code>, 3 основных <code>Transfer</code>-лога по 236 464 356 SNX.</li>
+<li>Перевод на Safe: отдельная tx, block <code>25 473 284</code>, timestamp <code>2026-07-06 11:46:23 UTC</code>.</li>
+<li>Safe balance: <code>236 464 356.0 SNX</code>.</li>
+<li>Исходящие SNX-переводы с Safe: <strong>0</strong> по состоянию на <code>2026-11-19</code>.</li>
+<li>Safe — контракт <code>SafeProxy</code>; это мультиподпись, а не биржа, не протокол и не vesting-контракт.</li>
+</ul>
+<p><strong>Критическая оговорка.</strong> «Токены в Safe» ≠ «токены в trustless vesting-контракте». SIP-423 описывает 1-year lock + 1-year vest и отдельный receipt-контракт, но на 19.11.2026 receipt-контракт не развёрнут и не наполнен. Пока токены лежат в multisig, сила lock зависит от signers, threshold и governance-процесса. Порог и состав signers в этом проходе не проверялись.</p>
+<hr />
+<h2 id="6-sip-423">6. Условия SIP-423</h2>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+<th>Комментарий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Статус</td>
+<td>Implemented</td>
+<td>Commit <code>180c54b</code> от 2026-07-01</td>
+</tr>
+<tr>
+<td>Авторы</td>
+<td>Kain Warwick, Benjamin Celermajer</td>
+<td>Создан 2026-06-12</td>
+</tr>
+<tr>
+<td>Maximum Mint</td>
+<td>236 464 356 SNX</td>
+<td>Совпадает с фактическим mint</td>
+</tr>
+<tr>
+<td>sUSD entitlement</td>
+<td>59 116 089 sUSD</td>
+<td>4 SNX за 1 sUSD</td>
+</tr>
+<tr>
+<td>Snapshot Ethereum</td>
+<td>block 25 473 065</td>
+<td>2026-07-06 11:02:35 UTC</td>
+</tr>
+<tr>
+<td>Snapshot Optimism</td>
+<td>block 153 868 527</td>
+<td>2026-07-06 11:03:51 UTC</td>
+</tr>
+<tr>
+<td>Lock</td>
+<td>1 год</td>
+<td>«1 year lock + 1 year vest from the time of freeze»</td>
+</tr>
+<tr>
+<td>Vest</td>
+<td>1 год, линейно</td>
+<td>После lock</td>
+</tr>
+<tr>
+<td>Claim window</td>
+<td>T+365 дней</td>
+<td>Ориентировочно 2027-07-06</td>
+</tr>
+<tr>
+<td>Unclaimed</td>
+<td>«after 6 months expire worthless» + строка <code>TBD</code></td>
+<td>Неопределённость, не финальная дата</td>
+</tr>
+<tr>
+<td>Revenue hurdle</td>
+<td>$10M в течение 2-летнего lock-up</td>
+<td>Configurable via SCCP</td>
+</tr>
+<tr>
+<td>Revenue share</td>
+<td>25%</td>
+<td>На redeem claims в USDT после hurdle</td>
+</tr>
+<tr>
+<td>Receipt contract</td>
+<td><code>TBC</code> / <code>CONTRACT BUILD DEFERRED</code></td>
+<td>На 2026-11-19 не развёрнут</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_1">Таймлайн</h3>
+<table>
+<thead>
+<tr>
+<th>Дата</th>
+<th>Событие</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-06-12</td>
+<td>SIP-423 создан</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td>2026-07-01</td>
+<td>SIP-423 помечен Implemented</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td>2026-07-06 11:02:35 UTC</td>
+<td>Ethereum snapshot block 25 473 065</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td>2026-07-06 11:03:51 UTC</td>
+<td>Optimism snapshot block 153 868 527</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td>2026-07-06 11:43:59 UTC</td>
+<td>Mint 236 464 356 SNX</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td>2026-07-06 11:46:23 UTC</td>
+<td>Перевод на Safe</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td>2026-08-16</td>
+<td>SIP update фиксирует mint amount и snapshot blocks</td>
+<td>Completed</td>
+</tr>
+<tr>
+<td>2027-07-06 (оценка)</td>
+<td>Claim window opens</td>
+<td>Scheduled</td>
+</tr>
+<tr>
+<td>2028-01-06 (условно)</td>
+<td>6-month unclaimed expiry, если применимо</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>2028-07-06 (оценка)</td>
+<td>Конец 1-летнего vest</td>
+<td>Scheduled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Неопределённость по expiry.</strong> В SIP одновременно есть фраза «Any unclaimed receipts after 6 months will expire worthless» и строка «Unclaimed sUSD entitlement treatment | TBD». Это может означать 6 месяцев после открытия claim window, но финальное правило не зафиксировано. В отчёте и дашборде дата 2028-01-06 должна быть помечена как условная.</p>
+<hr />
+<h2 id="7-19112026">7. Рыночный контекст на 19.11.2026</h2>
+<table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th style="text-align: right;">Значение</th>
+<th>Источник</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Цена</td>
+<td style="text-align: right;">$0.164855</td>
+<td>CoinGecko, last_updated 2026-11-19T17:03:57Z</td>
+</tr>
+<tr>
+<td>Reported market cap</td>
+<td style="text-align: right;">$95 831 317</td>
+<td>CoinGecko</td>
+</tr>
+<tr>
+<td>FDV</td>
+<td style="text-align: right;">$95 901 194</td>
+<td>CoinGecko</td>
+</tr>
+<tr>
+<td>Circulating supply</td>
+<td style="text-align: right;">580 980 590.46 SNX</td>
+<td>CoinGecko</td>
+</tr>
+<tr>
+<td>Total supply</td>
+<td style="text-align: right;">581 404 223.56 SNX</td>
+<td>Ethereum RPC</td>
+</tr>
+<tr>
+<td>24h volume</td>
+<td style="text-align: right;">$6 330 298</td>
+<td>CoinGecko</td>
+</tr>
+<tr>
+<td>Fees 24h / 30d / 1y</td>
+<td style="text-align: right;">$54 / $3 678 / $32 242</td>
+<td>DefiLlama</td>
+</tr>
+<tr>
+<td>Fees annualized from 30d</td>
+<td style="text-align: right;">$44 749</td>
+<td>Расчёт: 30d × 365/30</td>
+</tr>
+<tr>
+<td>TVL</td>
+<td style="text-align: right;">$856 123</td>
+<td>DefiLlama</td>
+</tr>
+<tr>
+<td>TVL 1 год назад</td>
+<td style="text-align: right;">$88 428 843</td>
+<td>DefiLlama, 2025-11-19</td>
+</tr>
+<tr>
+<td>TVL peak</td>
+<td style="text-align: right;">$2 966 823 065</td>
+<td>DefiLlama, 2021-02-10</td>
+</tr>
+<tr>
+<td>TVL change 1y</td>
+<td style="text-align: right;">−99.03%</td>
+<td>Расчёт</td>
+</tr>
+<tr>
+<td>Market cap / 30d fees</td>
+<td style="text-align: right;">26 055x</td>
+<td>Расчёт</td>
+</tr>
+<tr>
+<td>Market cap / 1y fees</td>
+<td style="text-align: right;">2 972x</td>
+<td>Расчёт</td>
+</tr>
+<tr>
+<td>Market cap / TVL</td>
+<td style="text-align: right;">111.9x</td>
+<td>Расчёт</td>
+</tr>
+<tr>
+<td>FDV / TVL</td>
+<td style="text-align: right;">112.0x</td>
+<td>Расчёт</td>
+</tr>
+<tr>
+<td>Revenue hurdle / 1y fees</td>
+<td style="text-align: right;">310.2x</td>
+<td>Расчёт</td>
+</tr>
+</tbody>
+</table>
+<p>Интерпретация:</p>
+<ul>
+<li>Абсолютные fees очень малы: <strong>$3 678 за 30 дней</strong> и <strong>$32 242 за год</strong>. Это не revenue и не прибыль, а fees по методологии DefiLlama.</li>
+<li>TVL упал на <strong>99.03%</strong> год к году и на <strong>99.97%</strong> от пика 2021 года. Экономический след протокола сейчас несопоставим с 2021 годом.</li>
+<li>Revenue hurdle $10M в 310 раз выше текущих годовых fees. Даже с учётом волатильности и возможного роста это не близкий триггер.</li>
+<li>SNX не является cash-flow claim на fees. 25% revenue redemption — условный механизм, который включается только после $10M и может быть изменён через SCCP. Поэтому multiples «market cap / fees» — диагностика, а не fair value.</li>
+</ul>
+<hr />
+<h2 id="8-market-cap-discrepancy">8. Market cap discrepancy и оценка</h2>
+<table>
+<thead>
+<tr>
+<th>База</th>
+<th style="text-align: right;">Supply</th>
+<th style="text-align: right;">Цена</th>
+<th style="text-align: right;">Market cap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reported CoinGecko circulating</td>
+<td style="text-align: right;">580 980 590.46</td>
+<td style="text-align: right;">$0.164855</td>
+<td style="text-align: right;">$95 831 317</td>
+</tr>
+<tr>
+<td>Pre-mint circulating basis</td>
+<td style="text-align: right;">344 939 867.56</td>
+<td style="text-align: right;">$0.164855</td>
+<td style="text-align: right;">$56 865 062</td>
+</tr>
+<tr>
+<td>FDV (total supply)</td>
+<td style="text-align: right;">581 404 223.56</td>
+<td style="text-align: right;">$0.164855</td>
+<td style="text-align: right;">$95 901 194</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Reported market cap / pre-mint implied market cap = <strong>1.685x</strong>.</li>
+<li>CoinGecko circulating / total supply = <strong>99.93%</strong>; market cap / FDV = <strong>99.93%</strong>.</li>
+<li>Pre-mint market cap / TVL = <strong>66.4x</strong>.</li>
+<li>Pre-mint market cap / annualized 30d fees = <strong>1 271x</strong>.</li>
+<li>Pre-mint market cap / 1y fees = <strong>1 764x</strong>.</li>
+</ul>
+<p>Что это значит:</p>
+<ol>
+<li>CoinGecko фактически считает заблокированные 236.46M SNX circulating. Это увеличивает reported market cap примерно на 40.7% относительно pre-mint базы.</li>
+<li>Для <strong>FDV</strong> база 581.40M корректна: все токены существуют и могут когда-то выйти.</li>
+<li>Для <strong>сравнения с историей</strong> и с агрегаторами, которые не считают locked tokens circulating, полезна pre-mint база 344.94M.</li>
+<li>Нельзя одновременно говорить «market cap $95.8M» и «market cap $56.9M» без указания базы. В отчёте и дашборде нужно показывать обе.</li>
+</ol>
+<hr />
+<h2 id="9-overhang">9. Overhang и сценарии</h2>
+<h3 id="91-claim">9.1. Claim при разных ценах</h3>
+<p>При текущей цене $0.164855:</p>
+<ul>
+<li>Стоимость всех 236 464 356 SNX = <strong>$38 982 331</strong>.</li>
+<li>Номинал sUSD entitlement = <strong>$59 116 089</strong>.</li>
+<li>Дисконт к par = <strong>−34.06%</strong>.</li>
+</ul>
+<p>То есть по текущей цене держатель sUSD получает примерно <strong>66%</strong> номинала в mark-to-market terms. Это важное уточнение к старой версии: пока цена ниже $0.25, экономический стимул продавать SNX ниже, чем при par. Но если рынок уходит выше $0.25, ситуация меняется.</p>
+<h3 id="92-unlock">9.2. Линейный unlock</h3>
+<p>Предположение: 236 464 356 SNX vest линейно за 12 месяцев после открытия claim window. Тогда в среднем <strong>19 705 363 SNX/месяц</strong>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Цена</th>
+<th style="text-align: right;">Стоимость всего claim</th>
+<th style="text-align: right;">Unlock/мес, $</th>
+<th style="text-align: right;">25% продаж/мес</th>
+<th style="text-align: right;">50% продаж/мес</th>
+<th style="text-align: right;">100% продаж/мес</th>
+<th style="text-align: right;">Unlock к monthly volume proxy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">$0.10</td>
+<td style="text-align: right;">$23.65M</td>
+<td style="text-align: right;">$1.97M</td>
+<td style="text-align: right;">$0.49M</td>
+<td style="text-align: right;">$0.99M</td>
+<td style="text-align: right;">$1.97M</td>
+<td style="text-align: right;">1.04%</td>
+</tr>
+<tr>
+<td style="text-align: right;">$0.15</td>
+<td style="text-align: right;">$35.47M</td>
+<td style="text-align: right;">$2.96M</td>
+<td style="text-align: right;">$0.74M</td>
+<td style="text-align: right;">$1.48M</td>
+<td style="text-align: right;">$2.96M</td>
+<td style="text-align: right;">1.56%</td>
+</tr>
+<tr>
+<td style="text-align: right;">$0.164855</td>
+<td style="text-align: right;">$38.98M</td>
+<td style="text-align: right;">$3.25M</td>
+<td style="text-align: right;">$0.81M</td>
+<td style="text-align: right;">$1.62M</td>
+<td style="text-align: right;">$3.25M</td>
+<td style="text-align: right;">1.71%</td>
+</tr>
+<tr>
+<td style="text-align: right;">$0.25</td>
+<td style="text-align: right;">$59.12M</td>
+<td style="text-align: right;">$4.93M</td>
+<td style="text-align: right;">$1.23M</td>
+<td style="text-align: right;">$2.46M</td>
+<td style="text-align: right;">$4.93M</td>
+<td style="text-align: right;">2.59%</td>
+</tr>
+<tr>
+<td style="text-align: right;">$0.50</td>
+<td style="text-align: right;">$118.23M</td>
+<td style="text-align: right;">$9.85M</td>
+<td style="text-align: right;">$2.46M</td>
+<td style="text-align: right;">$4.93M</td>
+<td style="text-align: right;">$9.85M</td>
+<td style="text-align: right;">5.19%</td>
+</tr>
+<tr>
+<td style="text-align: right;">$1.00</td>
+<td style="text-align: right;">$236.46M</td>
+<td style="text-align: right;">$19.71M</td>
+<td style="text-align: right;">$4.93M</td>
+<td style="text-align: right;">$9.85M</td>
+<td style="text-align: right;">$19.71M</td>
+<td style="text-align: right;">10.38%</td>
+</tr>
+</tbody>
+</table>
+<p>Monthly volume proxy = $6 330 298 × 30 = <strong>$189.9M</strong>. Это грубый знаменатель ликвидности, а не гарантия, что рынок поглотит продажи.</p>
+<h3 id="93">9.3. Три режима</h3>
+<p><strong>Bear.</strong> Цена ниже $0.15. Claim глубоко ниже par, часть получателей может не спешить с claim; overhang остаётся, но реализованное давление меньше. Revenue и TVL продолжают сжиматься. Reported market cap падает вместе с ценой, но multiple к fees остаётся высоким.</p>
+<p><strong>Base.</strong> Цена $0.15–0.25. Постепенный vest, продажи ограничены, пока цена не подходит к $0.25. Reported market cap примерно $87–145M на circulating базе; pre-mint market cap примерно $52–86M. Для роста нужны revenue/TVL, а не только сокращение overhang.</p>
+<p><strong>Bull.</strong> Цена выше $0.50. Получатели выходят в прибыль относительно $0.25 и продают в силу. 25% revenue buyback всё ещё далеко: hurdle $10M против $32k годовых fees. Для устойчивого роста нужен реальный возврат revenue/TVL и/или новый спрос на токен.</p>
+<p>Это сценарии, а не прогнозы. Они показывают чувствительность, а не вероятность.</p>
+<hr />
+<h2 id="10">10. Что изменит взгляд</h2>
+<ol>
+<li><strong>Исходящий перевод с Safe больше 1% баланса</strong> до открытия claim window — сигнал, что lock слабее, чем предполагалось.</li>
+<li><strong>SIP-423 amendment</strong> меняет vest/expiry, продлевает lock или отменяет 6-месячное истечение.</li>
+<li><strong>Receipt-контракт развёрнут и наполнен</strong> — lock становится on-chain, а не policy-based.</li>
+<li><strong>Protocol revenue превышает $10M</strong> и запускается 25% redemption mechanism.</li>
+<li><strong>TVL и fees восстанавливаются</strong> до уровней, при которых valuation multiples становятся осмысленными.</li>
+<li><strong>CoinGecko меняет методологию</strong> и исключает locked tokens из circulating supply — reported market cap падает примерно на 40%.</li>
+<li><strong>Claim window сдвигается</strong> или появляется новая дата deployment.</li>
+<li><strong>Новый mint/burn вне SIP-423</strong> меняет total supply.</li>
+</ol>
+<hr />
+<h2 id="11">11. Мониторинг</h2>
+<table>
+<thead>
+<tr>
+<th>Что</th>
+<th>Где</th>
+<th>Триггер</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Safe balance и исходящие SNX</td>
+<td><code>0x3265ff13f29fe2dd7501c608b914bfa5e1ffcf6d</code></td>
+<td>Исходящий перевод &gt;1% баланса</td>
+</tr>
+<tr>
+<td>Receipt contract deployment</td>
+<td>SIP-423 / Synthetix announcements</td>
+<td>Появление контракта и seed</td>
+</tr>
+<tr>
+<td>SIP-423 updates</td>
+<td>GitHub <code>Synthetixio/SIPs</code></td>
+<td>Изменение vest/expiry/revenue hurdle</td>
+</tr>
+<tr>
+<td>CoinGecko circulating supply</td>
+<td><code>/coins/havven</code></td>
+<td>Резкое изменение circulating без on-chain mint/burn</td>
+</tr>
+<tr>
+<td>Coinbase / CoinCodex supply</td>
+<td>Их страницы/API</td>
+<td>Dated snapshot методологии</td>
+</tr>
+<tr>
+<td>DefiLlama fees</td>
+<td><code>/summary/fees/synthetix</code></td>
+<td>Устойчивый рост &gt;$10M run-rate</td>
+</tr>
+<tr>
+<td>DefiLlama TVL</td>
+<td><code>/protocol/synthetix</code></td>
+<td>Восстановление TVL</td>
+</tr>
+<tr>
+<td>Цена около $0.25</td>
+<td>Рынок</td>
+<td>Переход claim из дисконта в par/прибыль</td>
+</tr>
+<tr>
+<td>Governance SCCP</td>
+<td>Snapshot Synthetix</td>
+<td>Изменение revenue hurdle или 25% share</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-data-quality">12. Ограничения и data quality</h2>
+<ol>
+<li><strong>Safe — не vesting-контракт.</strong> Signers, threshold и policy не проверены. «Нет исходящих переводов» — наблюдение на дату, не гарантия.</li>
+<li><strong>Receipt-контракт не развёрнут.</strong> Claim window и vest — оценки по SIP timeline, а не исполненные on-chain события.</li>
+<li><strong>Unclaimed expiry противоречив.</strong> В SIP есть 6-месячная фраза и строка <code>TBD</code>; 2028-01-06 — условная дата.</li>
+<li><strong>CoinGecko methodology.</strong> Reported market cap включает locked tokens. Coinbase/CoinCodex в этом проходе не проверены независимо; не утверждать их методологию без dated snapshot.</li>
+<li><strong>DefiLlama fees/TVL.</strong> Fees — не revenue и не profit. TVL зависит от покрытия и методологии; текущий <code>currentChainTvls</code> показывает только Ethereum.</li>
+<li><strong>Public RPC.</strong> Исторические <code>eth_call</code> могут требовать archive node и rate limits. Перед публикацией повторить на втором провайдере.</li>
+<li><strong>Point-in-time.</strong> Все рыночные значения — срез 2026-11-19; цена и TVL могут измениться.</li>
+<li><strong>Rounding.</strong> Total supply дробный; в отчёте округление до 2 знаков, в data pack — точные значения.</li>
+<li><strong>Не инвестиционная рекомендация.</strong> Это research artifact для проверки тезиса и риска.</li>
+</ol>
+<hr />
+<h2 id="13">13. Источники</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Источник</th>
+<th>Что покрывает</th>
+<th>Ссылка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRC-001</td>
+<td>Ethereum JSON-RPC</td>
+<td><code>totalSupply</code>, <code>balanceOf</code>, tx receipts, block timestamps</td>
+<td>https://ethereum-rpc.publicnode.com</td>
+</tr>
+<tr>
+<td>SRC-002</td>
+<td>Blockscout</td>
+<td>Входящие/исходящие SNX-переводы Safe</td>
+<td>https://eth.blockscout.com/address/0x3265ff13f29fe2dd7501c608b914bfa5e1ffcf6d?tab=token_transfers</td>
+</tr>
+<tr>
+<td>SRC-003</td>
+<td>Synthetix SIPs</td>
+<td>SIP-423 terms</td>
+<td>https://github.com/Synthetixio/SIPs/blob/master/content/sips/sip-423.md</td>
+</tr>
+<tr>
+<td>SRC-004</td>
+<td>SIP commit</td>
+<td>Фиксация mint amount и snapshot blocks</td>
+<td>https://github.com/Synthetixio/SIPs/commit/6fffb2ce2d540ace88cf1f77da9cece55c280b94</td>
+</tr>
+<tr>
+<td>SRC-005</td>
+<td>CoinGecko</td>
+<td>Price, market cap, FDV, circulating, volume</td>
+<td>https://www.coingecko.com/en/coins/havven</td>
+</tr>
+<tr>
+<td>SRC-006</td>
+<td>DefiLlama fees</td>
+<td>Fees 24h/30d/1y</td>
+<td>https://defillama.com/protocol/synthetix</td>
+</tr>
+<tr>
+<td>SRC-007</td>
+<td>DefiLlama TVL</td>
+<td>TVL history и current</td>
+<td>https://defillama.com/protocol/synthetix</td>
+</tr>
+<tr>
+<td>SRC-008</td>
+<td>Etherscan</td>
+<td>Human-readable tx/address links</td>
+<td>https://etherscan.io/token/0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F</td>
+</tr>
+<tr>
+<td>SRC-009</td>
+<td>Internal data pack</td>
+<td>Расчёты, сценарии, verification log</td>
+<td><code>SNX_SIP423_DATA_PACK.xlsx</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ключевые ссылки:</p>
+<ul>
+<li>Mint tx: https://etherscan.io/tx/0x0bb737a85b740a2e9557859c587cf6ba3c89ad531b960483cdfc89e42e5bc0b9</li>
+<li>Safe transfer tx: https://etherscan.io/tx/0xda4c600d3e85437e73f5f4128948877500158e881a32c83b4694c38699d3644c</li>
+<li>Safe: https://etherscan.io/address/0x3265ff13f29fe2dd7501c608b914bfa5e1ffcf6d</li>
+<li>Ethereum snapshot block: https://etherscan.io/block/25473065</li>
+<li>Optimism snapshot block: https://optimistic.etherscan.io/block/153868527</li>
+</ul>
+<hr />
+<h2 id="14">14. Как повторить</h2>
+<h3 id="141-total-supply">14.1. Total supply</h3>
+<pre><code class="language-bash">curl -s -X POST https://ethereum-rpc.publicnode.com \
+  -H 'Content-Type: application/json' \
+  --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;eth_call&quot;,&quot;params&quot;:[{&quot;to&quot;:&quot;0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F&quot;,&quot;data&quot;:&quot;0x18160ddd&quot;},&quot;latest&quot;],&quot;id&quot;:1}'
+</code></pre>
+<p>Результат: <code>581404223555663177920417946</code> при decimals 18 → <code>581 404 223.5556632</code>.</p>
+<h3 id="142-safe-balance">14.2. Safe balance</h3>
+<pre><code class="language-bash">curl -s -X POST https://ethereum-rpc.publicnode.com \
+  -H 'Content-Type: application/json' \
+  --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;eth_call&quot;,&quot;params&quot;:[{&quot;to&quot;:&quot;0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F&quot;,&quot;data&quot;:&quot;0x70a082310000000000000000000000003265ff13f29fe2dd7501c608b914bfa5e1ffcf6d&quot;},&quot;latest&quot;],&quot;id&quot;:1}'
+</code></pre>
+<p>Результат: <code>236464356000000000000000000</code> → <code>236 464 356.0</code>.</p>
+<h3 id="143-mint-tx">14.3. Mint tx</h3>
+<pre><code class="language-bash">curl -s -X POST https://ethereum-rpc.publicnode.com \
+  -H 'Content-Type: application/json' \
+  --data '{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;eth_getTransactionReceipt&quot;,&quot;params&quot;:[&quot;0x0bb737a85b740a2e9557859c587cf6ba3c89ad531b960483cdfc89e42e5bc0b9&quot;],&quot;id&quot;:1}'
+</code></pre>
+<p>Проверить <code>status = 0x1</code>, block <code>25 473 272</code>, три <code>Transfer</code>-лога по <code>236 464 356</code>.</p>
+<h3 id="144-safe-transfers">14.4. Safe transfers</h3>
+<p>Открыть Blockscout token transfers для Safe и убедиться, что есть только входящий перевод <code>236 464 356</code> и нет исходящих.</p>
+<h3 id="145-data-pack">14.5. Пересборка data pack</h3>
+<pre><code class="language-bash">python3 02_SNX/build_snx_data_pack.py
+</code></pre>
+<hr />
+<h2 id="15-english-summary">15. English summary</h2>
+<p><strong>Synthetix (SNX) — SIP-423 supply overhang, updated 19 Nov 2026</strong></p>
+<ul>
+<li>On 6 July 2026 Synthetix minted <strong>236,464,356 SNX</strong> under SIP-423. Total supply rose from <strong>344,939,867.56</strong> to <strong>581,404,223.56</strong> (+68.55%; 40.67% of post-mint supply).</li>
+<li>The entire mint sits in one Safe multisig (<code>0x3265ff13…cf6d</code>); no outgoing SNX transfers were found as of 19 Nov 2026.</li>
+<li>The Safe is a multisig, not an on-chain vesting contract. The lock/vest is a policy commitment; the receipt contract is not deployed yet.</li>
+<li>Claim window is estimated at <strong>6 July 2027</strong>, followed by a one-year linear vest to <strong>6 July 2028</strong>. The unclaimed-entitlement treatment is contradictory in the SIP text (6 months vs <code>TBD</code>).</li>
+<li>Market snapshot: price <strong>$0.164855</strong>, reported market cap <strong>$95.83M</strong>, FDV <strong>$95.90M</strong>, 30-day fees <strong>$3,678</strong>, TVL <strong>$856k</strong> (down 99.03% YoY).</li>
+<li>At the current price the claim is worth <strong>$38.98M</strong> versus <strong>$59.12M</strong> sUSD par (−34.06%). Selling incentive is lower below $0.25 and rises above it.</li>
+<li>Reported market cap is <strong>1.685x</strong> the pre-mint implied market cap because CoinGecko counts locked tokens as circulating. Show both bases.</li>
+<li><strong>Conclusion:</strong> real but deferred supply overhang. The key risk window is 2027–2028, and the protocol currently lacks the revenue/TVL base to absorb it. Research state: <strong>DEFENSIVE</strong>. Not investment advice.</li>
+</ul>
+<hr />
+<p><em>Не инвестиционная рекомендация. Все рыночные и on-chain значения — point-in-time snapshot; перед публикацией проверьте источники и условия использования провайдеров.</em></p><hr><p class="small">HTML-версия файла SNX_SIP423_RESEARCH_REPORT_2026-11-19.md. Открывается в любом браузере.</p></body></html>

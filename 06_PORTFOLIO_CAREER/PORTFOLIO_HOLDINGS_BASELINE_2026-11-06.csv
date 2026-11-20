@@ -1,0 +1,25 @@
+as_of_date,ticker_or_contract,asset_class,units,average_cost_usd,cost_basis_usd,bucket,custody,verified,thesis_status,notes
+2026-11-06,AVAIL,crypto,678782.16,0.004391,2980.53246456,speculation,Bybit,True,broken,
+2026-11-06,BABYDOGE,crypto,200000000000.0,6e-10,120.0,speculation,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,BTC,crypto,0.0,,,btc,OKX,True,,05.11: октябрьские покупки не делались (владелица)
+2026-11-06,COMP,crypto,99.78,21.7,2165.226,quality,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,DOGE,crypto,4157.0,0.1242,516.2994,speculation,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,DOT,crypto,150.0,1.27,190.5,speculation,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,EGLD,crypto,1378.26,5.95,8200.647,speculation,OKX|Bybit,True,broken,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,ENJ,crypto,7258.0,0.03044,220.93352,speculation,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,ETH,crypto,0.0,,,eth,OKX,True,,05.11: октябрьские покупки не делались (владелица)
+2026-11-06,ETHFI,crypto,1598.0,0.5435,868.513,quality,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,GRT,crypto,13138.0,0.03684,484.00392,speculation,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,LINK,crypto,23.7,12.23,289.851,quality,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,LRC,crypto,90121.66,0.01214,1094.0769524,speculation,OKX|Bybit,True,broken,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,LTC,crypto,228.14,72.13,16455.7382,ltc,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,MANA,crypto,1099.0,0.1608,176.7192,speculation,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,MNT,crypto,212.73,0.5782,123.000486,speculation,Bybit,True,broken,правило 13а: недели 0.5167 / 0.4762 ниже 0.52 (01.11)
+2026-11-06,ROSE,crypto,35911.87,0.029488857026938445,1059.0,speculation,Bybit,True,ok,06.11: владелец подтвердил общую сумму покупки 1059.00 USD; средняя рассчитана как сумма / 35911.87 ROSE
+2026-11-06,SNX,crypto,28021.73,0.2929,8207.564717,speculation,OKX|Bybit,True,broken,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,TIA,crypto,767.88,0.3412,262.000656,speculation,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,UNI,crypto,244.0,3.73,910.12,quality,OKX|Bybit,True,watch,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"
+2026-11-06,USDT,cash,990.0,1.0,990.0,reserve,dzengi.com,True,,
+2026-11-06,VIRTUAL,crypto,612.47,0.594,363.80718,speculation,OKX|Bybit,True,unknown,"05.11: средняя записана по текущей цене (≈0.594, OKX/Bybit) по решению владелицы — точной нет"
+2026-11-06,ZNTL,stock,446.0,3.74,1668.04,stock,dzengi.com,True,watch,
+2026-11-06,ZRX,crypto,30737.0,0.1161,3568.5657,speculation,OKX|Bybit,True,ok,"05.11: владелица — монеты на OKX и Bybit, распределение по биржам не уточнено"

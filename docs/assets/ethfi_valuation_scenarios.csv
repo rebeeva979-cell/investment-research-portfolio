@@ -1,0 +1,4 @@
+scenario,revenue_run_rate_usd,multiple_x,implied_mcap_usd,implied_price_usd,upside_pct
+Bear,32500000.0,7,227500000.0,0.2278,-51.2
+Base,43390000.0,10,433900000.0,0.4345,-6.8
+Bull,52070000.0,14,728980000.0,0.73,56.5

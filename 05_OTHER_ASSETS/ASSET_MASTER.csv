@@ -1,0 +1,9 @@
+asset_id,name,ticker,asset_class,sector,status,case_type,primary_question,position_limit_pct,source_url,as_of_date
+ETHFI,Ether.fi,ETHFI,token,liquid staking/restaking,watchlist,protocol economics,Does protocol revenue become enforceable ETHFI value accrual?,2,https://etherfi.gitbook.io/gov/ethfi-allocations,2026-11-16
+LTC,Litecoin,LTC,network,proof-of-work payments,watchlist,network economics,Is usage and miner security sufficient versus dilution and competition?,3,https://coinmetrics.io/community-network-data/,2026-11-16
+SNX,Synthetix,SNX,token,DeFi derivatives,watchlist,tokenomics,Does supply expansion exceed demand and fee generation?,2,https://sips.synthetix.io/sips/sip-423,2026-11-16
+UNI,Uniswap,UNI,token,DEX,watchlist,value accrual,Can fee switch and governance route value to UNI?,2,https://docs.uniswap.org/,2026-11-16
+GPRO,GoPro,GPRO,equity,cameras/subscriptions,special_situation,merger recap,What is the probability-adjusted value of the Starman transaction and residual stake?,1,https://www.sec.gov/Archives/edgar/data/1500435/000162828026059839/gpro2026-09x01exhibit991.htm,2026-11-18
+LYFT,Lyft,LYFT,equity,mobility marketplace,research_candidate,operating leverage,Can rides/active riders growth translate into durable FCF and margin expansion?,3,https://investor.lyft.com/financials/sec-filings,2026-11-18
+ZNTL,Zentalis Pharmaceuticals,ZNTL,equity,clinical oncology,wait,clinical optionality,Can azenosertib produce a clinically meaningful DENALI readout without destructive dilution?,0.5,https://www.sec.gov/Archives/edgar/data/1725160/000172516026000070/zntl-20260930.htm,2026-11-19
+ANT,Anthropic,ANT,equity,AI infrastructure / foundation models,wait,IPO valuation,Can revenue growth and compute economics justify IPO valuation after dilution?,0.5,https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm,2026-11-19

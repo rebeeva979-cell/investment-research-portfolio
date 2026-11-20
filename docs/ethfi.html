@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ETHFI — buyback is real, holder yield is not | Marina Rebeeva</title>
+<meta name="description" content="On-chain verification of ether.fi: 2.54M ETHFI traced through CoW, the funding Safe and LayerZero; supply reconciliation, holder concentration, DEX depth and a decision card.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="monogram">MR</span><span>Marina Rebeeva<small>on-chain research</small></span></a>
+    <div class="navlinks">
+      <a href="index.html#work"><span class="ru">Кейсы</span><span class="en">Work</span></a>
+      <a href="method.html"><span class="ru">Методика</span><span class="en">Method</span></a>
+      <a class="keep" href="cv.html">CV</a>
+      <a href="index.html#contact"><span class="ru">Контакты</span><span class="en">Contact</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-setlang="ru" aria-pressed="true">RU</button>
+        <button type="button" data-setlang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="report-hero">
+  <div class="wrap">
+    <p class="tiny dim" style="margin:0 0 18px"><a href="index.html#work">← <span class="ru">Все кейсы</span><span class="en">All work</span></a> &nbsp;/&nbsp; Case 04</p>
+    <div class="meta">
+      <span class="ticker" style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--mint);border:1px solid rgba(110,231,200,.3);padding:3px 7px;border-radius:5px">ETHFI</span>
+      <span class="badge wait">WAIT · 0–2%</span>
+      <span class="mono dim">Ethereum · as of 20.11.2026</span>
+      <span class="mono dim">12 min read</span>
+    </div>
+    <h1 class="ru">Buyback есть. Holder yield — нет.</h1>
+    <h1 class="en">The buyback is real. Holder yield is not.</h1>
+    <p class="dek ru">Я проследила 2.54M ETHFI через CoW, funding Safe и LayerZero. Покупка подтверждена транзакциями; выплата держателям — нет. Протокол тратит 17.3% revenue на buyback вместо 30% по политике (60% с cashback, который не подтверждён), а TVL упал на 71% от пика.</p>
+    <p class="dek en">I traced 2.54M ETHFI through CoW, the funding Safe and LayerZero. The purchase is verified by transactions; the distribution to holders is not. The protocol spends 17.3% of revenue on buybacks versus a 30% policy allocation (60% including cashback, unverified), while TVL is 71% below its peak.</p>
+    <div class="kpi">
+      <div><b>$0.466</b><span class="ru">цена · 20.11.2026</span><span class="en">price · 20 Nov 2026</span></div>
+      <div><b>$465.7M</b><span class="ru">market cap / FDV</span><span class="en">market cap / FDV</span></div>
+      <div><b>$3.73B</b><span class="ru">TVL · −70.9% от пика</span><span class="en">TVL · −70.9% from peak</span></div>
+      <div class="warn"><b>WAIT</b><span class="ru">решение · 0–2%</span><span class="en">decision · 0–2%</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:38px">
+  <div class="report-grid">
+    <article class="report-body">
+
+      <div id="question" class="anchor"></div>
+      <h2 class="ru">1. Вопрос: платит ли протокол держателям?</h2>
+      <h2 class="en">1. The question: does the protocol pay its holders?</h2>
+
+      <p class="ru">ETHFI — не акция и не долг. У токена нет юридического права на выручку ether.fi. Есть governance и заявленная политика распределения: 40% revenue идёт на расходы Labs, 30% — на buyback в Foundation treasury, 30% — на cashback пользователям. Fee switch включён.</p>
+      <p class="en">ETHFI is not equity and not debt. The token has no legal claim on ether.fi revenue. It has governance and a stated distribution policy: 40% of revenue to Labs expenses, 30% to buybacks held in the Foundation treasury, 30% to user cashback. The fee switch is on.</p>
+
+      <p class="ru">Из этого следуют три разных вопроса, которые постоянно смешивают:</p>
+      <p class="en">That creates three different questions that are constantly conflated:</p>
+
+      <div class="grid-3" style="margin:18px 0 24px">
+        <div class="card" style="padding:16px"><div class="num">BUYBACK</div><p class="ru">Протокол покупает токен на рынке. Это поддержка цены, но не выплата.</p><p class="en">The protocol buys the token on the market. That supports price; it is not a payout.</p></div>
+        <div class="card" style="padding:16px"><div class="num">BURN</div><p class="ru">Токен уничтожается, supply падает. Этого здесь нет.</p><p class="en">The token is destroyed and supply falls. That is not happening here.</p></div>
+        <div class="card" style="padding:16px"><div class="num">DIVIDEND</div><p class="ru">Держатель получает деньги или токены. Именно это надо доказать.</p><p class="en">The holder receives cash or tokens. That is the claim to prove.</p></div>
+      </div>
+
+      <p class="ru">Мой вопрос к данным: <strong>доходит ли buyback до держателя</strong>, или он остаётся внутри структур протокола? Ответ меняет тип актива: «токен с работающим bid» и «токен с реальным yield» — разные инвестиции с разной оценкой.</p>
+      <p class="en">My data question: <strong>does the buyback reach the holder</strong>, or does it stay inside the protocol’s structures? The answer changes the asset type: “a token with a working bid” and “a token with real yield” are different investments with different valuations.</p>
+
+      <div class="callout amber">
+        <p class="ru" style="margin:0"><b>Короткий ответ.</b> Покупка реальна: 566 сделок, 2.54M ETHFI, $1.65M. Выплата — нет: ни один ETHFI с buyback Safe не ушёл в sETHFI, holder revenue равен нулю с 1 апреля 2026. Токены уходят на EOA и в LayerZero для кэшбэка на Optimism. Это не то же самое, что yield держателям Ethereum.</p>
+        <p class="en" style="margin:0"><b>Short answer.</b> The purchase is real: 566 trades, 2.54M ETHFI, $1.65M. The payout is not: no ETHFI left the buyback Safe for sETHFI, and holder revenue has been zero since 1 April 2026. Tokens route to an EOA and to LayerZero for cashback on Optimism. That is not the same as yield to Ethereum holders.</p>
+      </div>
+
+      <div id="mechanics" class="anchor"></div>
+      <h2 class="ru">2. Что на самом деле делает протокол</h2>
+      <h2 class="en">2. What the protocol actually does</h2>
+
+      <p class="ru">ether.fi — ликвидный рестейкинг и стейкинг ETH. Держатель получает ликвидный токен (eETH/weETH), протокол берёт комиссию с rewards и restaking-доходности. TVL на 20 ноября — <strong>$3.73B</strong>: стейкинг $3.34B, liquid-часть $284M и остальное на других сетях и продуктах.</p>
+      <p class="en">ether.fi is liquid restaking and ETH staking. The depositor receives a liquid token (eETH/weETH); the protocol takes a fee on rewards and restaking yield. TVL on 20 November was <strong>$3.73B</strong>: $3.34B staking, $284M liquid, and the rest on other chains and products.</p>
+
+      <p class="ru">Выручка протокола — это не весь объём комиссий. Часть уходит валидаторам и партнёрам, часть — на расходы. Поэтому корректная цепочка выглядит так:</p>
+      <p class="en">Protocol revenue is not gross fees. Part goes to validators and partners, part to expenses. The correct chain is:</p>
+
+      <div class="table-wrap" style="margin:18px 0 8px">
+        <table>
+          <thead><tr>
+            <th><span class="ru">Показатель</span><span class="en">Metric</span></th>
+            <th class="num-r">30d</th>
+            <th class="num-r">365d</th>
+            <th><span class="ru">Комментарий</span><span class="en">Comment</span></th>
+          </tr></thead>
+          <tbody>
+            <tr><td><b>Gross fees</b></td><td class="num-r">$13,621,953</td><td class="num-r">$178,083,989</td><td><span class="ru">комиссии, не выручка</span><span class="en">fees, not revenue</span></td></tr>
+            <tr><td><b>Protocol revenue</b></td><td class="num-r">$3,824,601</td><td class="num-r">$43,391,303</td><td><span class="ru">28.1% от fees за 30d</span><span class="en">28.1% of 30d fees</span></td></tr>
+            <tr><td><b>Holders revenue</b></td><td class="num-r">$0</td><td class="num-r">$6,549,981</td><td><span class="ru">последнее начисление — 01.04.2026</span><span class="en">last distribution — 1 Apr 2026</span></td></tr>
+            <tr><td><b>Cumulative revenue</b></td><td class="num-r">$110,191,116</td><td class="num-r">—</td><td><span class="ru">с начала истории</span><span class="en">since inception</span></td></tr>
+            <tr><td><b>Cumulative holders revenue</b></td><td class="num-r">$16,591,119</td><td class="num-r">—</td><td><span class="ru">15.06% от revenue</span><span class="en">15.06% of revenue</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption ru">Источник: DefiLlama dailyFees / dailyRevenue / dailyHoldersRevenue, срез 20.11.2026. Holders revenue — то, что агрегатор считает распределением держателям; за 30 и 90 дней значение нулевое.</p>
+      <p class="caption en">Source: DefiLlama dailyFees / dailyRevenue / dailyHoldersRevenue, snapshot 20 Nov 2026. Holders revenue is what the aggregator treats as distribution to holders; it is zero over 30 and 90 days.</p>
+
+      <div class="callout">
+        <p class="ru" style="margin:0"><b>Ключевое различие.</b> $13.6M fees — это оборот комиссий. $3.8M revenue — то, что осталось протоколу. $0 holder revenue — то, что дошло до держателя. Для оценки токена имеет значение только третья строка.</p>
+        <p class="en" style="margin:0"><b>The key distinction.</b> $13.6M fees is commission turnover. $3.8M revenue is what the protocol kept. $0 holder revenue is what reached the holder. Only the third line matters for token valuation.</p>
+      </div>
+
+      <div id="supply" class="anchor"></div>
+      <h2 class="ru">3. Три числа предложения — и одно расхождение</h2>
+      <h2 class="en">3. Three supply numbers — and one conflict</h2>
+
+      <p class="ru">Первое, что ломается в токеномике, — «circulating supply». Для ETHFI три источника дают три разные базы:</p>
+      <p class="en">The first thing that breaks in tokenomics is “circulating supply”. For ETHFI, three sources give three different bases:</p>
+
+      <div class="table-wrap" style="margin:18px 0 8px">
+        <table>
+          <thead><tr>
+            <th><span class="ru">Источник</span><span class="en">Source</span></th>
+            <th class="num-r"><span class="ru">Circ.</span><span class="en">Circ.</span></th>
+            <th class="num-r"><span class="ru">Locked</span><span class="en">Locked</span></th>
+            <th class="num-r"><span class="ru">Total</span><span class="en">Total</span></th>
+            <th><span class="ru">Статус</span><span class="en">Status</span></th>
+          </tr></thead>
+          <tbody>
+            <tr><td><b>On-chain totalSupply</b></td><td class="num-r">998,535,999</td><td class="num-r">—</td><td class="num-r">998,535,999</td><td><span class="ru">RPC, проверено</span><span class="en">RPC, verified</span></td></tr>
+            <tr><td><b>CoinGecko</b></td><td class="num-r">998,535,999</td><td class="num-r">0</td><td class="num-r">998,535,999</td><td><span class="ru">circ = total</span><span class="en">circ = total</span></td></tr>
+            <tr><td><b>DefiLlama unlocks</b></td><td class="num-r">983,600,557</td><td class="num-r">16,399,443</td><td class="num-r">1,000,000,000</td><td><span class="ru">другая база</span><span class="en">different base</span></td></tr>
+            <tr><td><b>Docs / max supply</b></td><td class="num-r">—</td><td class="num-r">—</td><td class="num-r">1,000,000,000</td><td><span class="ru">жёсткий потолок</span><span class="en">hard cap</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption ru">Все значения — ETHFI. On-chain: <code>totalSupply()</code> на контракте <code>0xFe0c…c0eB</code>, block на 20.11.2026. DefiLlama: страница unlocks. CoinGecko: <code>/coins/ether-fi</code>.</p>
+      <p class="caption en">All values in ETHFI. On-chain: <code>totalSupply()</code> on <code>0xFe0c…c0eB</code>, block on 20 Nov 2026. DefiLlama: unlocks page. CoinGecko: <code>/coins/ether-fi</code>.</p>
+
+      <p class="ru">On-chain supply — 998,535,999 ETHFI, а не 1 млрд. Разница <strong>1,464,001 ETHFI</strong> сожжена через функцию <code>burn()</code>: баланс нулевого адреса равен нулю, на dead-адресе — 0.6696 ETHFI. Это не «сожгли на адрес», это уменьшение totalSupply.</p>
+      <p class="en">On-chain supply is 998,535,999 ETHFI, not 1B. The <strong>1,464,001 ETHFI</strong> difference was burned via <code>burn()</code>: the zero address balance is zero, the dead address holds 0.6696 ETHFI. This is a reduction of totalSupply, not a send to a burn address.</p>
+
+      <p class="ru">Практический вывод: если DefiLlama прав, CoinGecko завышает float на 14.9M ETHFI (1.5% supply) и market cap примерно на $7M. Для позиции это не критично; для расчёта overhang и разводнения — критично. Я беру on-chain supply как базу и отдельно показываю locked 16.4M как риск, а не как «уже в обращении».</p>
+      <p class="en">Practical implication: if DefiLlama is right, CoinGecko overstates float by 14.9M ETHFI (1.5% of supply) and market cap by about $7M. For a position that is minor; for overhang and dilution math it is not. I use on-chain supply as the base and show the 16.4M locked separately as risk, not as “already circulating”.</p>
+
+      <div class="callout amber">
+        <p class="ru" style="margin:0"><b>Что это меняет.</b> «Free float» — не 998.5M. В нём сидят treasury (15.3%), sETHFI (10.9%), CEX (13.9%) и два неразмеченных EOA на 156M. Реальный рынок тонкий; именно поэтому buyback на $1.65M так заметен в цене.</p>
+        <p class="en" style="margin:0"><b>What it changes.</b> “Free float” is not 998.5M. It includes treasury (15.3%), sETHFI (10.9%), CEX (13.9%) and two unlabelled EOAs holding 156M. The real market is thin; that is why a $1.65M buyback is visible in price.</p>
+      </div>
+
+      <div id="holders" class="anchor"></div>
+      <h2 class="ru">4. Кто держит float</h2>
+      <h2 class="en">4. Who holds the float</h2>
+
+      <p class="ru">Blockscout отдаёт 93,377 держателей; я разобрала топ-250 и разметила контракты, CEX, treasury и EOA. Картина не «розничная»:</p>
+      <p class="en">Blockscout reports 93,377 holders; I classified the top 250 and labelled contracts, CEX, treasury and EOAs. The picture is not retail:</p>
+
+      <div class="chart"><img src="assets/ethfi_holders.svg" alt="Top 10 ETHFI holders and their share of supply" loading="lazy"></div>
+      <p class="caption ru">Топ-10 кошельков: 62.2% supply. Treasury Safe — 15.3%; sETHFI — 10.9%; Binance — 7.7% на двух кошельках. Источник: Blockscout holders API, 20.11.2026.</p>
+      <p class="caption en">Top 10 wallets: 62.2% of supply. Treasury Safe 15.3%; sETHFI 10.9%; Binance 7.7% across two wallets. Source: Blockscout holders API, 20 Nov 2026.</p>
+
+      <div class="table-wrap" style="margin:18px 0 8px">
+        <table>
+          <thead><tr><th>#</th><th><span class="ru">Кошелёк</span><span class="en">Wallet</span></th><th><span class="ru">Тип</span><span class="en">Type</span></th><th class="num-r">ETHFI</th><th class="num-r">%</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><code>0x7A6A…bB53</code></td><td><span class="ru">ether.fi Safe (treasury)</span><span class="en">ether.fi Safe (treasury)</span></td><td class="num-r">153,200,600</td><td class="num-r">15.34%</td></tr>
+            <tr><td>2</td><td><code>0x86B5…0161</code></td><td><span class="ru">sETHFI staking contract</span><span class="en">sETHFI staking contract</span></td><td class="num-r">108,994,970</td><td class="num-r">10.92%</td></tr>
+            <tr><td>3</td><td><code>0x95Bf…995e</code></td><td><span class="ru">неразмеченный EOA</span><span class="en">unlabelled EOA</span></td><td class="num-r">101,547,168</td><td class="num-r">10.17%</td></tr>
+            <tr><td>4</td><td><code>0xf108…41aC</code></td><td><span class="ru">неразмеченный EOA</span><span class="en">unlabelled EOA</span></td><td class="num-r">54,533,029</td><td class="num-r">5.46%</td></tr>
+            <tr><td>5</td><td><code>0x5a52…Efcb</code></td><td><span class="ru">Binance</span><span class="en">Binance</span></td><td class="num-r">39,447,593</td><td class="num-r">3.95%</td></tr>
+            <tr><td>6</td><td><code>0xF977…aceC</code></td><td><span class="ru">Binance</span><span class="en">Binance</span></td><td class="num-r">37,000,000</td><td class="num-r">3.71%</td></tr>
+            <tr><td>7</td><td><code>0xe008…fD3f</code></td><td><span class="ru">Ether.fi OFT adapter</span><span class="en">Ether.fi OFT adapter</span></td><td class="num-r">35,992,714</td><td class="num-r">3.60%</td></tr>
+            <tr><td>8</td><td><code>0xF619…e39f</code></td><td><span class="ru">неразмеченный EOA</span><span class="en">unlabelled EOA</span></td><td class="num-r">35,877,782</td><td class="num-r">3.59%</td></tr>
+            <tr><td>9</td><td><code>0x7a93…b3fb</code></td><td><span class="ru">неразмеченный EOA</span><span class="en">unlabelled EOA</span></td><td class="num-r">27,633,150</td><td class="num-r">2.77%</td></tr>
+            <tr><td>10</td><td><code>0x6630…0739</code></td><td><span class="ru">неразмеченный EOA</span><span class="en">unlabelled EOA</span></td><td class="num-r">26,713,477</td><td class="num-r">2.68%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption ru">Топ-10 = 62.19% supply; топ-5 = 45.84%; топ-20 = 73.96%. Полный список — в CSV.</p>
+      <p class="caption en">Top 10 = 62.19% of supply; top 5 = 45.84%; top 20 = 73.96%. Full list in the CSV.</p>
+
+      <p class="ru">После исключения контрактов, CEX и мостов остаётся <strong>473,955,369 ETHFI (47.5%)</strong> на EOA. Внутри этого float:</p>
+      <p class="en">After excluding contracts, CEX and bridges, <strong>473,955,369 ETHFI (47.5%)</strong> sits on EOAs. Within that float:</p>
+      <ul class="ru">
+        <li>топ-1 EOA — 21.4% float; топ-5 EOA — 52.0%;</li>
+        <li>Gini 0.805, HHI 761, Nakamoto(50%) = 5 кошельков;</li>
+        <li>два неразмеченных EOA получили 156M ETHFI от Safe-кошельков: 101.5M — одной транзакцией в феврале 2025, 54.5M — траншами в декабре 2025 и апреле 2026.</li>
+      </ul>
+      <ul class="en">
+        <li>top-1 EOA is 21.4% of float; top-5 EOAs are 52.0%;</li>
+        <li>Gini 0.805, HHI 761, Nakamoto(50%) = 5 wallets;</li>
+        <li>two unlabelled EOAs received 156M ETHFI from Safes: 101.5M in a single February 2025 transaction, 54.5M in tranches in December 2025 and April 2026.</li>
+      </ul>
+
+      <p class="ru">Это не обязательно «инсайдеры продают». Но это <strong>overhang</strong>, которого нет в слове «circulating»: получатели allocation/vesting-типа могут выйти, и их баланс в 156M в 10 раз больше месячного buyback. Пока они не отправили токены на CEX, sell pressure не реализован; наблюдение point-in-time, не гарантия.</p>
+      <p class="en">This is not necessarily “insiders selling”. But it is <strong>overhang</strong> that the word “circulating” hides: allocation/vesting-type recipients can exit, and their 156M balance is 10× the monthly buyback. As long as they have not sent tokens to CEX, the sell pressure is unrealised; this is a point-in-time observation, not a guarantee.</p>
+
+      <div id="buyback" class="anchor"></div>
+      <h2 class="ru">5. Buyback: куда уходят деньги</h2>
+      <h2 class="en">5. Buyback: following the money</h2>
+
+      <p class="ru">Это главная часть проверки. Публичная политика говорит: 30% revenue → buyback. Вопрос — исполняется ли она и что происходит с купленным токеном. Я собрала весь путь по транзакциям Ethereum.</p>
+      <p class="en">This is the core of the verification. The public policy says 30% of revenue → buyback. The question is whether it is executed and what happens to the purchased token. I reconstructed the full path from Ethereum transactions.</p>
+
+      <div class="panel" style="margin:22px 0">
+        <div class="panel-head"><span class="mono">Value chain · Ethereum</span><span class="status">VERIFIED → INFERRED</span></div>
+        <div class="flow">
+          <div class="node"><span class="dot"></span><div><b>Funding Safe</b><span>0xf40bcc…f7021 · GnosisSafeProxy</span></div><span class="amt">$7.90M in / $7.60M out</span></div>
+          <div class="node"><span class="dot"></span><div><b>CoW Settlement</b><span>0x9008D1…0ab41 · 566 matched orders</span></div><span class="amt">2.54M ETHFI · $1.65M</span></div>
+          <div class="node"><span class="dot"></span><div><b>Buyback Safe</b><span>0x43f4ca…6408c · SafeProxy</span></div><span class="amt">2.95M ETHFI out</span></div>
+          <div class="node"><span class="dot"></span><div><b>Ops EOA</b><span>0x9eaC71…843f</span></div><span class="amt">2.05M ETHFI</span></div>
+          <div class="node"><span class="dot inferred"></span><div><b>LZMultiCall → Optimism</b><span>0xAcdDAC…c05f1 · LayerZero</span></div><span class="amt">894k ETHFI · cashback</span></div>
+        </div>
+        <p class="tiny dim" style="margin:14px 0 0"><span class="ru">Зелёный — подтверждено транзакциями. Янтарный — вывод: on-chain путь до LayerZero подтверждён, фактическая выплата пользователям на Optimism не проверена.</span><span class="en">Mint — verified by transactions. Amber — inference: the on-chain path to LayerZero is verified; the actual user payout on Optimism is not.</span></p>
+      </div>
+
+      <div class="chart"><img src="assets/ethfi_buyback.svg" alt="Daily ETHFI buybacks and cumulative purchases, September–November 2026" loading="lazy"></div>
+      <p class="caption ru">Ежедневные покупки ETHFI через CoW и накопленный объём. 58 активных дней, средний темп 47,921 ETHFI/день. Источник: CoW Settlement + Buyback Safe transfers.</p>
+      <p class="caption en">Daily ETHFI purchases through CoW and cumulative volume. 58 active days, average 47,921 ETHFI/day. Source: CoW Settlement + Buyback Safe transfers.</p>
+
+      <h3 class="ru">Что подтверждено</h3>
+      <h3 class="en">What is verified</h3>
+      <ul class="ru">
+        <li>Funding Safe получил $7.90M и отправил $2.2M на buyback Safe; ещё $3.73M ушли на адрес <code>0x4ECF…D643</code> (назначение не подтверждено).</li>
+        <li>Buyback Safe получил 581 перевод на 2,779,410 ETHFI; 2,603,293 пришли напрямую от CoW.</li>
+        <li>566 совпавших ордеров: 2,542,499 ETHFI за $1,645,541, средняя цена $0.6472; диапазон $0.4643–$0.7898.</li>
+        <li>За последние 30 дней куплено 1,155,696 ETHFI на $663,000.</li>
+        <li>С buyback Safe не было ни одного перевода в sETHFI. sETHFI-потоки — это пользовательские <code>deposit</code> и <code>boringRedeemSolve</code>, не buyback.</li>
+      </ul>
+      <ul class="en">
+        <li>The funding Safe received $7.90M and sent $2.2M to the buyback Safe; another $3.73M went to <code>0x4ECF…D643</code> (purpose unconfirmed).</li>
+        <li>The buyback Safe received 581 transfers totalling 2,779,410 ETHFI; 2,603,293 came directly from CoW.</li>
+        <li>566 matched orders: 2,542,499 ETHFI for $1,645,541, average $0.6472; range $0.4643–$0.7898.</li>
+        <li>The last 30 days: 1,155,696 ETHFI for $663,000.</li>
+        <li>No transfer from the buyback Safe to sETHFI. sETHFI flows are user <code>deposit</code> and <code>boringRedeemSolve</code>, not buybacks.</li>
+      </ul>
+
+      <h3 class="ru">Что не подтверждено</h3>
+      <h3 class="en">What is not verified</h3>
+      <ul class="ru">
+        <li>Конечная выплата кэшбэка пользователям на Optimism. Путь до LZMultiCall виден, дальнейшее распределение — нет.</li>
+        <li>Кто стоит за funding Safe и адресом <code>0x4ECF…D643</code>; это может быть операционный резерв или партнёрский расчёт.</li>
+        <li>Что buyback продолжится: наблюдаемый период — только с 17 сентября 2026, 58 активных дней.</li>
+      </ul>
+      <ul class="en">
+        <li>The final cashback payout to users on Optimism. The path to LZMultiCall is visible; the distribution after that is not.</li>
+        <li>Who controls the funding Safe and <code>0x4ECF…D643</code>; it could be an operating reserve or a partner settlement.</li>
+        <li>That the buyback continues: the observed period starts 17 September 2026 and covers 58 active days.</li>
+      </ul>
+
+      <p class="ru">Теперь сравним политику и поток. За 30 дней buyback / revenue = <strong>17.3%</strong>, а не 30% на buyback; заявленные 60% включают cashback, который не подтверждён. В годовом выражении это $7.96M, или <strong>1.71% market cap</strong>. Покупки покрывают около <strong>26%</strong> запланированных разлоков (1.02M ETHFI/неделя). Средняя цена покупки $0.647 против спота $0.466 — позиция отмечена на −28%; это не «умный buyback», это механика.</p>
+      <p class="en">Now compare policy and flow. Over 30 days, buyback / revenue = <strong>17.3%</strong>, not the 30% buyback allocation; the stated 60% includes cashback, which is unverified. Annualised, that is $7.96M, or <strong>1.71% of market cap</strong>. Purchases cover about <strong>26%</strong> of scheduled unlocks (1.02M ETHFI/week). The average purchase price is $0.647 versus a $0.466 spot — the position is marked −28%. That is not a “smart buyback”; it is mechanics.</p>
+
+      <div class="callout red">
+        <p class="ru" style="margin:0"><b>Главный вывод кейса.</b> Buyback — реальный bid, но не holder yield. Он поддерживает цену, пока funded, и не создаёт права на выручку. Если funding остановится, у токена не останется механического покупателя; если кэшбэк на Optimism реален, держатель Ethereum всё равно его не получает.</p>
+        <p class="en" style="margin:0"><b>The core finding.</b> The buyback is a real bid, not holder yield. It supports price while funded and creates no claim on revenue. If funding stops, the token loses its mechanical buyer; if the Optimism cashback is real, the Ethereum holder still does not receive it.</p>
+      </div>
+
+      <div id="economics" class="anchor"></div>
+      <h2 class="ru">6. Экономика сжимается быстрее, чем цена</h2>
+      <h2 class="en">6. The economics are shrinking faster than the price</h2>
+
+      <div class="chart"><img src="assets/ethfi_tvl.svg" alt="ether.fi TVL from 2023 to November 2026" loading="lazy"></div>
+      <p class="caption ru">TVL: пик $12.79B 14.08.2025 → $3.73B 20.11.2026. Просадка 70.9%; за 30 дней −27.0%, за год −46.3%. Источник: DefiLlama protocol.</p>
+      <p class="caption en">TVL: $12.79B peak on 14 Aug 2025 → $3.73B on 20 Nov 2026. Drawdown 70.9%; −27.0% over 30 days, −46.3% over a year. Source: DefiLlama protocol.</p>
+
+      <p class="ru">Выручка следует за TVL с лагом: комиссия начисляется на активы, а не на цену токена. За 30 дней revenue $3.82M; за год $43.39M. Мультипликаторы на 20.11.2026:</p>
+      <p class="en">Revenue follows TVL with a lag: the fee is charged on assets, not on the token price. 30-day revenue is $3.82M; 365-day is $43.39M. Multiples on 20 Nov 2026:</p>
+
+      <div class="kpi">
+        <div><b>10.73×</b><span>mcap / 365d revenue</span></div>
+        <div><b>2.62×</b><span>mcap / 365d fees</span></div>
+        <div><b>0.125×</b><span>mcap / TVL</span></div>
+        <div class="bad"><b>−42.6%</b><span class="ru">цена за год</span><span class="en">price, 1 year</span></div>
+      </div>
+
+      <div class="chart"><img src="assets/ethfi_fees.svg" alt="Monthly ETHFI fees, protocol revenue and holders revenue" loading="lazy"></div>
+      <p class="caption ru">Месячные fees и revenue с июня 2025; нижняя панель — holders revenue. Ноль с мая 2026, последнее начисление — 1 апреля 2026. Источник: DefiLlama daily series.</p>
+      <p class="caption en">Monthly fees and revenue since June 2025; the lower panel is holders revenue. Zero since May 2026, last distribution on 1 April 2026. Source: DefiLlama daily series.</p>
+
+      <p class="ru">Сценарии ниже — не ценовые цели, а проверка чувствительности к двум переменным: устойчивой выручке и мультипликатору. База — 998.5M токенов, текущая цена $0.466.</p>
+      <p class="en">The scenarios below are not price targets; they test sensitivity to two variables: sustainable revenue and the multiple. Base: 998.5M tokens, current price $0.466.</p>
+
+      <div class="table-wrap" style="margin:18px 0 8px">
+        <table>
+          <thead><tr><th><span class="ru">Сценарий</span><span class="en">Scenario</span></th><th class="num-r"><span class="ru">Revenue run-rate</span><span class="en">Revenue run-rate</span></th><th class="num-r"><span class="ru">Мультипликатор</span><span class="en">Multiple</span></th><th class="num-r"><span class="ru">Оценка</span><span class="en">Value</span></th><th class="num-r"><span class="ru">Цена</span><span class="en">Price</span></th><th class="num-r"><span class="ru">К споту</span><span class="en">vs spot</span></th></tr></thead>
+          <tbody>
+            <tr><td><b>Bear</b></td><td class="num-r">$32.5M</td><td class="num-r">7×</td><td class="num-r">$227.5M</td><td class="num-r">$0.228</td><td class="num-r">−51.2%</td></tr>
+            <tr><td><b>Base</b></td><td class="num-r">$43.39M</td><td class="num-r">10×</td><td class="num-r">$433.9M</td><td class="num-r">$0.435</td><td class="num-r">−6.8%</td></tr>
+            <tr><td><b>Bull</b></td><td class="num-r">$52.07M</td><td class="num-r">14×</td><td class="num-r">$729.0M</td><td class="num-r">$0.730</td><td class="num-r">+56.5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption ru">Допущения: Bear — выручка падает вместе с TVL ещё на 25%, мультипликатор сжимается; Base — выручка стабилизируется на 365-дневном уровне; Bull — восстановление TVL и revenue. Это не прогноз, а границы.</p>
+      <p class="caption en">Assumptions: Bear — revenue falls another 25% with TVL and the multiple compresses; Base — revenue stabilises at the 365-day level; Bull — TVL and revenue recover. These are bounds, not forecasts.</p>
+
+      <p class="ru">Цена уже упала на 42.6% за год, но выручка упала сильнее. «Дешёво по mcap/revenue» — ловушка, если знаменатель продолжает падать. Поэтому в решении нет покупки «на просадке».</p>
+      <p class="en">The price is down 42.6% over a year, but revenue fell further. “Cheap on mcap/revenue” is a trap if the denominator keeps falling. That is why the decision is not to buy the dip.</p>
+
+      <div id="liquidity" class="anchor"></div>
+      <h2 class="ru">7. Ликвидность, разлоки и цена ошибки</h2>
+      <h2 class="en">7. Liquidity, unlocks and the cost of being wrong</h2>
+
+      <div class="chart"><img src="assets/ethfi_liquidity.svg" alt="ETHFI DEX price impact for orders from $1k to $1M" loading="lazy"></div>
+      <p class="caption ru">Проскальзывание на $10k / $50k / $250k: −1.0% / −4.0% / −38.8% (Uniswap QuoterV2). Пунктир — модель постоянного произведения на топ-пуле $739.6k. Источник: DexScreener + QuoterV2, 20.11.2026.</p>
+      <p class="caption en">Slippage at $10k / $50k / $250k: −1.0% / −4.0% / −38.8% (Uniswap QuoterV2). Dashed line — constant-product model on the $739.6k top pool. Source: DexScreener + QuoterV2, 20 Nov 2026.</p>
+
+      <p class="ru">Вся видимая DEX-ликвидность — <strong>$1.23M</strong>, это 0.26% market cap. Топ-пул ETHFI/ETH на Uniswap — $739.6k; второй, ETHFI/WETH — $377.5k. Для позиции $250k вы уже платите двузначное проскальзывание на входе и выходе. Это ограничивает размер независимо от уверенности в тезисе.</p>
+      <p class="en">Total visible DEX liquidity is <strong>$1.23M</strong>, or 0.26% of market cap. The top ETHFI/ETH Uniswap pool holds $739.6k; the second, ETHFI/WETH, $377.5k. At a $250k position you already pay double-digit slippage in and out. That caps size regardless of conviction.</p>
+
+      <div class="grid-2" style="margin:22px 0">
+        <div class="card">
+          <div class="num">UNLOCK OVERHANG</div>
+          <p class="ru">Core Contributors получают ~1.02M ETHFI в неделю (~$482k). Buyback покрывает ~26% этого потока. Разлоки непрерывные, без датированного «unlock day».</p>
+          <p class="en">Core Contributors receive ~1.02M ETHFI per week (~$482k). The buyback covers ~26% of that flow. Unlocks are continuous, without a dated “unlock day”.</p>
+        </div>
+        <div class="card">
+          <div class="num">STRUCTURAL RISK</div>
+          <p class="ru">Смарт-контракты, слэшинг, зависимость от restaking-доходности, мост в Optimism, governance-контроль treasury. Ни один из этих рисков не виден в mcap/TVL.</p>
+          <p class="en">Smart contracts, slashing, dependence on restaking yield, the Optimism bridge, governance control of the treasury. None of these risks show up in mcap/TVL.</p>
+        </div>
+      </div>
+
+      <div id="decision" class="anchor"></div>
+      <h2 class="ru">8. Decision card</h2>
+      <h2 class="en">8. Decision card</h2>
+
+      <div class="decision">
+        <div class="top"><b>ETHFI · 20.11.2026</b><span class="badge wait">WAIT · MAX 0–2%</span></div>
+        <h3 class="ru">Ждать. Не покупать «дешёвый токен» и не шортить.</h3>
+        <h3 class="en">Wait. Do not buy the “cheap token”, do not short it.</h3>
+        <p class="ru" style="font-size:13px;color:var(--muted);margin:0 0 16px">Горизонт пересмотра — 3–6 месяцев. Позиция 0–2% обусловлена не силой тезиса, а тонкой ликвидностью и неподтверждённой выплатой.</p>
+        <p class="en" style="font-size:13px;color:var(--muted);margin:0 0 16px">Review horizon 3–6 months. The 0–2% cap reflects thin liquidity and an unverified distribution, not the strength of the thesis.</p>
+        <div class="split">
+          <div>
+            <h4 class="ru">Апгрейд</h4><h4 class="en">Upgrade if</h4>
+            <ul class="ru">
+              <li>Buyback начинает уходить в sETHFI, burn или прямой distribution — с проверяемыми tx.</li>
+              <li>TVL держится выше $4.5B 30 дней, revenue растёт вместе с ним.</li>
+              <li>Появляется подтверждённый кэшбэк на Optimism >$1M с адресами получателей.</li>
+            </ul>
+            <ul class="en">
+              <li>The buyback starts routing to sETHFI, burn or direct distribution — with verifiable txs.</li>
+              <li>TVL holds above $4.5B for 30 days and revenue grows with it.</li>
+              <li>Verified Optimism cashback above $1M with recipient addresses.</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="neg ru">Отмена / даунгрейд</h4><h4 class="neg en">Invalidate / downgrade if</h4>
+            <ul class="ru">
+              <li>Treasury или allocation-EOA отправляют >5% float на CEX.</li>
+              <li>Buyback останавливается более чем на 30 дней.</li>
+              <li>TVL уходит ниже $3B или revenue падает ниже $2.5M за 30 дней.</li>
+            </ul>
+            <ul class="en">
+              <li>Treasury or an allocation EOA sends more than 5% of float to CEX.</li>
+              <li>The buyback stops for more than 30 days.</li>
+              <li>TVL falls below $3B or revenue drops below $2.5M over 30 days.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="ru">Почему не шорт: buyback — реальный механический bid, float тонкий, а стоимость заимствования и риск squeeze не измерены. Почему не лонг: нет holder yield, revenue падает, выплата не доказана. Наблюдение — самая честная позиция при таком наборе данных.</p>
+      <p class="en">Why not short: the buyback is a real mechanical bid, float is thin, and borrow cost and squeeze risk are unmeasured. Why not long: no holder yield, falling revenue, unproven distribution. Watching is the honest position with this dataset.</p>
+
+      <div id="sources" class="anchor"></div>
+      <h2 class="ru">9. Источники, воспроизводимость и ограничения</h2>
+      <h2 class="en">9. Sources, reproducibility and limitations</h2>
+
+      <div class="table-wrap" style="margin:18px 0 8px">
+        <table>
+          <thead><tr><th><span class="ru">Источник</span><span class="en">Source</span></th><th><span class="ru">Что взято</span><span class="en">Used for</span></th><th><span class="ru">Статус</span><span class="en">Status</span></th></tr></thead>
+          <tbody>
+            <tr><td>Ethereum RPC</td><td><span class="ru">totalSupply, balanceOf, burn proof</span><span class="en">totalSupply, balanceOf, burn proof</span></td><td><span class="ru">первичный</span><span class="en">primary</span></td></tr>
+            <tr><td>Blockscout API</td><td><span class="ru">держатели, переводы, метаданные адресов</span><span class="en">holders, transfers, address metadata</span></td><td><span class="ru">первичный + эвристики</span><span class="en">primary + heuristics</span></td></tr>
+            <tr><td>CoW Protocol API</td><td><span class="ru">ордера, объёмы, цены исполнения</span><span class="en">orders, volumes, execution prices</span></td><td><span class="ru">первичный</span><span class="en">primary</span></td></tr>
+            <tr><td>DefiLlama</td><td><span class="ru">TVL, fees, revenue, holders revenue, unlocks</span><span class="en">TVL, fees, revenue, holders revenue, unlocks</span></td><td><span class="ru">агрегатор</span><span class="en">aggregator</span></td></tr>
+            <tr><td>CoinGecko</td><td><span class="ru">цена, market cap, supply</span><span class="en">price, market cap, supply</span></td><td><span class="ru">агрегатор</span><span class="en">aggregator</span></td></tr>
+            <tr><td>DexScreener + Uniswap QuoterV2</td><td><span class="ru">пулы, глубина, проскальзывание</span><span class="en">pools, depth, slippage</span></td><td><span class="ru">первичный + расчёт</span><span class="en">primary + calculation</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="ru"><strong>Ограничения.</strong> Все значения — point-in-time на 20.11.2026 и могут измениться. Разметка адресов — эвристика, а не юридическая идентификация. Optimism-нога кэшбэка не проверена. Расхождение supply не устранено: я показываю обе базы. Buyback наблюдается только с сентября 2026; нельзя утверждать, что он постоянный. Платных терминалов и API-ключей не использовалось.</p>
+      <p class="en"><strong>Limitations.</strong> All values are point-in-time on 20 Nov 2026 and may change. Address labels are heuristics, not legal identification. The Optimism cashback leg is unverified. The supply conflict is not resolved: I show both bases. The buyback is observed only since September 2026; it cannot be assumed permanent. No paid terminals or API keys were used.</p>
+
+      <p class="ru"><strong>Воспроизводимость.</strong> Пайплайн: <code>fetch_lib.py</code> (кэшированные публичные API) → <code>raw/*.json</code> → <code>build_outputs.py</code> (метрики, CSV, SVG). Все графики и таблицы выше собраны из этих файлов; исходные ответы API сохранены, чтобы числа можно было пересчитать, а не принимать на веру.</p>
+      <p class="en"><strong>Reproducibility.</strong> Pipeline: <code>fetch_lib.py</code> (cached public APIs) → <code>raw/*.json</code> → <code>build_outputs.py</code> (metrics, CSV, SVG). Every chart and table above is generated from those files; API responses are preserved so the numbers can be recomputed rather than trusted.</p>
+
+      <div class="grid-2" style="margin:18px 0 0">
+        <div class="card"><div class="num">DATA</div><p style="margin-bottom:8px"><a href="assets/ethfi_metrics.csv">ethfi_metrics.csv</a> · <a href="assets/ethfi_holders_top.csv">holders_top.csv</a></p><p><a href="assets/ethfi_buybacks_daily.csv">buybacks_daily.csv</a> · <a href="assets/ethfi_valuation_scenarios.csv">valuation_scenarios.csv</a></p></div>
+        <div class="card"><div class="num">MORE</div><p style="margin-bottom:8px"><a href="assets/ethfi_tvl_weekly.csv">tvl_weekly.csv</a> · <a href="assets/ethfi_fees_monthly.csv">fees_monthly.csv</a></p><p><a href="method.html">Методика / Method</a> · <a href="cv.html">CV</a></p></div>
+      </div>
+
+      <p class="tiny dim" style="margin-top:26px"><span class="ru">Не инвестиционная рекомендация. Кейс показывает процесс исследования; решение — иллюстрация дисциплины, а не совет покупать или продавать.</span><span class="en">Not investment advice. This case demonstrates a research process; the decision illustrates discipline, not a recommendation to buy or sell.</span></p>
+    </article>
+
+    <aside class="sidebar">
+      <div class="box">
+        <h3><span class="ru">Решение</span><span class="en">Decision</span></h3>
+        <p><span class="badge wait">WAIT · 0–2%</span></p>
+        <p class="ru">Buyback реальный, holder yield — нет. Ждать подтверждения распределения или остановки buyback.</p>
+        <p class="en">The buyback is real, holder yield is not. Wait for verified distribution or for the buyback to stop.</p>
+      </div>
+      <div class="box toc">
+        <h3><span class="ru">Содержание</span><span class="en">Contents</span></h3>
+        <a href="#question"><span class="ru">1. Вопрос</span><span class="en">1. The question</span></a>
+        <a href="#mechanics"><span class="ru">2. Механика</span><span class="en">2. Mechanics</span></a>
+        <a href="#supply"><span class="ru">3. Supply</span><span class="en">3. Supply</span></a>
+        <a href="#holders"><span class="ru">4. Держатели</span><span class="en">4. Holders</span></a>
+        <a href="#buyback"><span class="ru">5. Buyback</span><span class="en">5. Buyback</span></a>
+        <a href="#economics"><span class="ru">6. Экономика</span><span class="en">6. Economics</span></a>
+        <a href="#liquidity"><span class="ru">7. Ликвидность</span><span class="en">7. Liquidity</span></a>
+        <a href="#decision"><span class="ru">8. Decision card</span><span class="en">8. Decision card</span></a>
+        <a href="#sources"><span class="ru">9. Источники</span><span class="en">9. Sources</span></a>
+      </div>
+      <div class="box">
+        <h3><span class="ru">Срез</span><span class="en">Snapshot</span></h3>
+        <p><b style="color:var(--text)">ETHFI</b> · Ethereum</p>
+        <p class="ru">Контракт: <code>0xFe0c…c0eB</code></p>
+        <p class="en">Contract: <code>0xFe0c…c0eB</code></p>
+        <p class="ru">Держателей: 93,377</p>
+        <p class="en">Holders: 93,377</p>
+        <p class="ru">Данные: 20.11.2026</p>
+        <p class="en">Data: 20 Nov 2026</p>
+        <p class="ru">Позиция: 0–2%, горизонт 3–6 мес.</p>
+        <p class="en">Position: 0–2%, 3–6 month horizon.</p>
+      </div>
+      <div class="box">
+        <h3><span class="ru">Скачать</span><span class="en">Download</span></h3>
+        <p><a href="assets/ethfi_metrics.csv">metrics.csv</a></p>
+        <p><a href="assets/ethfi_holders_top.csv">holders.csv</a></p>
+        <p><a href="assets/ethfi_buybacks_daily.csv">buybacks.csv</a></p>
+        <p><a href="assets/ethfi_valuation_scenarios.csv">scenarios.csv</a></p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><span class="ru">© 2026 Marina Rebeeva. Независимое исследование, не инвестиционная рекомендация. Point-in-time снимки; проверяйте источники и условия провайдеров.</span><span class="en">© 2026 Marina Rebeeva. Independent research, not investment advice. Point-in-time snapshots; verify sources and provider terms.</span></p>
+    <div class="links"><a href="index.html"><span class="ru">На главную</span><span class="en">Home</span></a><a href="method.html"><span class="ru">Методика</span><span class="en">Method</span></a><a href="mailto:rebeeva979@gmail.com">Email</a></div>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

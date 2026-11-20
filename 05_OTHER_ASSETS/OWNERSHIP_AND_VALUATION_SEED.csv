@@ -1,0 +1,14 @@
+asset,ticker,as_of_date,metric,value,unit,source_url,quality_status,note
+Lyft,LYFT,2026-03-15,Ameriprise ownership,8.3,pct,https://www.sec.gov/Archives/edgar/data/1759509/000162828026022374/lyft-20260331.htm,primary SEC proxy,beneficial ownership snapshot
+Lyft,LYFT,2026-03-15,Vanguard ownership,8.3,pct,https://www.sec.gov/Archives/edgar/data/1759509/000162828026022374/lyft-20260331.htm,primary SEC proxy,beneficial ownership snapshot
+Lyft,LYFT,2026-03-15,Millennium ownership,6.2,pct,https://www.sec.gov/Archives/edgar/data/1759509/000162828026022374/lyft-20260331.htm,primary SEC proxy,beneficial ownership snapshot
+Lyft,LYFT,2026-03-15,AQR ownership,6.2,pct,https://www.sec.gov/Archives/edgar/data/1759509/000162828026022374/lyft-20260331.htm,primary SEC proxy,beneficial ownership snapshot
+Lyft,LYFT,2026-03-15,Fidelity ownership,5.4,pct,https://www.sec.gov/Archives/edgar/data/1759509/000162828026022374/lyft-20260331.htm,primary SEC proxy,beneficial ownership snapshot
+Lyft,LYFT,2025-12-31,Revenue,6316261000,USD,https://investor.lyft.com/financials/sec-filings/content/0001628280-26-006960/lyft-20251231.htm,primary 10-K,2025 annual revenue
+Lyft,LYFT,2025-12-31,Revenue growth,9,pct,https://investor.lyft.com/financials/sec-filings/content/0001628280-26-006960/lyft-20251231.htm,primary 10-K,reported year-over-year growth
+Lyft,LYFT,2025-12-31,Rides growth,14,pct,https://investor.lyft.com/financials/sec-filings/content/0001628280-26-006960/lyft-20251231.htm,primary 10-K,reported year-over-year growth
+GoPro,GPRO,2026-09-30,Q3 revenue,96200000,USD,https://www.sec.gov/Archives/edgar/data/1500435/000150043526000076/gpro20260930.htm,primary 10-Q,quarterly revenue
+GoPro,GPRO,2026-09-30,Cash and equivalents,33500000,USD,https://www.sec.gov/Archives/edgar/data/1500435/000150043526000076/gpro20260930.htm,primary 10-Q,balance-sheet cash
+GoPro,GPRO,2026-09-30,Aggregate principal debt,92200000,USD,https://www.sec.gov/Archives/edgar/data/1500435/000150043526000076/gpro20260930.htm,primary 10-Q,debt balance
+GoPro,GPRO,2026-09-30,Merger consideration,1.14,USD/share,https://www.sec.gov/Archives/edgar/data/1500435/000162828026059839/gpro2026-09x01exhibit991.htm,primary SEC exhibit,subject to closing and adjustments
+GoPro,GPRO,2026-09-30,Current holders residual stake,10,pct,https://www.sec.gov/Archives/edgar/data/1500435/000162828026059839/gpro2026-09x01exhibit991.htm,primary SEC exhibit,post-merger ownership headline; verify pro forma cap table

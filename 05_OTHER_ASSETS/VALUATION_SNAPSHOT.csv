@@ -1,0 +1,6 @@
+asset_id,as_of_date,market_cap_usd,enterprise_value_usd,annual_revenue_usd,annual_protocol_revenue_usd,annual_fees_usd,annual_fcf_usd,ev_sales,ev_revenue,ev_ebitda,price_to_fcf,market_cap_to_tvl,fdv_to_protocol_revenue,valuation_note,quality_status
+ETHFI,2026-11-16,477918345,,,46589280,168993468,,,,,,0.1242057,10.2581,Screening multiple; expenses and holder cash flow not reconciled,aggregator baseline
+GPRO,2026-11-19,125690000,184360000,501870000,,,,0.367,,,,,,"Headline $1.14 cash is conditional; EV approximated as market cap + $92.2m debt - $33.5m cash",secondary market + primary filing
+LYFT,2026-11-19,6651000000,6140000000,6910000000,,,,0.889,,,5.890,,,"FCF multiple uses official TTM FCF $1.1292bn; normalize SBC, working capital and legal items",primary filing + secondary market snapshot
+ZNTL,2026-11-19,133640000,,,,,,,,,,,,Cash $228.9m; market cap approx. $133.6m at $1.36; clinical-stage rNPV not yet assigned,primary filing + market data snapshot
+ANT,2026-11-19,1505419793459,,35282000000,,,,,,,,,,IPO $83 × 18.14bn analytical fully diluted shares; TTM $35.282bn; supplied calculator separately shows $81bn run-rate,primary prospectus + supplied calculator
