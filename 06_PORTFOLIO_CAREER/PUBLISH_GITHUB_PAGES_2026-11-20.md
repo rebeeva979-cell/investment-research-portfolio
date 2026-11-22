@@ -2,6 +2,8 @@
 
 **Цель:** получить публичный URL вида `https://<username>.github.io/<repo>/` и подставить его в CV и LinkedIn.
 
+**Статус 22.11.2026:** опубликовано — `https://rebeeva979-cell.github.io/investment-research-portfolio/`. Источник Pages: GitHub Actions; workflow `Deploy portfolio to GitHub Pages` зелёный. Ключ деплоя добавлен с write-доступом.
+
 GitHub Pages отдаёт только папку `docs/` (1,1 МБ, 28 файлов). Сам репозиторий содержит также `04_ETHFI/onchain/` с кодом и raw-снимками и кейсы LTC/SNX/other — это доказательство процесса, а не только витрина. Папка `07_PUBLICATION/` и старые сборки исключены через `.gitignore`.
 
 ## Вариант A — через браузер (без терминала)

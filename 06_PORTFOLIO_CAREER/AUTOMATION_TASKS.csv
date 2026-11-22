@@ -1,5 +1,5 @@
 id,priority,area,task,why,acceptance,effort_h,depends,status
-A01,P0,publishing,Опубликовать docs на GitHub Pages,Без URL портфолио не проверяемо,URL открывает все страницы PDF и CSV,3,github_account,todo
+A01,P0,publishing,Опубликовать docs на GitHub Pages,Без URL портфолио не проверяемо,URL открывает все страницы PDF и CSV,3,github_account,done
 A02,P0,reproducibility,Перенести ETHFI on-chain пайплайн в проект,Код и raw вне репозитория,python run.py воспроизводит три CSV,6,,done
 A03,P0,provenance,Manifest и source register,Не доказаны дата и источник каждого числа,У каждой метрики URL as_of и метод,4,A02,done
 A04,P0,quality,Consistency gate,Числа в HTML и CSV расходятся,make check пересчитывает KPI и проверяет ссылки,4,A02,done

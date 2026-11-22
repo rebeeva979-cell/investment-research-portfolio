@@ -24,7 +24,7 @@
 
 Инструменты: Python (stdlib + API; воспроизводимый пайплайн: raw → manifest → tests), SQL, Dune, Looker Studio, Power BI, Excel. Пишу на русском и английском (B1, письменная коммуникация). Ищу remote part-time роль в исследовательской или инвестиционной команде, 15–20 часов в неделю.
 
-Портфолио: [PUBLIC_PORTFOLIO_URL]  
+Портфолио: https://rebeeva979-cell.github.io/investment-research-portfolio/  
 Кейсы: ETHFI, LTC, SNX, LYFT, GPRO, ZNTL, ANT.  
 Не инвестиционная рекомендация; личный капитал, без управления клиентскими активами.
 
@@ -36,7 +36,7 @@ My focus is DeFi protocols and digital assets. In the ether.fi (ETHFI) case I tr
 
 Tools: Python (stdlib + APIs; reproducible pipeline: raw → manifest → tests), SQL, Dune, Looker Studio, Power BI, Excel. I work in Russian and English (B1, written communication preferred). I am looking for a remote part-time role in a research or investment team, 15–20 hours per week.
 
-Portfolio: [PUBLIC_PORTFOLIO_URL]  
+Portfolio: https://rebeeva979-cell.github.io/investment-research-portfolio/  
 Cases: ETHFI, LTC, SNX, LYFT, GPRO, ZNTL, ANT.  
 Not investment advice; personal capital only, no client assets managed.
 
@@ -54,11 +54,11 @@ Not investment advice; personal capital only, no client assets managed.
 On-chain analytics, tokenomics, valuation and risk-budget decision support.  
 Cases: Ether.fi, Litecoin, Synthetix, Lyft, GoPro, Zentalis, Anthropic.  
 Stack: Python, SQL, Dune, Looker Studio, Power BI, Excel.  
-Link: `[PUBLIC_PORTFOLIO_URL]`
+Link: `https://rebeeva979-cell.github.io/investment-research-portfolio/`
 
 ## Правило публикации
 
 1. Создать GitHub-репозиторий, положить корень проекта, включить Pages: `main` / `/docs`.
 2. Проверить URL в инкогнито: главная, ETHFI, method, CV, PDF, CSV.
-3. Заменить `[PUBLIC_PORTFOLIO_URL]` в этом файле, CV PDF и LinkedIn Featured.
+3. Заменить `https://rebeeva979-cell.github.io/investment-research-portfolio/` в этом файле, CV PDF и LinkedIn Featured.
 4. Не публиковать «portfolio published» до шага 2.
