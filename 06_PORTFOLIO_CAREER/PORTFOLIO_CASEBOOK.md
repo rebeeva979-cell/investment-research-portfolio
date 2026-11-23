@@ -25,8 +25,8 @@
 | [LTC — Network & Market Research](../01_LTC/LTC_RESEARCH_MEMO.md) | on-chain activity, PoW security, supply, mining economics, drawdown и peer analysis | [LTC Dashboard](../01_LTC/LTC_Dashboard.html) + [thesis](../01_LTC/LTC_INVESTMENT_THESIS.md) + [financial/tokenomics model](../01_LTC/LTC_FINANCIAL_TOKENOMICS_MODEL.md) + [risk assessment](../01_LTC/LTC_RISK_ASSESSMENT.md) | `wait` | 3% |
 | [ETHFI — Protocol Economics & On-chain Verification](../04_ETHFI/ETHFI_ONCHAIN_VERIFICATION_2026-11-20.md) | buyback ≠ burn ≠ dividend; treasury/vesting/CEX labeling; supply reconciliation; DEX depth | verification report + 4-page bilingual case + CSVs/SVG | `wait` | 2% |
 | [LYFT — Marketplace Unit Economics](../05_OTHER_ASSETS/LYFT_RESEARCH_BRIEF.md) | rides, active riders, take rate, adjusted EBITDA и нормализация FCF | SEC/IR brief + valuation seed | `wait` | 3% |
-| [ZNTL — Clinical Risk & Runway](../05_OTHER_ASSETS/ZNTL_RESEARCH_BRIEF.md) | binary clinical risk, cash runway, burn, dilution и scenario valuation | clinical investment brief | `wait` | 0.5% |
-| [GPRO — Special Situation](../05_OTHER_ASSETS/GPRO_RESEARCH_BRIEF.md) | deal probability, debt/covenants, residual ownership и downside | merger/deal-risk brief | `wait` | 1% |
+| [ZNTL — Clinical Risk & Runway](../05_OTHER_ASSETS/ZNTL_RESEARCH_BRIEF.md) | binary clinical risk, cash runway, burn, dilution и scenario valuation | clinical brief + Q3 verification update | `wait` | 0.5% |
+| [GPRO — Special Situation](../05_OTHER_ASSETS/GPRO_RESEARCH_BRIEF.md) | deal probability, debt/covenants, residual ownership и downside | merger brief + covenant/financing verification update | `wait` | 1% |
 | [ANT — AI IPO Valuation](../05_OTHER_ASSETS/ANTHROPIC_RESEARCH_BRIEF.md) | revenue run-rate vs TTM, dilution, compute commitments и IPO microstructure | [ANT calculator](../05_OTHER_ASSETS/ANT_Anthropic_Calculator.html) + IPO brief | `wait` | 0.5% |
 | [SNX — SIP-423 Supply Overhang](../02_SNX/SNX_SIP423_RESEARCH_REPORT_2026-11-19.md) | real mint, Safe custody, lock enforceability, unlock scenarios и market-cap methodology | [SNX report](../02_SNX/SNX_SIP423_RESEARCH_REPORT_2026-11-19.md) + [verification update](../02_SNX/SNX_VERIFICATION_UPDATE_2026-11-23.md) + [Safe JSON](../02_SNX/SNX_SAFE_VERIFICATION_2026-11-23.json) + data pack | `defensive / research` | 0% now |
 | [AVAIL — Data Availability Research](../03_AVAIL/AVAIL_RESEARCH_BRIEF-2026-11-22.md) | DA usage, bytes/blobs, validator economics, bridged supply и unlock pressure | [research brief](../03_AVAIL/AVAIL_RESEARCH_BRIEF-2026-11-22.md) + [research plan](../03_AVAIL/AVAIL_RESEARCH_PLAN-2026-11-22.md) + dashboard spec | `research` | N/A |
@@ -166,6 +166,7 @@ HNT пока не считается завершённым кейсом: мар
 - [LYFT weekly update 21.11.2026](../05_OTHER_ASSETS/LYFT_WEEKLY_UPDATE_2026-11-21.md)
 - [LYFT verification update 23.11.2026](../05_OTHER_ASSETS/LYFT_VERIFICATION_UPDATE_2026-11-23.md) · [quarterly operating series CSV](../05_OTHER_ASSETS/LYFT_QUARTERLY_OPERATING_SERIES_2026-11-23.csv)
 - [Unified equity valuation snapshot](../05_OTHER_ASSETS/EQUITY_VALUATION_SNAPSHOT_2026-11-21.md)
+- [LYFT verification update 23.11.2026](../05_OTHER_ASSETS/LYFT_VERIFICATION_UPDATE_2026-11-23.md) · [quarterly operating series CSV](../05_OTHER_ASSETS/LYFT_QUARTERLY_OPERATING_SERIES_2026-11-23.csv)
 - [combined dashboard specification](../05_OTHER_ASSETS/COMBINED_DASHBOARD_BUILD_GUIDE.md)
 - [ownership and valuation seed](../05_OTHER_ASSETS/OWNERSHIP_AND_VALUATION_SEED.csv)
 
@@ -204,6 +205,7 @@ HNT пока не считается завершённым кейсом: мар
 ### Артефакты
 
 - [ZNTL research brief](../05_OTHER_ASSETS/ZNTL_RESEARCH_BRIEF.md)
+- [ZNTL verification update 23.11.2026](../05_OTHER_ASSETS/ZNTL_VERIFICATION_UPDATE_2026-11-23.md)
 - [ZNTL weekly update 21.11.2026](../05_OTHER_ASSETS/ZNTL_WEEKLY_UPDATE_2026-11-21.md)
 - [Unified equity valuation snapshot](../05_OTHER_ASSETS/EQUITY_VALUATION_SNAPSHOT_2026-11-21.md)
 - [ZNTL / LYFT / GPRO cases](../05_OTHER_ASSETS/ZNTL_LYFT_GPRO_INVESTMENT_CASES.md)
@@ -244,6 +246,7 @@ HNT пока не считается завершённым кейсом: мар
 ### Артефакты
 
 - [GPRO research brief](../05_OTHER_ASSETS/GPRO_RESEARCH_BRIEF.md)
+- [GPRO verification update 23.11.2026](../05_OTHER_ASSETS/GPRO_VERIFICATION_UPDATE_2026-11-23.md)
 - [GPRO weekly update 21.11.2026](../05_OTHER_ASSETS/GPRO_WEEKLY_UPDATE_2026-11-21.md)
 - [Unified equity valuation snapshot](../05_OTHER_ASSETS/EQUITY_VALUATION_SNAPSHOT_2026-11-21.md)
 - [combined dashboard specification](../05_OTHER_ASSETS/COMBINED_DASHBOARD_BUILD_GUIDE.md)
