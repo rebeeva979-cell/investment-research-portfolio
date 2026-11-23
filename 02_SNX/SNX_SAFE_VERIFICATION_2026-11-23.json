@@ -1,0 +1,45 @@
+{
+  "asset": "SNX",
+  "as_of": "2026-11-23",
+  "chain": "Ethereum mainnet",
+  "safe": "0x3265fF13F29Fe2DD7501C608b914bfA5E1fFcf6d",
+  "safe_version": "1.4.1",
+  "owners_count": 5,
+  "threshold": 3,
+  "modules": [],
+  "guard": "0x0000000000000000000000000000000000000000",
+  "module_guard": "0x0000000000000000000000000000000000000000",
+  "creation": {
+    "created": "2026-07-06T11:05:47Z",
+    "creator": "0xc1C33291f26AA83BA174E3B12dA523183ba9f54A",
+    "transaction_hash": "0x3d52ddb987ae3724e4d399952e1bce14217cb41b0d635db69c5bce3e05f071d3"
+  },
+  "executed_transactions": [
+    {
+      "date": "2026-07-06T11:46:23Z",
+      "block": 25473284,
+      "tx_hash": "0xda4c600d3e85437e73f5f4128948877500158e881a32c83b4694c38699d3644c",
+      "token": "SNX",
+      "amount": 236464356
+    },
+    {
+      "date": "2026-07-18T04:50:59Z",
+      "block": 25557306,
+      "tx_hash": "0x06da21e4058d9b9e88dfbdb6bea938c0647f10f14a843231bde26ce6e1be9825",
+      "token": "CAT",
+      "amount": 1
+    }
+  ],
+  "snx_outflow_found": false,
+  "sources": {
+    "safe": "https://safe-transaction-mainnet.safe.global/api/v1/safes/0x3265fF13F29Fe2DD7501C608b914bfA5E1fFcf6d/",
+    "creation": "https://safe-transaction-mainnet.safe.global/api/v1/safes/0x3265fF13F29Fe2DD7501C608b914bfA5E1fFcf6d/creation/",
+    "all_transactions": "https://safe-transaction-mainnet.safe.global/api/v1/safes/0x3265fF13F29Fe2DD7501C608b914bfA5E1fFcf6d/all-transactions/?limit=20",
+    "rpc": "https://ethereum-rpc.publicnode.com"
+  },
+  "limitations": [
+    "Safe configuration can change after this snapshot",
+    "No receipt-contract deployment was identified in this pass",
+    "Absence of current outflow does not prove an immutable vesting lock"
+  ]
+}
