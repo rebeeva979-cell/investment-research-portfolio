@@ -27,7 +27,7 @@
 | [LYFT — Marketplace Unit Economics](../05_OTHER_ASSETS/LYFT_RESEARCH_BRIEF.md) | rides, active riders, take rate, adjusted EBITDA и нормализация FCF | SEC/IR brief + valuation seed | `wait` | 3% |
 | [ZNTL — Clinical Risk & Runway](../05_OTHER_ASSETS/ZNTL_RESEARCH_BRIEF.md) | binary clinical risk, cash runway, burn, dilution и scenario valuation | clinical brief + Q3 verification update | `wait` | 0.5% |
 | [GPRO — Special Situation](../05_OTHER_ASSETS/GPRO_RESEARCH_BRIEF.md) | deal probability, debt/covenants, residual ownership и downside | merger brief + covenant/financing verification update | `wait` | 1% |
-| [ANT — AI IPO Valuation](../05_OTHER_ASSETS/ANTHROPIC_RESEARCH_BRIEF.md) | revenue run-rate vs TTM, dilution, compute commitments и IPO microstructure | [ANT calculator](../05_OTHER_ASSETS/ANT_Anthropic_Calculator.html) + IPO brief | `wait` | 0.5% |
+| [ANT — AI IPO Valuation](../05_OTHER_ASSETS/ANTHROPIC_RESEARCH_BRIEF.md) | revenue run-rate vs TTM, dilution, compute commitments и IPO microstructure | [ANT calculator](../05_OTHER_ASSETS/ANT_Anthropic_Calculator.html) + IPO brief + SEC verification | `wait` | 0.5% |
 | [SNX — SIP-423 Supply Overhang](../02_SNX/SNX_SIP423_RESEARCH_REPORT_2026-11-19.md) | real mint, Safe custody, lock enforceability, unlock scenarios и market-cap methodology | [SNX report](../02_SNX/SNX_SIP423_RESEARCH_REPORT_2026-11-19.md) + [verification update](../02_SNX/SNX_VERIFICATION_UPDATE_2026-11-23.md) + [Safe JSON](../02_SNX/SNX_SAFE_VERIFICATION_2026-11-23.json) + data pack | `defensive / research` | 0% now |
 | [AVAIL — Data Availability Research](../03_AVAIL/AVAIL_RESEARCH_BRIEF-2026-11-22.md) | DA usage, bytes/blobs, validator economics, bridged supply и unlock pressure | [research brief](../03_AVAIL/AVAIL_RESEARCH_BRIEF-2026-11-22.md) + [research plan](../03_AVAIL/AVAIL_RESEARCH_PLAN-2026-11-22.md) + dashboard spec | `research` | N/A |
 | [HNT — Carrier Network & Emission Risk](../07_HNT/HNT_RESEARCH_BRIEF-2026-11-22.md) | DC burn, paid carrier usage, BME, supply bridge и HIP-149 dilution | [research brief](../07_HNT/HNT_RESEARCH_BRIEF-2026-11-22.md) + [research plan](../07_HNT/HNT_RESEARCH_PLAN-2026-11-22.md) + snapshot JSON | `wait / research` | 0% now |
@@ -287,6 +287,7 @@ HNT пока не считается завершённым кейсом: мар
 
 - [ANTHROPIC research brief](../05_OTHER_ASSETS/ANTHROPIC_RESEARCH_BRIEF.md)
 - [ANT calculator](../05_OTHER_ASSETS/ANT_Anthropic_Calculator.html)
+- [ANT SEC verification update 23.11.2026](../05_OTHER_ASSETS/ANT_VERIFICATION_UPDATE_2026-11-23.md)
 - [SEC final prospectus](https://www.sec.gov/Archives/edgar/data/2130357/000162828026074944/anthropicpbc-424b4.htm)
 
 ---
