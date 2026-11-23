@@ -1,6 +1,6 @@
 # Investment Research Portfolio — Casebook
 
-**Версия:** 22 ноября 2026
+**Версия:** 23 ноября 2026
 **Позиционирование:** Junior Investment Research / Crypto & Digital Assets Analyst
 **Важно:** это учебно-практическое портфолио и decision-support research, а не управление чужими деньгами и не персональная рекомендация.
 
@@ -164,6 +164,7 @@ HNT пока не считается завершённым кейсом: мар
 
 - [LYFT research brief](../05_OTHER_ASSETS/LYFT_RESEARCH_BRIEF.md)
 - [LYFT weekly update 21.11.2026](../05_OTHER_ASSETS/LYFT_WEEKLY_UPDATE_2026-11-21.md)
+- [LYFT verification update 23.11.2026](../05_OTHER_ASSETS/LYFT_VERIFICATION_UPDATE_2026-11-23.md) · [quarterly operating series CSV](../05_OTHER_ASSETS/LYFT_QUARTERLY_OPERATING_SERIES_2026-11-23.csv)
 - [Unified equity valuation snapshot](../05_OTHER_ASSETS/EQUITY_VALUATION_SNAPSHOT_2026-11-21.md)
 - [combined dashboard specification](../05_OTHER_ASSETS/COMBINED_DASHBOARD_BUILD_GUIDE.md)
 - [ownership and valuation seed](../05_OTHER_ASSETS/OWNERSHIP_AND_VALUATION_SEED.csv)
