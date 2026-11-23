@@ -1,0 +1,42 @@
+skill,type,role,status,source,what_it_gives,notes
+coingecko-api,API,"Scout, Valuation",ready_free,CoinGecko,"Цена, market cap, история, supply",30 req/min free
+defillama-api,API,"Scout, Valuation",ready_free,DefiLlama,"TVL, fees, revenue, unlocks, stablecoins",основной источник протокольных метрик
+dexscreener-api,API,Liquidity,ready_free,DexScreener,"Пулы, объёмы, ликвидность","11 пар ETHFI, тонкая глубина"
+Etherscan API V2,API,Forensic,needs_key,Etherscan,"Контракты, транзакции, верификация",бесплатный tier
+Dune,API,"Forensic, Quant",needs_key,Dune,SQL по decoded-данным,free tier
+Birdeye,API,"Liquidity, Sentinel",needs_key,Birdeye,Solana market data,если расширяемся на Solana
+Helius,API,"Forensic, Sentinel",needs_key,Helius,Solana RPC/DAS/webhooks,если расширяемся на Solana
+Safe Transaction Service,API,Forensic,ready_free,Safe,Treasury и мультисиги,без ключа
+CoW API,API,Forensic,ready_free,CoW Protocol,Ордера и buyback,без ключа
+L2Beat,Data,Risk,ready_free,L2Beat,Риски L2 и мостов,публичные данные
+Token Terminal,Data,Valuation,paid,Token Terminal,Institutional-метрики,когда есть бюджет
+Nansen / Arkham,Data,Forensic,paid,Nansen/Arkham,Метки и smart money,когда есть бюджет
+Glassnode / CryptoQuant,Data,"Risk, Quant",paid,Glassnode/CryptoQuant,On-chain macro,когда есть бюджет
+Kaiko / CCData,Data,Liquidity,paid,Kaiko/CCData,Институциональные market data,когда есть бюджет
+Deribit,Data,Risk,free_paid,Deribit,Options и implied vol,для forward-risk
+SEC EDGAR / FRED,Data,"Scout, Valuation",ready_free,SEC/FRED,TradFi-контекст,для cross-asset
+token-holder-analysis,DSH skill,Forensic,ready,DSH,"Концентрация, Gini/HHI/Nakamoto","Solana-centric, формулы переносимы"
+wallet-profiling,DSH skill,Forensic,ready,DSH,Поведение кошельков,Solana-centric
+whale-tracking,DSH skill,Sentinel,ready,DSH,Крупные движения,Solana-centric
+sybil-detection,DSH skill,Forensic,ready,DSH,Кластеры и wash trading,Solana-centric
+token-economics,DSH skill,Valuation,ready,DSH,"Supply, vesting, emissions",—
+liquidity-analysis,DSH skill,Liquidity,ready,DSH,Глубина и проскальзывание,Solana-centric
+dex-pool-analysis,DSH skill,Liquidity,ready,DSH,Механика пулов,—
+lp-math,DSH skill,Liquidity,ready,DSH,Расчёт LP/цены,—
+mev-analysis,DSH skill,Liquidity,ready,DSH,Sandwich/MEV-риск,Solana-centric
+yield-analysis,DSH skill,Valuation,ready,DSH,Реальная доходность,—
+sentiment-analysis,DSH skill,"Scout, Sentinel",ready,DSH,Нарратив и внимание,—
+historical-risk,DSH skill,Risk,ready,DSH,"Волатильность, drawdown",—
+forward-risk,DSH skill,Risk,ready,DSH,"VaR, stress, Monte Carlo",—
+bet-sizing,DSH skill,Constructor,ready,DSH,"Kelly, risk budget",—
+diversification,DSH skill,Constructor,ready,DSH,"Корреляции, лимиты",—
+factor-investing,DSH skill,Quant,ready,DSH,Факторные модели,—
+performance-metrics,DSH skill,PM,ready,DSH,Sharpe/Sortino/IR,—
+rebalancing,DSH skill,Constructor,ready,DSH,Пороги и стоимость,—
+investment-policy,DSH skill,Risk,ready,DSH,IPS и ограничения,—
+investment-suitability,DSH skill,Compliance,ready,DSH,Пригодность и концентрация,—
+DuckDB schema,Build,Platform,to_build,Python/DuckDB,"tokens, prices, pools, claims, positions",—
+Evidence ledger,Build,Platform,to_build,Python/SQLite/Postgres,"claim_id, source, as_of, SHA-256",—
+Backtest engine,Build,Quant,to_build,Python,"Комиссии, слиппедж, funding",—
+Portfolio accounting,Build,Constructor,to_build,Python,"Позиции, P&L, экспозиции",—
+Alerting,Build,Sentinel,to_build,Telegram + cron,Алерты и журнал,—

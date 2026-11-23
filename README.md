@@ -2,7 +2,7 @@
 
 **On-chain research analyst · DeFi & digital assets · Minsk / remote**
 
-[RU] Портфолио воспроизводимых исследований цифровых активов: on-chain forensics, tokenomics, supply reconciliation, ликвидность и Decision Cards с условиями отмены.  
+[RU] Портфолио воспроизводимых исследований цифровых активов: on-chain forensics, tokenomics, supply reconciliation, ликвидность и Decision Cards с условиями отмены.
 [EN] A portfolio of reproducible digital-asset research: on-chain forensics, tokenomics, supply reconciliation, liquidity and decision cards with invalidation triggers.
 
 ## Start here
@@ -10,6 +10,7 @@
 - **Bilingual portfolio (RU/EN):** [`docs/index.html`](docs/index.html)
 - **ETHFI case:** [`docs/ethfi.html`](docs/ethfi.html) · [verification report](04_ETHFI/ETHFI_ONCHAIN_VERIFICATION_2026-11-20.md)
 - **Method:** [`docs/method.html`](docs/method.html)
+- **On-chain department:** [`docs/onchain-department.html`](docs/onchain-department.html) · [AI-native model](docs/ai-investment-company.html)
 - **CV:** [`docs/cv.html`](docs/cv.html) · [PDF](docs/assets/Marina_Rebeeva_CV.pdf)
 - **Casebook:** [`06_PORTFOLIO_CAREER/PORTFOLIO_CASEBOOK.md`](06_PORTFOLIO_CAREER/PORTFOLIO_CASEBOOK.md)
 - **Status:** [`00_README/PROJECT_STATUS.md`](00_README/PROJECT_STATUS.md)
@@ -43,6 +44,7 @@ Full numbers, sources and limitations: [`04_ETHFI/ETHFI_ONCHAIN_VERIFICATION_202
 | [GPRO](05_OTHER_ASSETS/GPRO_RESEARCH_BRIEF.md) | Merger probability vs residual downside | `wait`, max 1% |
 | [ZNTL](05_OTHER_ASSETS/ZNTL_RESEARCH_BRIEF.md) | Cash runway, clinical risk and dilution | `wait`, max 0.5% |
 | [ANT](05_OTHER_ASSETS/ANTHROPIC_RESEARCH_BRIEF.md) | IPO valuation, dilution and compute commitments | `wait`, max 0.5% |
+| [HNT](07_HNT/HNT_RESEARCH_BRIEF-2026-11-22.md) | Carrier usage, DC burn, BME and HIP-149 dilution | `wait`, 0% new buys |
 
 ## Structure
 
@@ -58,6 +60,8 @@ docs/                       public bilingual site (GitHub Pages root)
 04_ETHFI/                   ETHFI thesis, model, risk, on-chain report
    onchain/                  reproducible fetch → build → check pipeline
 06_PORTFOLIO_CAREER/        casebook, IPS, work plan, CV/LinkedIn copy
+07_HNT/                     HNT carrier economics and emission-risk case
+08_ONCHAIN_DEPARTMENT/      public operating model, roles and skill matrix
 07_PUBLICATION/             legacy publication builds
 ```
 

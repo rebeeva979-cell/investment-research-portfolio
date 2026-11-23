@@ -1,0 +1,64 @@
+{
+  "asset": "HNT",
+  "project": "Helium",
+  "as_of": "2026-11-22",
+  "status": "research_first_snapshot",
+  "decision": "wait",
+  "market": {
+    "price_usd": 0.2217,
+    "market_cap_usd": 45151753,
+    "source": "CoinGecko dynamic page snapshot",
+    "source_url": "https://www.coingecko.com/en/coins/helium"
+  },
+  "supply": {
+    "solana_total_supply_hnt": 203625648.8781804,
+    "solana_slot": 472646415,
+    "mint_address": "hntyVP6YFm1Hg25TN9WGLqM12b8TQmcknKrdu1oxWux",
+    "rpc_method": "getTokenSupply",
+    "rpc_url": "https://api.mainnet-beta.solana.com",
+    "legacy_max_supply_hnt": 223000000,
+    "hip149_effective_ceiling_hnt": 347000000,
+    "hip149_supplement_hnt": 141000000
+  },
+  "network_reported": {
+    "daily_users_lower_bound": 1000000,
+    "daily_data_tb_lower_bound": 49,
+    "active_access_points_lower_bound": 40000,
+    "historical_q1_2026_daily_users_m": 3.4,
+    "historical_may_2026_daily_data_tb": 128,
+    "source": "Helium official network snapshot",
+    "source_url": "https://www.helium.com/snapshot",
+    "quality": "reported_not_independently_reconciled"
+  },
+  "unit_economics_rough": {
+    "mobile_price_usd_per_gb": 0.1,
+    "assumed_billable_tb_per_day": 49,
+    "annualized_gross_usage_usd": 1788500,
+    "annualized_hnt_burn_at_snapshot_price": 8067207.94,
+    "annualized_burn_to_market_cap": 0.0396,
+    "assumption": "all reported TB is billable at $0.10/GB; must be replaced with verified DC burn"
+  },
+  "governance": {
+    "hip": "HIP-149",
+    "status": "Approved",
+    "supplement_hnt": 141000000,
+    "first_window_hnt_per_day": 196000,
+    "duration_months": 36,
+    "source_url": "https://github.com/helium/HIP/blob/main/0149-helium-utility-and-emissions-realignment.md",
+    "deployment_verified": false
+  },
+  "sources": [
+    {"name": "HNT token docs", "url": "https://docs.helium.com/tokens/hnt-token/"},
+    {"name": "Data Credit docs", "url": "https://docs.helium.com/tokens/data-credit/"},
+    {"name": "Mobile network data", "url": "https://docs.helium.com/network-data/mobile-network-data/"},
+    {"name": "Mobile Iceberg catalog", "url": "https://catalog.mobile.helium.io/api/catalog/v1/config"},
+    {"name": "HNT mint on Solana", "url": "https://explorer.solana.com/address/hntyVP6YFm1Hg25TN9WGLqM12b8TQmcknKrdu1oxWux"}
+  ],
+  "next_data_required": [
+    "daily mobile and IoT DC burn",
+    "daily HNT mint by reward bucket",
+    "HIP-149 deployment slot and supplement vault",
+    "carrier concentration",
+    "90-day burn/mint bridge"
+  ]
+}

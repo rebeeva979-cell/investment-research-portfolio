@@ -1,0 +1,30 @@
+{
+  "read_at": "2026-11-22T17:29:23Z",
+  "asset": "AVAIL",
+  "sources": {
+    "official_circulating_supply": "https://finance-apis.availproject.org/circulating-supply",
+    "official_token_page": "https://www.availproject.org/token",
+    "official_docs": "https://docs.availproject.org/about",
+    "rpc": "https://avail-rpc.publicnode.com",
+    "market": "https://api.coingecko.com/api/v3/simple/price?ids=avail&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
+  },
+  "snapshot": {
+    "chain": "Avail DA Mainnet",
+    "finalized_or_latest_header_hex": "0x395da0",
+    "latest_header_decimal": 3759520,
+    "rpc_peers": 30,
+    "rpc_is_syncing": false,
+    "circulating_supply": 4114494609,
+    "total_supply_official": 10000000000,
+    "price": {
+      "usd": 0.00143054,
+      "usd_market_cap": 5883215.898066939,
+      "usd_24h_vol": 232018.74653155045,
+      "usd_24h_change": -1.5895617920232756,
+      "last_updated_at": 1795368490
+    },
+    "market_cap_usd": 5883215.898066939,
+    "fdv_at_official_total_supply_usd": 14305400.00000000,
+    "circulating_share_of_official_total": 0.4114494609
+  }
+}
